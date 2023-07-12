@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to Mbayat </title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+</head>
+
+<script>
+
+    function setMaxDate() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('dob').setAttribute('max', today);
+    }
+
+    function handleDateChange() {
+        const selectedDate = new Date(this.value);
+        const currentDate = new Date();
+
+        if (selectedDate > currentDate) {
+            this.value = '';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        setMaxDate();
+
+        const datePicker = document.getElementById('dob');
+        datePicker.addEventListener('input', handleDateChange);
+    });
+
+    function fetchData() {
+        fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
+            .then(response => response.json())
+            .then(data => {
+                const interests = data.results;
+                const container = document.getElementById('container');
+
+                container.innerHTML = '';
+
+                interests.forEach(interest => {
+                    const checkbox = document.createElement('input');
+                    checkbox.className = 'form-check-input';
+                    checkbox.id = interest.id;
+                    checkbox.type = 'checkbox';
+                    checkbox.name = 'item-checkbox';
+                    checkbox.value = interest.name;
+
+
+                    const label = document.createElement('label');
+                    label.className = 'form-check-label';
+                    label.htmlFor = checkbox.id;
+                    label.textContent = interest.name;
+
+                    const div = document.createElement('div');
+                    div.className = 'form-check';
+                    div.appendChild(checkbox);
+                    div.appendChild(label);
+
+                    // checkbox.addEventListener('change', function () {
+
+                    //     if (this.checked) {
+                    //         fetchSubinterests(interest);
+                    //     } else {
+                    //         removeSubinterests(interest.id);
+                    //     }
+                    // });
+
+                    checkbox.addEventListener('change', function () {
+                        const selectedInterests = document.querySelectorAll('input[name="item-checkbox"]:checked');
+                        if (selectedInterests.length > 5) {
+                            this.checked = false;
+                            alert('Only 5 interests can be selected!!');
+                        } else {
+                            if (this.checked) {
+
+                                fetchSubinterests(interest);
+                            } else {
+                                removeSubinterests(interest.id);
+                            }
+                        }
+                    });
+
+                    container.appendChild(div);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching interests:', error);
+            });
+    }
+
+
+    function fetchSubinterests(interest) {
+        fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interest.id}`)
+            .then(response => response.json())
+            .then(data => {
+                const subinterests = data.data;
+                const subinterestContainer = document.createElement('div');
+                subinterestContainer.id = `interest_${interest.id}`;
+                subinterestContainer.style.marginRight = "20px"
+                const interestHeading = document.createElement('h6');
+                interestHeading.textContent = `${interest.name}`;
+                subinterestContainer.appendChild(interestHeading);
+
+                subinterests.forEach(subinterest => {
+                    const checkbox = document.createElement('input');
+                    checkbox.className = 'form-check-input';
+                    checkbox.id = subinterest.id;
+                    checkbox.type = 'checkbox';
+                    checkbox.name = 'subitem-checkbox';
+                    checkbox.value = subinterest.name;
+
+                    const label = document.createElement('label');
+                    label.className = 'form-check-label';
+                    label.htmlFor = checkbox.id;
+                    label.textContent = subinterest.name;
+                    label.style.marginLeft = "-20px";
+                    label.style.fontSize = "15px"
+
+                    const subinterestDiv = document.createElement('div');
+                    subinterestDiv.className = 'form-check ';
+                    subinterestDiv.appendChild(checkbox);
+                    subinterestDiv.appendChild(label);
+
+                    checkbox.addEventListener('change', function () {
+
+                        if (this.checked) {
+                            console.log(subinterest.id);
+                        }
+                    });
+
+                    subinterestContainer.appendChild(subinterestDiv);
+
+
+                });
+
+                // Append the subinterest container to the main container
+                const subContainer = document.getElementById('sub_container');
+                subContainer.appendChild(subinterestContainer);
+            })
+            .catch(error => {
+                console.error('Error fetching subinterests:', error);
+            });
+    }
+
+    function removeSubinterests(interestId) {
+        const subContainer = document.getElementById('sub_container');
+        const interestContainer = document.getElementById(`interest_${interestId}`);
+
+        // Remove the interest container
+        subContainer.removeChild(interestContainer);
+    }
+
+    fetchData();
+
+    function getSelectedInterests() {
+        const checkboxes = document.querySelectorAll('#container input[type="checkbox"]');
+        const selectedInterests = [];
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedInterests.push(checkbox.value);
+            }
+        });
+
+        if (selectedInterests.length !== 5) {
+            alert('Please select 5 interests.');
+            return [];
+        }
+
+        return selectedInterests;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('signup');
+        const submitButton = document.getElementById('submit-button');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            // Handle form submission logic here
+            const firstName = document.getElementById('fname').value;
+            const lastName = document.getElementById('lname').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('c-password').value;
+            const mobileNumber = document.getElementById('phone').value;
+            const dateOfBirth = document.getElementById('dob').value;
+            const gender = document.getElementById('gender').value;
+
+            const selectedInterests = document.querySelectorAll('input[name="item-checkbox"]:checked');
+            const interests = Array.from(selectedInterests).map(interest => interest.id).join(',');
+
+            const selectedSubinterests = document.querySelectorAll('input[name="subitem-checkbox"]:checked');
+            const subInterests = Array.from(selectedSubinterests).map(subinterest => subinterest.id).join(',');
+
+            const data = {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: password,
+                confirm_password: confirmPassword,
+                mobile_number: mobileNumber,
+                date_of_birth: dateOfBirth,
+                interests: interests,
+                subInterests: subInterests,
+                gender: gender,
+                country_code: '+91'
+            };
+            if (selectedInterests.length !== 5) {
+                alert('Please select 5 interests.');
+                return;
+            }
+
+            const terms = document.getElementById("register-terms")
+            if(terms.checked){
+                // continue;
+            }else{
+                alert("Please accept Terms and Condition to proceed signup")
+                return;
+            }
+
+            fetch('https://15.185.57.60/api/v1/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result);
+                    if (result.tokens) {
+                        form.reset()
+                        alert("Login Successful!!")
+                        window.location.href = "login.html";
+                    }
+                    else {
+                        alert(result.message)
+                    }
+
+                })
+                .catch(error => {
+                    console.error('Error submitting form:', error);
+                });
+        });
+
+        function getSelectedInterests() {
+            const checkboxes = document.querySelectorAll('#container input[type="checkbox"]');
+            const selectedInterests = [];
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedInterests.push(checkbox.value);
+                }
+            });
+
+            return selectedInterests;
+        }
+
+        function getSelectedSubInterests() {
+            const checkboxes = document.querySelectorAll('#sub_container input[type="checkbox"]');
+            const selectedSubInterests = [];
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedSubInterests.push(checkbox.value);
+                }
+            });
+
+            return selectedSubInterests;
+        }
+    });
+
+</script>
+
+<body>
+
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__option">
+            <div class="offcanvas__links">
+                <a href="#">Sign in</a>
+                <a href="#">FAQs</a>
+            </div>
+            <!-- <div class="offcanvas__top__hover">
+                <span>Usd <i class="arrow_carrot-down"></i></span>
+                <ul>
+                    <li>USD</li>
+                    <li>EUR</li>
+                    <li>USD</li>
+                </ul>
+            </div> -->
+        </div>
+        <!-- <div class="offcanvas__nav__option">
+            <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
+            <a href="#"><img src="img/icon/heart.png" alt=""></a>
+            <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+            <div class="price">$0.00</div>
+        </div> -->
+        <div id="mobile-menu-wrap"></div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="/"><img src="img/company_logo.jpg" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <!-- <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="./shop.html">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="./about.html">About Us</a></li>
+                                    <li><a href="./shop-details.html">Shop Details</a></li>
+                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
+                                    <li><a href="./checkout.html">Check Out</a></li>
+                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contacts</a></li>
+                        </ul>
+                    </nav> -->
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__nav__option">
+                        <!-- <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a> -->
+                        <a href="login.html">Login</a>
+                        <a class="active" href="signup.html">Signup</a>
+                        <!-- <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+                        <div class="price">$0.00</div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Breadcrumb Area -->
+    <div class="tm-breadcrumb-area tm-padding-section bg-img">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="tm-breadcrumb">
+                        <h2>Signup</h2>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="signup.html">Signup</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// Breadcrumb Area -->
+    <!-- Header Section End -->
+    <!-- Main Content -->
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Login Register Area -->
+        <div class="tm-section tm-login-register-area bg-white tm-padding-section">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-12">
+                        <form id="signup" class="tm-form tm-register-form tm-form-bordered">
+                            <h4>Create an account</h4>
+                            <div class="tm-form-inner">
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" id="fname" required="required">
+                                </div>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" id="lname" required="required">
+                                </div>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="register-email">Email address</label>
+                                    <input type="email" id="register-email" required="required">
+                                </div>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="number" id="phone" required="required">
+                                </div>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="dob">Date of Birth</label>
+                                    <input type="date" id="dob" required="required">
+                                </div>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="gender">Gender</label>
+                                    <select name="Gender" id="gender"
+                                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
+                                        <option>Select gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="register-password">Password</label>
+                                    <input type="password" id="register-password" required="required">
+                                </div>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="c-password">Confirm Password</label>
+                                    <input type="password" id="c-password" required="required">
+                                </div>
+
+                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                    <h6>Please select 5 Interests</h6>
+                                    <div class="check-box_flex" id="container">
+
+                                    </div>
+                                </div>
+                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                    <h6>Please select Sub-Interests</h6>
+                                    <div class="check-box_flex" id="sub_container">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                <input type="checkbox" id="register-terms">
+                                <label class="lbl-cus" for="register-terms">
+                                    By Clicking on proceed, I agree to the
+                                    <a href="terms-and-conditions.html " class="text-primary" target="_blank">Terms
+                                        and Conditions</a>
+                                    and
+                                    <a href="privacy-statement.html" class="text-primary" target="_blank">Privacy
+                                        Policy</a>
+                                    of
+                                    <br>
+                                </label>
+                            </div>
+                            <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                <button type="submit" class="tm-button">Submit <b></b></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+        <!--// Login Register Area -->
+
+    </main>
+    <!--// Main Content -->
+    <!--// Main Content -->
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__logo" style="width: 70%;">
+                            <a href="/"><img src="img/logo-mbyat (1).png" alt=""></a>
+                        </div>
+                        <p>Mbayat is a mystery subscription box tailored to costumers’ interest, where you will get the
+                            opportunity to try and experience new products and services matching your interest provided
+                            by local brands and companies each month.</p>
+                        <a href="#"><img src="img/payment.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>NewLetter</h6>
+                        <div class="footer__newslatter">
+                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                            <form action="#">
+                                <input type="text" placeholder="Your email">
+                                <button type="submit"><span class="icon_mail_alt"></span></button>
+                            </form>
+                        </div>
+                        <div class="hero__social">
+                            <!-- <a href="#"><i class="fa fa-facebook"></i></a> -->
+                            <a href="https://twitter.com/trymbayat"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/trymbayat/"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>CONTACT US</h6>
+                        <div class="footer__newslatter">
+                            <p>MBAYAT Kuwait, Sharq, Ahmed Al Jaber Street, Al Gaz Tower,</p>
+                            <div class="social_add">
+                                <a href="tell:+965 90015060">+965 90015060</a>
+                                <a href="info:info@trymbayat.com">info@trymbayat.com</a>
+                                <a href="#" class="btn btn-primary px-4 py-2 mt-4">Vendor Signup</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row footer__copyright__text">
+                <div class="col-lg-6 text-left">
+                    <div class="">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <p>Copyright ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="#" target="_blank"> MBAYAT</a>
+                        </p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="footer-link">
+                        <ul>
+                            <li>
+                                <a href="contact.html">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="about.html">About Us</a>
+                            </li>
+                            <li>
+                                <a href="privacy-statement.html">Privacy police</a>
+                            </li>
+                            <li>
+                                <a href="terms-and-conditions.html">Terms & Conditions</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

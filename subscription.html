@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Male_Fashion Template">
+  <meta name="keywords" content="Male_Fashion, unica, creative, html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Welcome to Mbayat</title>
+
+  <!-- Css Styles -->
+  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+  <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+  <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+  <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+  <!-- Page Preloder -->
+  <div id="preloder">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Offcanvas Menu Begin -->
+  <div class="offcanvas-menu-overlay"></div>
+  <div class="offcanvas-menu-wrapper">
+    <div class="offcanvas__option">
+      <div class="offcanvas__links">
+        <a href="login.html">Login</a>
+        <a class="active" href="signup.html">Signup</a>
+      </div>
+      <!--<div class="offcanvas__top__hover">-->
+      <!--    <span>Usd <i class="arrow_carrot-down"></i></span>-->
+      <!--    <ul>-->
+      <!--        <li>USD</li>-->
+      <!--        <li>EUR</li>-->
+      <!--        <li>USD</li>-->
+      <!--    </ul>-->
+      <!--</div>-->
+    </div>
+    <div class="offcanvas__nav__option">
+      <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
+      <a href="#"><img src="img/icon/heart.png" alt=""></a>
+      <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+      <div class="price">$0.00</div>
+    </div>
+    <div id="mobile-menu-wrap"></div>
+    <div class="offcanvas__text">
+      <p>Free shipping, 30-day return or refund guarantee.</p>
+    </div>
+  </div>
+  <!-- Offcanvas Menu End -->
+
+  <!-- Header Section Begin -->
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3">
+          <div class="header__logo">
+            <a href="/"><img src="img/company_logo.jpg" alt=""></a>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <!-- <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="./shop.html">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="./about.html">About Us</a></li>
+                                    <li><a href="./shop-details.html">Shop Details</a></li>
+                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
+                                    <li><a href="./checkout.html">Check Out</a></li>
+                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contacts</a></li>
+                        </ul>
+                    </nav> -->
+        </div>
+        <div class="col-lg-3 col-md-3">
+          <div class="header__nav__option">
+            <!-- <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a> -->
+            <a href="login.html">Login</a>
+            <a class="active" href="signup.html">Signup</a>
+            <!-- <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+                        <div class="price">$0.00</div> -->
+          </div>
+        </div>
+      </div>
+      <div class="canvas__open"><i class="fa fa-bars"></i></div>
+    </div>
+  </header>
+  <!-- Header Section End -->
+
+  <!-- Breadcrumb Section Begin -->
+  <section class="breadcrumb-option">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="breadcrumb__text">
+            <h4>PLAN SUBSCRIPTION</h4>
+            <div class="breadcrumb__links">
+              <a href="index.html">Home</a>
+              <span>PLAN SUBSCRIPTION</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Breadcrumb Section End -->
+
+  <!-- Checkout Section Begin -->
+  <section class="checkout spad">
+    <div class="container">
+      <div id="planExistDiv" class="message_error" style="display:none">
+        You already have a subscription plan
+      </div>
+      <div id="subscriptionDiv" class="row pacage-section" style="display: none;">
+        <div class="col-md-6 text-center">
+          <img src="https://www.trymbayat.com/public/default/frontend/standard/images/subscription-img.jpg"
+            class="img-fluid mb-5 mb-lg-0">
+        </div>
+        <div class="col-md-6 subscription-block">
+          <h2 class="font-weight-bold h3 pb-3">Choose Your Subscription&ZeroWidthSpace;</h2>
+          <h4>Mbayat Mystery Box &ZeroWidthSpace;</h4>
+          <p>Mbayat is a mystery subscription box tailored to costumers’ interest, where you will get the opportunity to
+            try and experience new products and services matching your interest provided by local brands and companies
+            each month. &ZeroWidthSpace;</p>
+          <div id="subscriptionDiv" class="position-relative">
+            <div class="count-block">
+              <ul class="list-unstyled my-5 clearfix">
+                <li class="d-inline-block">
+                  <div class="count-bg text-center position-relative float-left"><span class="count-num">5</span> <span
+                      class="day01 d-block text-uppercase">DAYS</span><img
+                      src="https://www.trymbayat.com/public/default/frontend/standard/images/shadow-1.png"
+                      class="shadow-1 position-absolute"></div><span
+                    class="txt-head ml-4 mr-4 mr-md-3 mr-lg-5 text-uppercase float-left"> REMAINING</span>
+                </li>
+                <li class="d-inline-block">
+                  <div class="count-bg text-center position-relative float-left"><span class="count-num">164</span>
+                    <span class="day01 d-block text-uppercase">BOXES</span><img
+                      src="https://www.trymbayat.com/public/default/frontend/standard/images/shadow-2.png"
+                      class="shadow-2 position-absolute">
+                  </div>
+                  <span class="txt-head ml-4 mr-4 mr-md-0 ml-md-4 text-uppercase float-left">LEFT</span>
+                </li>
+              </ul>
+            </div>
+            <input type="hidden" id="selectedSubID" value="3">
+            <div class="tab-block d-inline-block mr-2 mb-4 mb-lg-0">
+              <div id="act_1" class="subscbt text-uppercase font-weight-semibold"> <span id="sub_1"
+                  style="cursor: pointer;">1 Month</span> </div>
+              <div class="subsc-value position-absolute h2 font-weight-bold"><span id="show_sub_1"
+                  style="display: none;"> <span class="d-block total pl-1">Total</span> <span>KD 15</span> </span></div>
+            </div>
+            <div class="tab-block d-inline-block mr-2 mb-4 mb-lg-0">
+              <div id="act_2" class="subscbt text-uppercase font-weight-semibold"> <span id="sub_2"
+                  style="cursor: pointer;">3 Months</span> </div>
+              <div class="subsc-value position-absolute h2 font-weight-bold"><span id="show_sub_2" style="display:none">
+                  <span class="d-block total pl-1">Total</span> <span>KD 40</span> </span></div>
+            </div>
+            <div class="tab-block d-inline-block mr-2 mb-4 mb-lg-0">
+              <div id="act_3" class="subscbt text-uppercase font-weight-semibold active"> <span id="sub_3"
+                  style="cursor: pointer;">6 Months</span> </div>
+              <div class="subsc-value position-absolute h2 font-weight-bold"><span id="show_sub_3" style=""> <span
+                    class="d-block total pl-1">Total</span> <span>KD 75</span> </span></div>
+            </div>
+            <div class="col-md-5 p-0">
+              <button onclick="proceedPayment();"
+                class="btn btn-primary text-uppercase font-weight-semibold py-2 w-100">Continue</button>
+              <input type="hidden" name="hidselectedSubID" value="3" id="hidselectedSubID">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="paymentDiv">
+        <div class="row m-md-0 justify-content-center">
+          <div class="col-xl-9 col-lg-10 col-12">
+            <h3 class="font-weight-semibold mb-3 mt-1 text-uppercase">Plan Subscription</h3>
+            <div class="mt-3 mb-4 selectedPlan">
+              <div class="subscription-block">
+                <input type="hidden" id="selectedSubID" value="1">
+                <div class="tab-block d-inline-block mr-2 mb-4 mb-lg-0">
+                  <div id="act_1" class="subscbt text-uppercase font-weight-semibold active"> <span id="sub_1"
+                      style="cursor: pointer;">1 Month</span> </div>
+
+                </div>
+                <div class="tab-block d-inline-block mr-2 mb-4 mb-lg-0">
+                  <div id="act_2" class="subscbt text-uppercase font-weight-semibold "> <span id="sub_2"
+                      style="cursor: pointer;">3 Months</span> </div>
+
+                </div>
+                <div class="tab-block d-inline-block mr-2 mb-4 mb-lg-0 ">
+                  <div id="act_3" class="subscbt text-uppercase font-weight-semibold "> <span id="sub_3"
+                      style="cursor: pointer;">6 Months</span> </div>
+
+                </div>
+              </div>
+              <div class="row align-items-center pt-3">
+                <div class="col-md-9 col-sm-8 col-12 mb-3 mb-sm-0">
+                  <div class="abt_plan position-relative">
+                    <h5 class="text-primary m-0">6 Months - <span class="h3 font-weight-bold">KD 75</span></h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <form name="formPaymentGateway" method="post" enctype="multipart/form-data" id="formPaymentGateway"
+              action="my-account.html"><input type="hidden" id="formPaymentGateway_errors"
+                name="formPaymentGateway_errors" value="1">
+              <input type="hidden" name="countryCode" id="countryCode" value="">
+              <div class="">
+                <input type="hidden" name="statehidValue" id="statehidValue" value="0">
+                <input type="hidden" name="cityhidValue" id="cityhidValue" value="">
+                <input type="hidden" name="hidPlanID" value="3" id="hidPlanID">
+                <input type="hidden" name="planAmount" value="75" id="planAmount">
+                <div class="Billing_info box-shadow p-5">
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 class="font-weight-bold text-dark mb-4">Billing Information </h4>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">First Name<sup class="text-primary">*</sup></label>
+                        <div id="errMsgBilngFrstNme">
+                          <input type="text" name="billingFirstName" class="text-box form-control py-2 rounded-0"
+                            value="vasu" id="billingFirstName">
+                          <span id="firstNameErr" class="message_validation" style="display:none;">
+                            <span id="errFrstName">Please enter First Name</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Last Name<sup class="text-primary">*</sup></label>
+                        <div id="errMsgBilngLstNme">
+                          <input type="text" name="billingLastName" class="text-box form-control py-2 rounded-0"
+                            value="chaudhary" id="billingLastName">
+                          <span id="lastNameErr" class="message_validation" style="display:none;">
+                            <span id="errLastName">Please enter Valid Last Name</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Country<sup class="text-primary">*</sup></label>
+                        <div class="select_drop" id="errMsgSelctCountry">
+                          <select class="form-control mandatory select-box rounded-0"
+                            onchange="listState(this.value,'');" id="countryID" name="countryID">
+                            <option value="">Select</option>
+                            <option value="114">Kuwait</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">State<sup class="text-primary">*</sup></label>
+                        <div class="select_drop" id="errMsgSelctState">
+                          <select class="form-control mandatory select-box rounded-0" title="Select" id="stateID"
+                            name="stateID">
+                            <option value="">Select</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2" style="display: none">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">City<sup class="text-primary"></sup></label>
+                        <div class="select_drop" id="errMsgSelctCity">
+                          <input type="text" name="userCity" class="text-box form-control py-2 textarea rounded-0"
+                            value="" id="userCity">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2" style="display: none">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Address<sup class="text-primary"></sup></label>
+                        <div id="errMsgBillAddrs1">
+                          <input type="text" name="billingAddress" class="text-box form-control py-2 textarea rounded-0"
+                            value="" id="billingAddress">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2" style="display: none">
+                      <div class="form-group position-relative">
+                        <label class="mb-1"></label>
+                        <input type="text" name="userZip" class="text-box form-control py-2" value="" id="userZip">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2" style="display:none;">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold"></label>
+                        <div id="errMsgBillAddrs2">
+                          <input type="text" name="billingAddress1" class="text-box form-control py-2 rounded-0"
+                            value="" id="billingAddress1">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Area<sup class="text-primary">*</sup></label>
+                        <div id="errMsgBilngbillingArea">
+                          <input type="text" name="billingArea" class="text-box form-control py-2 rounded-0" value=""
+                            id="billingArea">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Block<sup class="text-primary">*</sup></label>
+                        <div id="errMsgbillingBlock">
+                          <input type="text" name="billingBlock" class="text-box form-control py-2 rounded-0" value=""
+                            id="billingBlock">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Street<sup class="text-primary">*</sup></label>
+                        <div id="errMsgbillingStreet">
+                          <input type="text" name="billingStreet" class="text-box form-control py-2 rounded-0" value=""
+                            id="billingStreet">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">House No<sup class="text-primary">*</sup></label>
+                        <div id="errMsgbillingHouseNo">
+                          <input type="text" name="billingHouseNo" class="text-box form-control py-2 rounded-0" value=""
+                            id="billingHouseNo">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Apartment<sup class="text-primary"></sup></label>
+                        <div id="errMsgbillingApartment">
+                          <input type="text" name="billingApartment" class="text-box form-control py-2 rounded-0"
+                            value="" id="billingApartment">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Floor<sup class="text-primary"></sup></label>
+                        <div id="errMsgbillingFloor">
+                          <input type="text" name="billingFloor" class="text-box form-control py-2 rounded-0" value=""
+                            id="billingFloor">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Avenue<sup class="text-primary"></sup></label>
+                        <div id="errMsgBillAddrs1">
+                          <input type="text" name="billingJade" class="text-box form-control py-2 textarea rounded-0"
+                            value="" id="billingJade">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Direction<sup class="text-primary"></sup></label>
+                        <div id="errMsgBillAddrs1">
+                          <input type="text" name="billingDirection"
+                            class="text-box form-control py-2 textarea rounded-0" value="" id="billingDirection">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Phone Number<sup
+                            class="text-primary">*</sup></label>
+                        <div id="errMoblieNo">
+                          <input type="text" name="userPhone" id="userPhone" value="85474555" maxlength="8"
+                            class="form-control2  form-control py-2 rounded-0">
+                          <input type="hidden" name="checkPhNo" value="0" id="checkPhNo">
+                        </div>
+                        <span class="col-12 font-small mt-2">(Phone number should be 8 digits)</span>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12 mb-2">
+                      <div class="form-group position-relative">
+                        <label class="f15 mb-1 font-weight-semibold">Email<sup class="text-primary">*</sup></label>
+                        <div id="errMsgBillEmail">
+                          <input type="text" name="billingEmail" class="text-box form-control py-2 rounded-0"
+                            value="dsad@gmail.com" id="billingEmail">
+                          <span id="billingEmailErr" class="message_validation" style="display:none;">
+                            <span id="errEmail">Enter valid Email Address</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="order-payment  clearfix">
+                    <div class="row">
+
+                      <div class="col-sm-6">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="billing-information-box py-4 col-12">
+                    <h4 class="font-weight-bold text-dark mb-4">Payment Information</h4>
+                    <div class="Billing_info">
+                      <input type="hidden" name="currencyDecimalPlaces" value="" id="currencyDecimalPlaces">
+                      <span class="rs text-primary font-weight-bold h4" id="promoSuccs" style="display:none"></span>
+                      <div class="total_price mt-3 font-weight-semibold h5 text-dark">
+                        <span class="total_amt">Total Amount</span>
+                        :
+                        <span class="rs text-primary font-weight-bold h4" id="orgAmnt"> KD 75</span>
+                      </div>
+                      <div id="prmBlk" style="display: none;">
+                        <div class="total_price mt-3 font-weight-semibold h5 text-dark">
+                          <span class="total_amt">Code applied</span>
+                          :
+                          <span class="rs text-primary font-weight-bold h4"> KD <span id="discAmt"></span></span>
+                        </div>
+                        <div class="total_price mt-3 font-weight-semibold h5 text-dark">
+                          <span class="total_amt">Final amount</span>
+                          :
+                          <span class="rs text-primary font-weight-bold h4"> KD <span id="TotAmt"></span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <input type="hidden" name="hid_orderTotalAmount" value="75" id="hid_orderTotalAmount">
+                  <input type="hidden" name="noPayment" value="" id="noPayment">
+                  <div class="billing-information-box py-4 col-12" id="paymntOptn">
+                    <h4 class="font-weight-bold text-dark mb-4">Payment Options</h4>
+                    <div class="row">
+                      <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="form-group">
+                          <input type="hidden" name="paymentSettingsGroupID" value="24" id="paymentSettingsGroupID">
+                          <input type="hidden" name="hidPaymentSettingsGroupID" value="24"
+                            id="hidPaymentSettingsGroupID">
+                          <input type="hidden" name="hidPaymentSettingsGroupIDTemp" value="24"
+                            id="hidPaymentSettingsGroupIDTemp">
+                          <input type="hidden" name="hidPaymentSettingsGroupIDcheck" value="24"
+                            id="hidPaymentSettingsGroupIDcheck">
+                          <div class="font-weight-semibold h5 text-primary">K - NET</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mb-3">
+                    <a href="my-account.html">
+                      <input type="button" value="Processing" name="submitUserDisable" id="submitUserDisable"
+                        class="btn btn-primary px-5 py-2 text-uppercase font-weight-semibold buttom-botton-width">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Checkout Section End -->
+
+  <!-- Footer Section Begin -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6">
+          <div class="footer__about">
+            <div class="footer__logo">
+              <a href="/"><img src="img/company_logo.jpg" alt=""></a>
+            </div>
+            <p>Mbayat is a mystery subscription box tailored to costumers’ interest, where you will get the
+              opportunity to try and experience new products and services matching your interest provided
+              by local brands and companies each month.</p>
+            <a href="#"><img src="img/payment.png" alt=""></a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6">
+          <div class="footer__widget">
+            <h6>NewLetter</h6>
+            <div class="footer__newslatter">
+              <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+              <form action="#">
+                <input type="text" placeholder="Your email">
+                <button type="submit"><span class="icon_mail_alt"></span></button>
+              </form>
+            </div>
+            <div class="hero__social">
+              <!-- <a href="#"><i class="fa fa-facebook"></i></a> -->
+              <a href="https://twitter.com/trymbayat"><i class="fa fa-twitter"></i></a>
+              <a href="https://www.instagram.com/trymbayat/"><i class="fa fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="footer__widget">
+            <h6>CONTACT US</h6>
+            <div class="footer__newslatter">
+              <p>MBAYAT Kuwait, Sharq, Ahmed Al Jaber Street, Al Gaz Tower,</p>
+              <div class="social_add">
+                <a href="tell:+965 90015060">+965 90015060</a>
+                <a href="info:info@trymbayat.com">info@trymbayat.com</a>
+                <a href="#" class="btn btn-primary px-4 py-2 mt-4">Vendor Signup</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row footer__copyright__text">
+        <div class="col-lg-6 text-left">
+          <div class="">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            <p>Copyright ©
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="#" target="_blank"> MBAYAT</a>
+            </p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="footer-link">
+            <ul>
+              <li>
+                <a href="contact.html">Contact Us</a>
+              </li>
+              <li>
+                <a href="about.html">About Us</a>
+              </li>
+              <li>
+                <a href="privacy-statement.html">Privacy police</a>
+              </li>
+              <li>
+                <a href="terms-and-conditions.html">Terms & Conditions</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer Section End -->
+
+  <!-- Search Begin -->
+  <div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+      <div class="search-close-switch">+</div>
+      <form class="search-model-form">
+        <input type="text" id="search-input" placeholder="Search here.....">
+      </form>
+    </div>
+  </div>
+  <!-- Search End -->
+
+  <!-- Js Plugins -->
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.nice-select.min.js"></script>
+  <script src="js/jquery.nicescroll.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/jquery.countdown.min.js"></script>
+  <script src="js/jquery.slicknav.js"></script>
+  <script src="js/mixitup.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

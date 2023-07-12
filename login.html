@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to Mbayat </title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+</head>
+<script>
+    function handleLogin(event) {
+        event.preventDefault();
+
+        const mobileNumber = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        const data = {
+            email: mobileNumber,
+            password: password
+        };
+        const remember_me = document.getElementById("login-remember")
+
+        fetch('https://15.185.57.60/api/v1/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(result => {
+                console.log("result", result)
+                if (result.tokens) {
+                    alert('Login successful!');
+                    console.log(result.tokens);
+                    localStorage.setItem('access_token', result.tokens.access.token);
+                    localStorage.setItem('first_name', result.user.first_name);
+                } else {
+                    alert("Invalid mobile number or password");
+                }
+            })
+            .catch(error => {
+                console.error('Error logging in:', error);
+            });
+    }
+
+    function checkStoredCredentials() {
+        const credential = google.accounts.id.restore();
+        if (credential) {
+            const number = credential.id;
+            const password = credential.password;
+        }
+    }
+
+    window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: 'YOUR_CLIENT_ID',
+            callback: checkStoredCredentials
+        });
+    };
+
+    function handleCredentialResponse(response) {
+        if (response.credential) {
+            const email = response.credential.id;
+            const password = response.credential.password;
+        }
+    }
+
+</script>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__option">
+            <div class="offcanvas__links">
+                <a href="#">Sign in</a>
+                <a href="#">FAQs</a>
+            </div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="/"><img src="img/company_logo.jpg" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__nav__option">
+                        <!-- <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a> -->
+                        <a href="login.html">Login</a>
+                        <a class="active" href="signup.html">Signup</a>
+                        <!-- <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+                        <div class="price">$0.00</div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Breadcrumb Area -->
+    <div class="tm-breadcrumb-area tm-padding-section bg-img">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="tm-breadcrumb">
+                        <h2>Login</h2>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li>Login</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// Breadcrumb Area -->
+    <!-- Header Section End -->
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Login Register Area -->
+        <div class="tm-section tm-login-register-area bg-white tm-padding-section">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div id="g_id_onload" data-client_id="YOUR_CLIENT_ID" data-callback="handleCredentialResponse">
+                        </div>
+                        <form action="subscription.html" class="tm-form tm-login-form tm-form-bordered"
+                            onsubmit="return handleLogin(event)">
+                            <h4>Login</h4>
+                            <div class="tm-form-inner" style="margin-top: 10px;">
+                                <div class="tm-form-field">
+                                    <input type="number" id="login-email" required="required"
+                                        placeholder="Enter your Mobile No.">
+                                </div>
+                                <div class="tm-form-field">
+                                    <input type="password" id="login-password" required="required"
+                                        placeholder="Enter your password">
+                                </div>
+                                <div class="tm-form-field">
+                                    <input type="checkbox" name="login-remember" id="login-remember">
+                                    <label for="login-remember">Remember Me</label>
+                                </div>
+                                <div class="tm-form-field">
+                                    <button type="submit" class="tm-button">Login <b></b></button>
+                                </div>
+                                <div class="tm-form-field">
+                                    <a href="#">Forgot your password?</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--// Login Register Area -->
+    </main>
+    <!--// Main Content -->
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__logo" style="width: 70%;">
+                            <a href="/"><img src="img/logo-mbyat (1).png" alt=""></a>
+                        </div>
+                        <p>Mbayat is a mystery subscription box tailored to costumers’ interest, where you will get the
+                            opportunity to try and experience new products and services matching your interest provided
+                            by local brands and companies each month.</p>
+                        <a href="#"><img src="img/payment.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>NewLetter</h6>
+                        <div class="footer__newslatter">
+                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                            <form action="#">
+                                <input type="text" placeholder="Your email">
+                                <button type="submit"><span class="icon_mail_alt"></span></button>
+                            </form>
+                        </div>
+                        <div class="hero__social">
+                            <!-- <a href="#"><i class="fa fa-facebook"></i></a> -->
+                            <a href="https://twitter.com/trymbayat"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/trymbayat/"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>CONTACT US</h6>
+                        <div class="footer__newslatter">
+                            <p>MBAYAT Kuwait, Sharq, Ahmed Al Jaber Street, Al Gaz Tower,</p>
+                            <div class="social_add">
+                                <a href="tell:+965 90015060">+965 90015060</a>
+                                <a href="info:info@trymbayat.com">info@trymbayat.com</a>
+                                <a href="#" class="btn btn-primary px-4 py-2 mt-4">Vendor Signup</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row footer__copyright__text">
+                <div class="col-lg-6 text-left">
+                    <div class="">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <p>Copyright ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="#" target="_blank"> MBAYAT</a>
+                        </p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="footer-link">
+                        <ul>
+                            <li>
+                                <a href="contact.html">Contact US</a>
+                            </li>
+                            <li>
+                                <a href="about.html">About_us</a>
+                            </li>
+                            <li>
+                                <a href="privacy-statement.html">Privacy-police</a>
+                            </li>
+                            <li>
+                                <a href="terms-and-conditions.html">Terms-and Conditions</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
