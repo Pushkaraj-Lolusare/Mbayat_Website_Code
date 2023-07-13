@@ -24,7 +24,7 @@
     #logout a:hover {
         cursor: pointer;
         text-decoration: underline;
-        color:rgb(110,198,183);
+        color: rgb(110, 198, 183);
     }
 </style>
 
@@ -86,15 +86,14 @@
                         <a href="/"><img src="img/company_logo.jpg" alt=""></a>
                     </div>
                 </div>
-                
+
                 <div style="display: flex; ">
-                    <div class="header__nav__option" id="accountname"
-                        style="text-align: center; ">
+                    <div class="header__nav__option" id="accountname" style="text-align: center; ">
                         <!-- <a onclick="return handleLogout(event)">Logout</a> -->
 
                     </div>
-                    <div class="header__nav__option" id="logout" >
-                        <a  onclick="return handleLogout(event)">Logout</a>
+                    <div class="header__nav__option" id="logout">
+                        <a onclick="return handleLogout(event)">Logout</a>
 
                     </div>
                 </div>
@@ -102,23 +101,11 @@
             <div class="canvas__open"><i class="fa fa-bars"></i></div>
         </div>
     </header>
-    <!-- Breadcrumb Area -->
-    <div class="tm-breadcrumb-area tm-padding-section bg-img" >
-        <div class="container" >
-            <div class="row" >
-                <div class="col-lg-6">
-                    <div class="tm-breadcrumb">
-                        <h2>My Account</h2>
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li>Welcome...</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--// Breadcrumb Area -->
+
+
+
+
+
     <!-- Header Section End -->
     <!-- Main Content -->
     <!-- Main Content -->
@@ -148,16 +135,35 @@
                                 role="tab" aria-controls="account-acdetails" aria-selected="false">Account Details</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="account-logout-tab" href="#" onclick="return handleLogout(event)" role="tab"
-                                aria-controls="account-address" aria-selected="false">Logout</a>
+                            <a class="nav-link" id="account-logout-tab" href="#" onclick="return handleLogout(event)"
+                                role="tab" aria-controls="account-address" aria-selected="false">Logout</a>
                         </li>
                     </ul>
+
+                    <!-- Breadcrumb Area -->
+                    <div class="tm-breadcrumb-area tm-padding-section bg-img" style="margin-bottom: 20px;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="tm-breadcrumb">
+                                        <h2>My Account</h2>
+                                        <ul>
+                                            <li><a href="index.html">Home</a></li>
+                                            <li>Welcome...</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--// Breadcrumb Area -->
 
                     <div class="tab-content" id="account-ontent">
                         <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
                             aria-labelledby="account-dashboard-tab">
                             <div class="tm-myaccount-dashboard">
-                                <p>Hello <b>Jonathon Doe</b> (not <b>Jonathon Doe</b>? <a  href="#" id="logout" onclick="return handleLogout(event)">Log
+                                <p>Hello <b>Jonathon Doe</b> (not <b>Jonathon Doe</b>? <a href="#" id="logout"
+                                        onclick="return handleLogout(event)">Log
                                         out</a>)</p>
                                 <p>From your account dashboard you can view your recent orders, manage your
                                     shipping and billing addresses, and edit your password and account details.</p>
