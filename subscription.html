@@ -20,6 +20,62 @@
   <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
+<script>
+  const ALLOWED_PATHS = ['/subscription.html'];
+
+  function isAllowedPath(path) {
+    return ALLOWED_PATHS.includes(path);
+  }
+
+  function isLoggedIn() {
+    return localStorage.getItem('access_token') !== null;
+  }
+
+  function redirectIfNotLoggedIn() {
+    if (!isLoggedIn()) {
+      window.location.href = 'login.html';
+    }
+  }
+
+  function redirectIfNotAllowed() {
+    if (!isAllowedPath(window.location.pathname)) {
+      redirectIfNotLoggedIn();
+    }
+  }
+
+  window.addEventListener('load', redirectIfNotAllowed);
+
+  function handleLogout(event) {
+    event.preventDefault();
+    localStorage.removeItem("access_token");
+    window.location.reload();
+  }
+
+  function handleSubscription(event) {
+    event.preventDefault();
+
+    if (isLoggedIn()) {
+      // User is logged in, perform subscription logic here
+      // ...
+      // Redirect to the subscription page
+      window.location.href = 'subscription.html';
+    } else {
+      // User is not logged in, redirect to the login page
+      window.location.href = 'login.html';
+    }
+  }
+  function redirectIfNotAllowed() {
+    if (!isAllowedPath(window.location.pathname)) {
+      if (!isLoggedIn() && window.location.pathname === '/subscription.html') {
+        window.location.href = 'login.html';
+      } else {
+        redirectIfNotLoggedIn();
+      }
+    }
+  }
+
+</script>
+
 <body>
   <!-- Page Preloder -->
   <div id="preloder">
@@ -223,7 +279,7 @@
                         <label class="f15 mb-1 font-weight-semibold">First Name<sup class="text-primary">*</sup></label>
                         <div id="errMsgBilngFrstNme">
                           <input type="text" name="billingFirstName" class="text-box form-control py-2 rounded-0"
-                            value="vasu" id="billingFirstName">
+                            value="" id="billingFirstName">
                           <span id="firstNameErr" class="message_validation" style="display:none;">
                             <span id="errFrstName">Please enter First Name</span>
                           </span>
@@ -235,7 +291,7 @@
                         <label class="f15 mb-1 font-weight-semibold">Last Name<sup class="text-primary">*</sup></label>
                         <div id="errMsgBilngLstNme">
                           <input type="text" name="billingLastName" class="text-box form-control py-2 rounded-0"
-                            value="chaudhary" id="billingLastName">
+                            value="" id="billingLastName">
                           <span id="lastNameErr" class="message_validation" style="display:none;">
                             <span id="errLastName">Please enter Valid Last Name</span>
                           </span>
@@ -375,7 +431,7 @@
                         <label class="f15 mb-1 font-weight-semibold">Phone Number<sup
                             class="text-primary">*</sup></label>
                         <div id="errMoblieNo">
-                          <input type="text" name="userPhone" id="userPhone" value="85474555" maxlength="8"
+                          <input type="text" name="userPhone" id="userPhone" value="" maxlength="8"
                             class="form-control2  form-control py-2 rounded-0">
                           <input type="hidden" name="checkPhNo" value="0" id="checkPhNo">
                         </div>
@@ -386,8 +442,8 @@
                       <div class="form-group position-relative">
                         <label class="f15 mb-1 font-weight-semibold">Email<sup class="text-primary">*</sup></label>
                         <div id="errMsgBillEmail">
-                          <input type="text" name="billingEmail" class="text-box form-control py-2 rounded-0"
-                            value="dsad@gmail.com" id="billingEmail">
+                          <input type="text" name="billingEmail" class="text-box form-control py-2 rounded-0" value=""
+                            id="billingEmail">
                           <span id="billingEmailErr" class="message_validation" style="display:none;">
                             <span id="errEmail">Enter valid Email Address</span>
                           </span>

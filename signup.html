@@ -49,8 +49,6 @@
                 const interests = data.results;
                 const container = document.getElementById('container');
 
-                container.innerHTML = '';
-
                 interests.forEach(interest => {
                     const checkbox = document.createElement('input');
                     checkbox.className = 'form-check-input';
@@ -58,7 +56,6 @@
                     checkbox.type = 'checkbox';
                     checkbox.name = 'item-checkbox';
                     checkbox.value = interest.name;
-
 
                     const label = document.createElement('label');
                     label.className = 'form-check-label';
@@ -70,14 +67,7 @@
                     div.appendChild(checkbox);
                     div.appendChild(label);
 
-                    // checkbox.addEventListener('change', function () {
-
-                    //     if (this.checked) {
-                    //         fetchSubinterests(interest);
-                    //     } else {
-                    //         removeSubinterests(interest.id);
-                    //     }
-                    // });
+                    container.appendChild(div);
 
                     checkbox.addEventListener('change', function () {
                         const selectedInterests = document.querySelectorAll('input[name="item-checkbox"]:checked');
@@ -86,22 +76,18 @@
                             alert('Only 5 interests can be selected!!');
                         } else {
                             if (this.checked) {
-
                                 fetchSubinterests(interest);
                             } else {
                                 removeSubinterests(interest.id);
                             }
                         }
                     });
-
-                    container.appendChild(div);
                 });
             })
             .catch(error => {
                 console.error('Error fetching interests:', error);
             });
     }
-
 
     function fetchSubinterests(interest) {
         fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interest.id}`)
@@ -110,7 +96,7 @@
                 const subinterests = data.data;
                 const subinterestContainer = document.createElement('div');
                 subinterestContainer.id = `interest_${interest.id}`;
-                subinterestContainer.style.marginRight = "20px"
+                subinterestContainer.style.marginRight = '20px';
                 const interestHeading = document.createElement('h6');
                 interestHeading.textContent = `${interest.name}`;
                 subinterestContainer.appendChild(interestHeading);
@@ -122,32 +108,23 @@
                     checkbox.type = 'checkbox';
                     checkbox.name = 'subitem-checkbox';
                     checkbox.value = subinterest.name;
+                    checkbox.setAttribute('data-interest', interest.id); // Set data-interest attribute
 
                     const label = document.createElement('label');
                     label.className = 'form-check-label';
                     label.htmlFor = checkbox.id;
                     label.textContent = subinterest.name;
-                    label.style.marginLeft = "-20px";
-                    label.style.fontSize = "15px"
+                    label.style.marginLeft = '-20px';
+                    label.style.fontSize = '15px';
 
                     const subinterestDiv = document.createElement('div');
                     subinterestDiv.className = 'form-check ';
                     subinterestDiv.appendChild(checkbox);
                     subinterestDiv.appendChild(label);
 
-                    checkbox.addEventListener('change', function () {
-
-                        if (this.checked) {
-                            console.log(subinterest.id);
-                        }
-                    });
-
                     subinterestContainer.appendChild(subinterestDiv);
-
-
                 });
 
-                // Append the subinterest container to the main container
                 const subContainer = document.getElementById('sub_container');
                 subContainer.appendChild(subinterestContainer);
             })
@@ -160,129 +137,135 @@
         const subContainer = document.getElementById('sub_container');
         const interestContainer = document.getElementById(`interest_${interestId}`);
 
-        // Remove the interest container
         subContainer.removeChild(interestContainer);
     }
 
-    fetchData();
-
-    function getSelectedInterests() {
-        const checkboxes = document.querySelectorAll('#container input[type="checkbox"]');
-        const selectedInterests = [];
-
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                selectedInterests.push(checkbox.value);
-            }
-        });
+    async function validateForm() {
+        const selectedInterests = document.querySelectorAll('input[name="item-checkbox"]:checked');
 
         if (selectedInterests.length !== 5) {
-            alert('Please select 5 interests.');
-            return [];
+            alert('Please select exactly 5 interests.');
+            return false;
         }
 
-        return selectedInterests;
+        for (let i = 0; i < selectedInterests.length; i++) {
+            const interestId = selectedInterests[i].id;
+            const selectedSubinterests = document.querySelectorAll(`input[name="subitem-checkbox"][data-interest="${interestId}"]:checked`);
+
+            if (selectedSubinterests.length === 0) {
+                const interestName = selectedInterests[i].parentNode.textContent.trim();
+                alert(`Please select at least one subinterest for all the interest`);
+                return false;
+            }
+        }
+
+        return true;
     }
+    
+    fetchData();
 
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('signup');
         const submitButton = document.getElementById('submit-button');
 
-        form.addEventListener('submit', function (event) {
+        form.addEventListener('submit', async function (event) {
             event.preventDefault();
             // Handle form submission logic here
-            const firstName = document.getElementById('fname').value;
-            const lastName = document.getElementById('lname').value;
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const confirmPassword = document.getElementById('c-password').value;
-            const mobileNumber = document.getElementById('phone').value;
-            const dateOfBirth = document.getElementById('dob').value;
-            const gender = document.getElementById('gender').value;
+            if (await validateForm()) {
+                const firstName = document.getElementById('fname').value;
+                const lastName = document.getElementById('lname').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('c-password').value;
+                const mobileNumber = document.getElementById('phone').value;
 
-            const selectedInterests = document.querySelectorAll('input[name="item-checkbox"]:checked');
-            const interests = Array.from(selectedInterests).map(interest => interest.id).join(',');
+                const dateOfBirth = document.getElementById('dob').value;
+                const gender = document.getElementById('gender').value;
 
-            const selectedSubinterests = document.querySelectorAll('input[name="subitem-checkbox"]:checked');
-            const subInterests = Array.from(selectedSubinterests).map(subinterest => subinterest.id).join(',');
+                const selectedInterests = document.querySelectorAll('input[name="item-checkbox"]:checked');
+                const interests = Array.from(selectedInterests).map(interest => interest.id).join(',');
 
-            const data = {
-                first_name: firstName,
-                last_name: lastName,
-                email: email,
-                password: password,
-                confirm_password: confirmPassword,
-                mobile_number: mobileNumber,
-                date_of_birth: dateOfBirth,
-                interests: interests,
-                subInterests: subInterests,
-                gender: gender,
-                country_code: '+91'
-            };
-            if (selectedInterests.length !== 5) {
-                alert('Please select 5 interests.');
-                return;
-            }
+                const selectedSubinterests = document.querySelectorAll('input[name="subitem-checkbox"]:checked');
+                const subInterests = Array.from(selectedSubinterests).map(subinterest => subinterest.id).join(',');
+                if (mobileNumber.length !== 8) {
+                    alert('Enter a valid mobile number');
+                    return;
+                }
+                if (gender === '') {
+                    alert('Select a gender');
+                    return;
+                }
 
-            const terms = document.getElementById("register-terms")
-            if(terms.checked){
-                // continue;
-            }else{
-                alert("Please accept Terms and Condition to proceed signup")
-                return;
-            }
+                const data = {
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email,
+                    password: password,
+                    confirm_password: confirmPassword,
+                    mobile_number: mobileNumber,
+                    date_of_birth: dateOfBirth,
+                    interests: interests,
+                    subInterests: subInterests,
+                    gender: gender,
+                    country_code: '+91',
+                };
 
-            fetch('https://15.185.57.60/api/v1/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => response.json())
-                .then(result => {
-                    console.log(result);
-                    if (result.tokens) {
-                        form.reset()
-                        alert("Login Successful!!")
-                        window.location.href = "login.html";
-                    }
-                    else {
-                        alert(result.message)
-                    }
+                const terms = document.getElementById('register-terms');
+                if (!terms.checked) {
+                    alert('Please accept the Terms and Conditions to proceed with the signup');
+                    return;
+                }
 
+                fetch('https://15.185.57.60/api/v1/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
                 })
-                .catch(error => {
-                    console.error('Error submitting form:', error);
-                });
+                    .then(response => response.json())
+                    .then(result => {
+                        console.log(result);
+                        if (result.tokens) {
+                            form.reset();
+                            alert('Login Successful!!');
+                            window.location.href = 'login.html';
+                        } else {
+                            alert(result.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error submitting form:', error);
+                    });
+            } else {
+                return;
+            }
         });
+    });
 
-        function getSelectedInterests() {
-            const checkboxes = document.querySelectorAll('#container input[type="checkbox"]');
-            const selectedInterests = [];
-
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    selectedInterests.push(checkbox.value);
-                }
-            });
-
-            return selectedInterests;
+    async function fetchSubinterestsById(interestId) {
+        try {
+            const response = await fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interestId}`);
+            const data = await response.json();
+            return data.data;
+        } catch (error) {
+            console.error('Error fetching subinterests:', error);
+            return [];
         }
+    }
 
-        function getSelectedSubInterests() {
-            const checkboxes = document.querySelectorAll('#sub_container input[type="checkbox"]');
-            const selectedSubInterests = [];
 
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    selectedSubInterests.push(checkbox.value);
-                }
-            });
+    const phoneInput = document.getElementById('phone');
 
-            return selectedSubInterests;
+    phoneInput.addEventListener('input', function (event) {
+        const input = event.target;
+
+        if (input.value.length >= input.maxLength) {
+            input.value = input.value.slice(0, input.maxLength);
         }
     });
+
+
 
 </script>
 
@@ -404,7 +387,7 @@
                                 </div>
                                 <div class="tm-form-field col-lg-6 col-md-6 col-12">
                                     <label for="phone">Phone Number</label>
-                                    <input type="number" id="phone" required="required">
+                                    <input type="number" id="phone" required="required" maxlength="8">
                                 </div>
                                 <div class="tm-form-field col-lg-6 col-md-6 col-12">
                                     <label for="dob">Date of Birth</label>
@@ -414,7 +397,7 @@
                                     <label for="gender">Gender</label>
                                     <select name="Gender" id="gender"
                                         style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
-                                        <option>Select gender</option>
+                                        <option value="">Select gender</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>

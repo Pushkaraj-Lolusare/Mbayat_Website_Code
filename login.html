@@ -45,8 +45,10 @@
                 if (result.tokens) {
                     localStorage.setItem('access_token', result.tokens.access.token);
                     localStorage.setItem('first_name', result.user.first_name);
-                    window.location.href="my-account.html";
-                    alert('Login successful!');
+                    localStorage.setItem('loginId', result.user.id);
+
+                    window.location.href="index.html";
+                    
                 } else {
                     alert("Invalid mobile number or password");
                 }
@@ -105,7 +107,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="/"><img src="img/company_logo.jpg" alt=""></a>
+                        <a href="index.html"><img src="img/company_logo.jpg" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
