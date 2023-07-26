@@ -875,6 +875,55 @@
                 dropbtn.classList.remove("active");
             }
         });
+        const areasByState = {
+            'Al Asimah': ['Kuwait City', 'Sharq', 'Jaber Al-Ahmad City', 'Mirqab', 'Dasman', 'Salhiya', 'Salmiya', 'Hawally', 'Mishref', 'Bayan'],
+            'Hawalli': ['Mishref', 'Salmiya', 'Bayan', 'Rumaithiya', 'Salwa', 'Rai'],
+            'Farwaniya': ['Al Dajeej', 'Abdullah Al-Mubarak Al-Sabah', 'Al-Rai', 'Jleeb Al-Shuyoukh', 'Al-Riggae', 'Khaitan'],
+            'Ahmadi': ['Fintas', 'Manqaf', 'Wafrah', 'Riqqh'],
+            'Mubarak Alkabeer': ['Abu Fatira', 'Abu Halifa', 'Al Wafra', 'Bnaider', 'Fahaheel', 'Jaber Al Ahmad', 'Mangaf'],
+            'Jahra': ['Naseem', 'Al Sulaibikhat', 'Amghara', 'Kabad', 'Jahra Industrial Area', 'Qasr']
+        }
+
+        function populateAreas() {
+            const stateDropdown = document.getElementById('state');
+
+            const selectedState = stateDropdown.value;
+            // console.log("selectedState", selectedState);
+            const areaDropdown = document.getElementById('area');
+
+            areaDropdown.innerHTML = '';
+
+            const selectAreaOption = document.createElement('option');
+            selectAreaOption.value = '';
+            selectAreaOption.textContent = 'Select Area';
+            areaDropdown.appendChild(selectAreaOption);
+
+            const selectedStateAreas = areasByState[selectedState];
+            // console.log("selectedStateAreas", selectedStateAreas);
+
+            if (selectedStateAreas) {
+                selectedStateAreas.forEach(area => {
+                    const option = document.createElement('option');
+                    option.value = area;
+                    option.textContent = area;
+                    areaDropdown.appendChild(option);
+                    // console.log("areaDropdown", areaDropdown);
+
+                });
+            }
+            console.log("stateDropdown", stateDropdown);
+            console.log("areaDropdown", areaDropdown);
+
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            populateAreas();
+
+            document.getElementById('state').addEventListener('change', populateAreas);
+        });
+
     </script>
 
     <body>
@@ -1156,7 +1205,7 @@
                                     <div class="col-12">
                                         <div class="tm-myaccount-acdetails">
                                             <form action="#" class="tm-form tm-form-bordered">
-                                                <h4>Account Details</h4>
+                                                <!-- <h4>Account Details</h4> -->
                                                 <div class="tm-form-inner">
                                                     <div class="tm-form-field tm-form-fieldhalf">
                                                         <label for="acdetails-firstname">First name</label>
@@ -1220,7 +1269,7 @@
                                                 </div>
                                             </form>
                                             <div id="addAddressModal" class="modal"
-                                                style="width:80%; margin: auto;top: 20%; ">
+                                                style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
                                                 <div class="modal-content" style="padding: 20px;">
                                                     <div style="display: flex; justify-content: space-between;">
                                                         <h2>Add New Address</h2>
@@ -1229,28 +1278,76 @@
                                                     </div>
                                                     <form id="addAddressForm">
                                                         <!-- Add address form fields -->
-                                                        <div class="tm-form-field">
+
+                                                        <div class="tm-form-field" style="width: 45%;">
+                                                            <label for="country">Address Name</label><br />
+                                                            <input type="text" id="country" value="" />
+                                                        </div>
+                                                        <div class="tm-form-field" style="width: 45%;">
                                                             <label for="country">Country</label><br />
-                                                            <input type="text" id="country" value="Kuwait"
-                                                                style="width: 45%;" disabled>
+                                                            <input type="text" id="country" value="Kuwait" disabled />
                                                         </div>
-                                                        <div class="tm-form-field">
-                                                            <label for="state">State</label>
-                                                            <select id="state" onchange="populateAreas()">
-                                                                <!-- State options will be dynamically populated using JavaScript -->
-                                                            </select>
+
+                                                        <div
+                                                            style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                            <div class="tm-form-field" style="width: 45%;">
+                                                                <label for="state">State</label>
+                                                                <select id="state" onchange="populateAreas()">
+                                                                    <option value="">Select State</option>
+                                                                    <option value="Al Asimah">Al Asimah</option>
+                                                                    <option value="Farwaniya">Farwaniya</option>
+                                                                    <option value="Hawalli">Hawalli</option>
+                                                                    <option value="Ahmadi">Ahmadi</option>
+                                                                    <option value="Mubarak Alkabeer">Mubarak Alkabeer
+                                                                    </option>
+                                                                    <option value="Jahra">Jahra</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="tm-form-field" style="width: 45%;">
+                                                                <label for="area">Area</label>
+                                                                <select id="area">
+                                                                    <option value="">Select Area</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                        <div class="tm-form-field">
-                                                            <label for="area">Area</label>
-                                                            <select id="area">
-                                                                <!-- Area options will be dynamically populated using JavaScript -->
-                                                            </select>
+                                                        <div
+                                                            style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                            <div class="tm-form-field">
+                                                                <label for="country">Block</label><br />
+                                                                <input type="text" id="country" value="" />
+                                                            </div>
+                                                            <div class="tm-form-field">
+                                                                <label for="country">Street</label><br />
+                                                                <input type="text" id="country" value="" />
+                                                            </div>
                                                         </div>
-                                                        <div class="tm-form-field">
-                                                            <!-- Other address fields (Block, Street, HouseNo., Apartment, Floor, Avenue, Direction) -->
-                                                            <!-- ... -->
+                                                        <div
+                                                            style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                            <div class="tm-form-field">
+                                                                <label for="country">House No.</label><br />
+                                                                <input type="text" id="country" value="" />
+                                                            </div>
+                                                            <div class="tm-form-field">
+                                                                <label for="country">Apartment</label><br />
+                                                                <input type="text" id="country" value="" />
+                                                            </div>
                                                         </div>
-                                                        <div class="tm-form-field">
+                                                        <div
+                                                            style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                            <div class="tm-form-field">
+                                                                <label for="country">Floor</label><br />
+                                                                <input type="text" id="country" value="" />
+                                                            </div>
+                                                            <div class="tm-form-field">
+                                                                <label for="country">Avenue</label><br />
+                                                                <input type="text" id="country" value="" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="tm-form-field" style="width: 45%;">
+                                                            <label for="country">Direction</label><br />
+                                                            <input type="text" id="country" value="" />
+                                                        </div>
+                                                        <div class="tm-form-field" style="margin-top: 100px;">
                                                             <button type="button" class="tm-button"
                                                                 onclick="addNewAddress()">Add Address</button>
                                                             <button type="button" class="tm-button"
@@ -1260,6 +1357,7 @@
                                                     </form>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
