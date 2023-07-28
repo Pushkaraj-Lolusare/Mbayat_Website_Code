@@ -28,7 +28,7 @@
     .tab-block {
         display: inline-block;
         margin-right: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 50px;
         cursor: pointer;
         /* background-color: white; */
         color: black;
@@ -36,8 +36,15 @@
     }
 
     .tab-block.active {
-        /* background-color: black; */
-        color: white;
+        background-color: black;
+        color: rgb(53, 183, 156);
+        height: 39px;
+        padding: 0px;
+        width: 140px;
+        margin-top: 4px;
+        border-radius: 21px;
+        border: none;
+        text-align: center;
     }
 
     .subsc-value {
@@ -45,7 +52,8 @@
         margin-top: 10px;
         padding: 5px;
         /* background-color: #f0f0f0; */
-        color: black
+        color: black;
+        margin-bottom: 30px;
     }
 
     .subsc-value.active {
@@ -64,6 +72,7 @@
     .subsc-value.active {
         display: block;
     }
+    
 </style>
 <script>
     window.onload = function () {
@@ -223,17 +232,13 @@
     <!-- Header Section Begin -->
     <header class="header">
         <div class="container">
-            <div class="row">
+            <div class="row" style="justify-content: space-between;">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
                         <a href="#"><img src="img/company_logo.jpg" alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="header__nav__option">
-                        <a href="my-account.html">Dashboard</a>
-                    </div>
-                </div>
+
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
                         <a id="loginBtn" href="login.html">Login</a>
@@ -245,7 +250,6 @@
         </div>
     </header>
     <!-- Header Section End -->
-
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="hero__slider owl-carousel">
@@ -256,14 +260,12 @@
                             <div class="hero__text">
                                 <h2>Subscribe Your Mystery Box</h2>
                                 <p>Kuwait first Mystery subscription Box delivered right to your door!</p>
-                                <a href="subscription.html" onclick="handleSubscription(event);"
-                                    class="primary-btn">Subscribe<span class="arrow_right"></span></a>
-                                <!--<div class="hero__social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </div> -->
+                                <div style="display: flex; column-gap: 20px;">
+                                    <a href="subscription.html" onclick="handleSubscription(event);"
+                                        class="primary-btn">Subscribe<span class="arrow_right"></span></a>
+                                    <img src="img/icon/android-svgrepo-com 1.svg" style="width: 40px;">
+                                    <img src="img/icon/apple-svgrepo-com 1.svg" style="width: 40px;">
+                                </div>
                             </div>
                         </div>
                         <div class="col-xl-5 col-lg-5 col-md-5">
@@ -280,7 +282,6 @@
         </div>
     </section>
     <!-- Hero Section End -->
-
     <!-- Banner Section Begin -->
     <section class="banner spad">
         <div class="tm-section about-us-area bg-white tm-padding-section">
@@ -326,17 +327,11 @@
                     <div class="col-lg-6 order-1 order-lg-2">
                         <div class="about-image type1">
                             <img src="img/How.png" alt="about image">
-                            <!-- <div class="tm-videobutton">
-                            <a href="https://www.youtube.com/watch?v=Sv511KEiIJQ">
-                                <span><i class="fas fa-play"></i></span>
-                            </a>
-                        </div> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </section>
     <!-- Banner Section End -->
     <section class="pkg-bg position-relative">
@@ -356,34 +351,33 @@
                                 <div class="count-bg text-center float-left position-relative"><span
                                         class="count-num">9</span> <span
                                         class="day01 d-block text-uppercase">DAYS</span><img
-                                        src="https://www.trymbayat.com/public/default/frontend/standard/images/shadow-1.png"
                                         class="shadow-1 position-absolute">
                                 </div>
-                                <span class="txt-head ml-2 mr-5 text-uppercase float-left ml-4"> REMAINING</span>
+                                <span class="txt-head ml-2 mr-5 text-uppercase float-left ml-4"
+                                    style="margin-top: 35px;"> REMAINING</span>
                             </li>
                             <li class="d-inline-block d-flex">
                                 <div class="count-bg text-center float-left position-relative"><span
                                         class="count-num">160</span> <span
                                         class="day01 d-block text-uppercase">BOXES</span><img
-                                        src="https://www.trymbayat.com/public/default/frontend/standard/images/shadow-2.png"
                                         class="shadow-2 position-absolute"></div><span
-                                    class="txt-head ml-2 mr-5 text-uppercase float-left ml-4">LEFT</span>
+                                    class="txt-head ml-2 mr-5 text-uppercase float-left ml-4"
+                                    style="margin-top: 35px;">LEFT</span>
                             </li>
                         </ul>
-                        <div class="subscription-block pt-3 pt-4">
+                        <div class="subscription-block pt-3 pt-md-4">
                             <input type="hidden" id="selectedSubID" value="1">
-                            <div class="tab-block d-inline-block mr-2 mb-4 mb-lg-0">
+                            <div class="tab-block mb-4 mb-lg-0">
                                 <div id="act_1" class="subscbt text-uppercase font-weight-semibold">
                                     <span id="sub_1" style="cursor: pointer;">1 Month</span>
                                 </div>
-                                <div class="subsc-value position-absolute h2 font-weight-bold">
-                                    <span id="show_sub_1">
-                                        <span class="d-block total pl-1">Total</span> <span>KD 15</span>
+                                <div class="subsc-value position-absolute h2 font-weight-bold" style="margin-bottom: 40px;">
+                                    <span id="show_sub_1" >
+                                        <span class="d-block total pl-1" >Total</span> <span>KD 15</span>
                                     </span>
                                 </div>
                             </div>
-
-                            <div class="tab-block d-inline-block mr-2 mb-4 mb-lg-0">
+                            <div class="tab-block mb-4 mb-lg-0">
                                 <div id="act_2" class="subscbt text-uppercase font-weight-semibold">
                                     <span id="sub_2" style="cursor: pointer;">3 Months</span>
                                 </div>
@@ -393,8 +387,7 @@
                                     </span>
                                 </div>
                             </div>
-
-                            <div class="tab-block d-inline-block mr-2 mb-4 mb-lg-0">
+                            <div class="tab-block" style="margin-top: 70px;">
                                 <div id="act_3" class="subscbt text-uppercase font-weight-semibold">
                                     <span id="sub_3" style="cursor: pointer;">6 Months</span>
                                 </div>
@@ -405,6 +398,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="text-center text-lg-left text-md-left">
                             <a href="subscription.html" onclick="setPlan();"
                                 class="btn subscribe py-2 px-5 text-uppercase mt-5 mt-lg-4 ">Subscribe</a>
@@ -414,8 +408,6 @@
             </div>
         </div>
     </section>
-
-
     <!-- Instagram Section Begin -->
     <section class="instagram spad" style="margin-bottom: 40px;">
         <div class="container">
@@ -436,7 +428,6 @@
             </div>
         </div>
     </section>
-
     <!-- Footer Section Begin -->
     <footer class="footer">
         <div class="container">
@@ -446,10 +437,11 @@
                         <div class="footer__logo" style="width: 70%;">
                             <a href="/"><img src="img/logo-mbyat (1).png" alt=""></a>
                         </div>
-                        <p>Mbayat is a mystery subscription box tailored to costumers’ interest, where you will get the
+                        <p>Mbayat is a mystery subscription box tailored to costumer's interest, where you will get the
                             opportunity to try and experience new products and services matching your interest provided
                             by local brands and companies each month.</p>
-                        <a href="#"><img src="img/payment.png" alt=""></a>
+                        <a href="#"><img src="img/logo.png" alt=""
+                                style="width: 65px; height: 45px; border-radius: 2px;"></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
@@ -477,9 +469,15 @@
                             <div class="social_add">
                                 <a href="tell:+965 90015060">+965 90015060</a>
                                 <a href="info:info@trymbayat.com">info@trymbayat.com</a>
-                                <a href="#" class="btn btn-primary px-4 py-2 mt-4">Vendor Signup</a>
+                                <div>
+                                    <a href="venderSignup.html" class="btn btn-primary px-4 py-2 mt-4"
+                                        id="vendor-signup-btn">Vendor Signup</a>
+                                    <a href="corporateSignup.html" class="btn btn-primary px-4 py-2 mt-4"
+                                        id="corporate-signup-btn">Corporate Signup</a>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -506,7 +504,7 @@
                                 <a href="about.html">About Us</a>
                             </li>
                             <li>
-                                <a href="privacy-statement.html">Privacy police</a>
+                                <a href="privacy-statement.html">Privacy policy</a>
                             </li>
                             <li>
                                 <a href="terms-and-conditions.html">Terms & Conditions</a>
@@ -544,4 +542,4 @@
     <script src="js/main.js"></script>
 </body>
 
-</html>]
+</html>

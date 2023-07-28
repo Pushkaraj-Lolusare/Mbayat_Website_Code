@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome to Mbayat </title>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -20,70 +18,12 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/main.css" type="text/css">
 </head>
-<script>
-    function handleLogin(event) {
-        event.preventDefault();
 
-        const mobileNumber = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-        const data = {
-            email: mobileNumber,
-            password: password
-        };
-        const remember_me = document.getElementById("login-remember")
 
-        fetch('https://15.185.57.60/api/v1/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => response.json())
-            .then(result => {
-                console.log("result", result)
-                if (result.tokens) {
-                    localStorage.setItem('access_token', result.tokens.access.token);
-                    localStorage.setItem('first_name', result.user.first_name);
-                    localStorage.setItem('loginId', result.user.id);
 
-                    window.location.href = "dashboard.html";
-
-                } else {
-                    alert("Invalid mobile number or password");
-                }
-            })
-            .catch(error => {
-                console.error('Error logging in:', error);
-            });
-    }
-
-    function checkStoredCredentials() {
-        const credential = google.accounts.id.restore();
-        if (credential) {
-            const number = credential.id;
-            const password = credential.password;
-        }
-    }
-
-    window.onload = function () {
-        google.accounts.id.initialize({
-            client_id: 'YOUR_CLIENT_ID',
-            callback: checkStoredCredentials
-        });
-    };
-
-    function handleCredentialResponse(response) {
-        if (response.credential) {
-            const email = response.credential.id;
-            const password = response.credential.password;
-        }
-    }
-
-</script>
 
 <body>
-    <!-- Page Preloder -->
+
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -96,7 +36,21 @@
                 <a href="#">Sign in</a>
                 <a href="#">FAQs</a>
             </div>
+            <!-- <div class="offcanvas__top__hover">
+                <span>Usd <i class="arrow_carrot-down"></i></span>
+                <ul>
+                    <li>USD</li>
+                    <li>EUR</li>
+                    <li>USD</li>
+                </ul>
+            </div> -->
         </div>
+        <!-- <div class="offcanvas__nav__option">
+            <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
+            <a href="#"><img src="img/icon/heart.png" alt=""></a>
+            <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+            <div class="price">$0.00</div>
+        </div> -->
         <div id="mobile-menu-wrap"></div>
     </div>
     <!-- Offcanvas Menu End -->
@@ -110,18 +64,7 @@
                         <a href="index.html"><img src="img/company_logo.jpg" alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
 
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="header__nav__option">
-                        <!-- <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a> -->
-                        <a href="login.html">Login</a>
-                        <a class="active" href="signup.html">Signup</a>
-                        <!-- <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div> -->
-                    </div>
-                </div>
             </div>
             <div class="canvas__open"><i class="fa fa-bars"></i></div>
         </div>
@@ -132,10 +75,10 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="tm-breadcrumb">
-                        <h2>Login</h2>
+                        <h2> Corporate Signup</h2>
                         <ul>
                             <li><a href="index.html">Home</a></li>
-                            <li>Login</li>
+                            <li><a href="corporateSignup.html">Signup</a></li>
                         </ul>
                     </div>
                 </div>
@@ -145,44 +88,84 @@
     <!--// Breadcrumb Area -->
     <!-- Header Section End -->
     <!-- Main Content -->
+    <!-- Main Content -->
     <main class="main-content">
         <!-- Login Register Area -->
         <div class="tm-section tm-login-register-area bg-white tm-padding-section">
             <div class="container">
                 <div class="row d-flex justify-content-center">
-                    <div class="col-lg-6">
-                        <div id="g_id_onload" data-client_id="YOUR_CLIENT_ID" data-callback="handleCredentialResponse">
-                        </div>
-                        <form action="subscription.html" class="tm-form tm-login-form tm-form-bordered"
-                            onsubmit="return handleLogin(event)">
-                            <h4>Login</h4>
-                            <div class="tm-form-inner" style="margin-top: 10px;">
-                                <div class="tm-form-field">
-                                    <input type="number" id="login-email" required="required"
-                                        placeholder="Enter your Mobile No.">
+                    <div class="col-lg-12">
+                        <form id="signup" class="tm-form tm-register-form tm-form-bordered">
+                            <!-- <h4>Create an account</h4> -->
+                            <div class="tm-form-inner">
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="fname">Company Name</label>
+                                    <input type="text" id="fname" required="required" placeholder="Enter company's name">
                                 </div>
-                                <div class="tm-form-field">
-                                    <input type="password" id="login-password" required="required"
-                                        placeholder="Enter your password">
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="companyType">Company Type</label>
+                                    <select id="companyType" >
+                                        <option value="">Select Company Type</option>
+                                        <option value="Public Ltd.">Public Ltd.</option>
+                                        <option value="Private Ltd.">Private Ltd.</option>
+                                        <option value="MNC">MNC</option>
+                                    </select>
+                                    </select>
                                 </div>
-                                <div class="tm-form-field">
-                                    <input type="checkbox" name="login-remember" id="login-remember">
-                                    <label for="login-remember">Remember Me</label>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="lname">Industry Type</label>
+                                    <select id="industryType" >
+                                        <option value="">Select Industry Type</option>
+                                        <option value="Public Ltd.">Technology </option>
+                                        <option value="Textile">Textile</option>
+                                        <option value="Food">Food</option>
+                                    </select>
                                 </div>
-                                <div class="tm-form-field">
-                                    <button type="submit" class="tm-button">Login <b></b></button>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="register-email">Email </label>
+                                    <input type="email" id="register-email" required="required" placeholder="Enter company's email">
                                 </div>
-                                <div class="tm-form-field">
-                                    <a href="#">Forgot your password?</a>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="phone">Phone Number</label>
+                                    <div style="display: flex">
+                                        <div
+                                            style="display: flex;border: 1px solid rgb(211, 209, 209);width: 110px ; margin-right: 10px;padding-left: 5px; padding-right: 5px; padding-top: 15px; column-gap: 4px;">
+                                            <img src="img/Frame.png" alt=""
+                                                style="width: 30px; height: 20px; margin-right: 5px;">
+                                            <span style="font-size: 13px">+965</span>
+                                        </div>
+                                        <input type="number" id="phone" required="required" maxlength="8" placeholder="Enter company's phone No.">
+                                    </div>
                                 </div>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="address">Address</label>
+                                    <input type="text" id="address" required="required" placeholder="Enter company's address">
+                                </div>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="register-password">Password</label>
+                                    <input type="password" id="register-password" required="required" placeholder="Enter password">
+                                </div>
+                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="c-password">Confirm Password</label>
+                                    <input type="password" id="c-password" required="required" placeholder="Confirm password">
+                                </div>
+                                <!-- <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                    <label for="profile-image">Company Logo</label>
+                                    <input type="file" id="profile-image" accept="image/*" style="padding: 12px;">
+                                </div> -->
+                            </div>
+                            <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                <button type="submit" class="tm-button">Register<b></b></button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
         <!--// Login Register Area -->
     </main>
+    <!--// Main Content -->
     <!--// Main Content -->
     <!-- Footer Section Begin -->
     <footer class="footer">
@@ -273,7 +256,6 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-
     <!-- Search Begin -->
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
@@ -284,7 +266,6 @@
         </div>
     </div>
     <!-- Search End -->
-
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -296,6 +277,63 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+      
+    
+        document.getElementById('signup').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+    
+            // Get form input values
+            const companyName = document.getElementById('fname').value;
+            const companyType = document.getElementById('companyType').value;
+            const industryType = document.getElementById('industryType').value;
+            const email = document.getElementById('register-email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('c-password').value;
+    
+            const formData = {
+                companyName: companyName,
+                companyType: companyType,
+                industry: industryType,
+                address: address,
+                phoneNumber: phone,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword
+            };
+    
+            // Display the form data in the console
+            console.log(formData);
+    
+            // Make the POST request to the server
+            fetch('http://localhost:5500/corporateUser/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the server response if needed
+                console.log(data);
+                if(data.msg === "Registration successful"){
+                    alert("Thank you for registering with us!");
+                    alert("You will receive the mail if admin approve you account!!")
+                    document.getElementById('signup').reset();
+                    window.location.href="index.html"
+                }else{
+                    alert(`${data.msg}`)
+                }
+            })
+            .catch(error => {
+                // Handle any errors that occurred during the POST request
+                console.error('Error:', error);
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -218,8 +218,8 @@
             <div class="tab-block d-inline-block mr-2 mb-4 mb-lg-0">
               <div id="act_3" class="subscbt text-uppercase font-weight-semibold active"> <span id="sub_3"
                   style="cursor: pointer;">6 Months</span> </div>
-              <div class="subsc-value position-absolute h2 font-weight-bold"><span id="show_sub_3" style=""> <span
-                    class="d-block total pl-1">Total</span> <span>KD 75</span> </span></div>
+              <div class="subsc-value position-absolute h2 font-weight-bold"><span id="show_sub_3" style="display:none">
+                  <span class="d-block total pl-1">Total</span> <span>KD 75</span> </span></div>
             </div>
             <div class="col-md-5 p-0">
               <button onclick="proceedPayment();"
@@ -523,13 +523,13 @@
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6">
           <div class="footer__about">
-            <div class="footer__logo">
-              <a href="/"><img src="img/company_logo.jpg" alt=""></a>
+            <div class="footer__logo" style="width: 70%;">
+              <a href="/"><img src="img/logo-mbyat (1).png" alt=""></a>
             </div>
-            <p>Mbayat is a mystery subscription box tailored to costumers’ interest, where you will get the
+            <p>Mbayat is a mystery subscription box tailored to costumer's interest, where you will get the
               opportunity to try and experience new products and services matching your interest provided
               by local brands and companies each month.</p>
-            <a href="#"><img src="img/payment.png" alt=""></a>
+            <a href="#"><img src="img/logo.png" alt="" style="width: 65px; height: 45px; border-radius: 2px;"></a>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6">
@@ -557,9 +557,15 @@
               <div class="social_add">
                 <a href="tell:+965 90015060">+965 90015060</a>
                 <a href="info:info@trymbayat.com">info@trymbayat.com</a>
-                <a href="#" class="btn btn-primary px-4 py-2 mt-4">Vendor Signup</a>
+                <div>
+                  <a href="venderSignup.html" class="btn btn-primary px-4 py-2 mt-4" id="vendor-signup-btn">Vendor
+                    Signup</a>
+                  <a href="corporateSignup.html" class="btn btn-primary px-4 py-2 mt-4"
+                    id="corporate-signup-btn">Corporate Signup</a>
+                </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -586,7 +592,7 @@
                 <a href="about.html">About Us</a>
               </li>
               <li>
-                <a href="privacy-statement.html">Privacy police</a>
+                <a href="privacy-statement.html">Privacy policy</a>
               </li>
               <li>
                 <a href="terms-and-conditions.html">Terms & Conditions</a>

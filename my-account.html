@@ -148,29 +148,6 @@
             /* 6s for 2s per slide, adjust as needed */
         }
 
-        /* @keyframes slideAnimation {
-
-        0%,
-        100% {
-            transform: translateX(0);
-        }
-
-        33.33%,
-        66.66% {
-            transform: translateX(calc(-100% * 1));
-        }
-
-        33.33% {
-            /* Add a delay of 2 seconds for each slide */
-        /* animation-delay: 2s; */
-        /* } */
-
-        /* 66.66% { */
-        /* Add a delay of 4 seconds for each slide */
-        /* animation-delay: 4s;
-        } */
-        /* } */
-
         .carousel {
             margin: 0 auto;
             width: 50%;
@@ -228,7 +205,7 @@
             background-color: #f1f1f1;
             color: #333;
             padding: 10px;
-            font-size: 16px;
+            font-size: 18px;
             border: none;
             cursor: pointer;
             /* border: 1px solid red; */
@@ -266,6 +243,8 @@
 
         .dropbtn:hover {
             background-color: rgb(110, 198, 183);
+            color: white;
+
         }
 
         .dropdown .dropbtn {
@@ -473,6 +452,7 @@
             color: #fff;
         }
 
+
         .address-div button.edit-button svg {
             margin-right: 5px;
         }
@@ -576,6 +556,16 @@
 
         .dropbtn.active {
             background-color: rgb(110, 198, 183);
+        }
+
+        #vendor-signup-btn {
+            background-color: rgb(177, 43, 82);
+            border: 1px solid black;
+        }
+
+        #corporate-signup-btn {
+            background-color: rgb(177, 43, 82);
+            border: 1px solid black;
         }
     </style>
 
@@ -1494,7 +1484,8 @@
                                 opportunity to try and experience new products and services matching your interest
                                 provided
                                 by local brands and companies each month.</p>
-                            <a href="#"><img src="img/payment.png" alt=""></a>
+                            <a href="#"><img src="img/logo.png" alt=""
+                                    style="width: 65px; height: 45px; border-radius: 2px;"></a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6">
@@ -1522,11 +1513,15 @@
                                 <div class="social_add">
                                     <a href="tell:+965 90015060">+965 90015060</a>
                                     <a href="info:info@trymbayat.com">info@trymbayat.com</a>
-                                    <a href="#" class="btn btn-primary px-4 py-2 mt-4"
-                                        style="background-color: rgb(163,54,75); border: 1px solid black;">Vendor
-                                        Signup</a>
+                                    <div>
+                                        <a href="#" class="btn btn-primary px-4 py-2 mt-4" id="vendor-signup-btn">Vendor
+                                            Signup</a>
+                                        <a href="#" class="btn btn-primary px-4 py-2 mt-4"
+                                            id="corporate-signup-btn">Corporate Signup</a>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

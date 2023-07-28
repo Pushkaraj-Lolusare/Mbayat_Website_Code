@@ -161,7 +161,7 @@
 
         return true;
     }
-    
+
     fetchData();
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -364,14 +364,13 @@
     <!-- Main Content -->
     <!-- Main Content -->
     <main class="main-content">
-
         <!-- Login Register Area -->
         <div class="tm-section tm-login-register-area bg-white tm-padding-section">
             <div class="container">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12">
                         <form id="signup" class="tm-form tm-register-form tm-form-bordered">
-                            <h4>Create an account</h4>
+                            <!-- <h4>Create an account</h4> -->
                             <div class="tm-form-inner">
                                 <div class="tm-form-field col-lg-6 col-md-6 col-12">
                                     <label for="fname">First Name</label>
@@ -387,7 +386,15 @@
                                 </div>
                                 <div class="tm-form-field col-lg-6 col-md-6 col-12">
                                     <label for="phone">Phone Number</label>
-                                    <input type="number" id="phone" required="required" maxlength="8">
+                                    <div style="display: flex">
+                                        <div
+                                            style="display: flex;border: 1px solid rgb(211, 209, 209);width: 110px ; margin-right: 10px;padding-left: 5px; padding-right: 5px; padding-top: 15px; column-gap: 4px;">
+                                            <img src="img/Frame.png" alt=""
+                                                style="width: 30px; height: 20px; margin-right: 5px;">
+                                            <span style="font-size: 13px">+965</span>
+                                        </div>
+                                        <input type="number" id="phone" required="required" maxlength="8">
+                                    </div>
                                 </div>
                                 <div class="tm-form-field col-lg-6 col-md-6 col-12">
                                     <label for="dob">Date of Birth</label>
@@ -424,7 +431,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="tm-form-field col-lg-12 col-md-12 col-12">
                                 <input type="checkbox" id="register-terms">
                                 <label class="lbl-cus" for="register-terms">
@@ -444,12 +450,10 @@
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
         </div>
         <!--// Login Register Area -->
-
     </main>
     <!--// Main Content -->
     <!--// Main Content -->
@@ -462,10 +466,11 @@
                         <div class="footer__logo" style="width: 70%;">
                             <a href="/"><img src="img/logo-mbyat (1).png" alt=""></a>
                         </div>
-                        <p>Mbayat is a mystery subscription box tailored to costumers’ interest, where you will get the
+                        <p>Mbayat is a mystery subscription box tailored to costumer's interest, where you will get the
                             opportunity to try and experience new products and services matching your interest provided
                             by local brands and companies each month.</p>
-                        <a href="#"><img src="img/payment.png" alt=""></a>
+                        <a href="#"><img src="img/logo.png" alt=""
+                                style="width: 65px; height: 45px; border-radius: 2px;"></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
@@ -493,9 +498,15 @@
                             <div class="social_add">
                                 <a href="tell:+965 90015060">+965 90015060</a>
                                 <a href="info:info@trymbayat.com">info@trymbayat.com</a>
-                                <a href="#" class="btn btn-primary px-4 py-2 mt-4">Vendor Signup</a>
+                                <div>
+                                    <a href="venderSignup.html" class="btn btn-primary px-4 py-2 mt-4"
+                                        id="vendor-signup-btn">Vendor Signup</a>
+                                    <a href="corporateSignup.html" class="btn btn-primary px-4 py-2 mt-4"
+                                        id="corporate-signup-btn">Corporate Signup</a>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -522,7 +533,7 @@
                                 <a href="about.html">About Us</a>
                             </li>
                             <li>
-                                <a href="privacy-statement.html">Privacy police</a>
+                                <a href="privacy-statement.html">Privacy policy</a>
                             </li>
                             <li>
                                 <a href="terms-and-conditions.html">Terms & Conditions</a>
@@ -535,7 +546,6 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-
     <!-- Search Begin -->
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
@@ -546,7 +556,6 @@
         </div>
     </div>
     <!-- Search End -->
-
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
