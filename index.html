@@ -18,6 +18,19 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-Cw8FZc+5IiEQMzN5wl4oCx4w77LThnMf5eB8Pm1WObU9eHmDpplKTt6Xe/B+49uNAX69NR/8hSN6GR8imdb8A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 </head>
 <style>
     #loginButton:hover {
@@ -72,29 +85,23 @@
     .subsc-value.active {
         display: block;
     }
-    
+
+    .dropdown-item:hover {
+        color: rgb(53, 183, 156);
+        border: none;
+    }
+
+    #logoutBtn:hover {
+        color: rgb(53, 183, 156);
+    }
+    #android:hover{
+        transform: scale(1.1);
+    }
+    #apple:hover{
+        transform: scale(1.1);
+    }
 </style>
 <script>
-    window.onload = function () {
-        const loginButton = document.getElementById('loginButton');
-        const access_token = localStorage.getItem('access_token');
-
-        if (access_token) {
-            loginButton.textContent = 'Logout';
-
-            loginButton.addEventListener('click', function () {
-                localStorage.removeItem('access_token');
-                window.location.href = 'index.html';
-            });
-        } else {
-            loginButton.textContent = 'Login';
-
-            loginButton.addEventListener('click', function () {
-                window.location.href = 'login.html';
-            });
-        }
-    };
-
     document.addEventListener("DOMContentLoaded", function () {
         var name = localStorage.getItem("first_name");
 
@@ -185,29 +192,6 @@
             window.location.href = 'login.html';
         }
     }
-
-    window.addEventListener('DOMContentLoaded', function () {
-        var loginBtn = document.getElementById('loginBtn');
-        var signupBtn = document.getElementById('signupBtn');
-        var access_token = localStorage.getItem('access_token');
-
-        if (access_token) {
-            loginBtn.textContent = 'Logout';
-            signupBtn.style.display = 'none';
-        }
-
-        loginBtn.addEventListener('click', function (event) {
-            if (access_token) {
-                // Clear localStorage and redirect to index page
-                localStorage.clear();
-                window.location.href = 'index.html';
-            } else {
-                // Redirect to login page
-                window.location.href = 'login.html';
-            }
-            event.preventDefault(); // Prevent default link behavior
-        });
-    });
 </script>
 
 <body>
@@ -238,11 +222,31 @@
                         <a href="#"><img src="img/company_logo.jpg" alt=""></a>
                     </div>
                 </div>
-
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <a id="loginBtn" href="login.html">Login</a>
-                        <a id="signupBtn" class="active" href="signup.html">Signup</a>
+                        <div style="display: flex;">
+                            <a id="loginBtn" href="login.html">Login</a>
+                            <a id="signupBtn" class="active" href="signup.html">Signup</a>
+                        </div>
+                        <div id="userDropdown" class="dropdown" style="width: 170px;">
+                            <button id="userDropdownBtn" class="btn btn-primary dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                style="width: 100%; background-color: aliceblue; color: black; border: none; outline: none;">
+                                <i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                                Account
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="userDropdownBtn"
+                                style="width: 100%;padding: 0px;">
+                                <a class="dropdown-item" href="my-account.html"
+                                    style="font-size: 17px; width: 170px;font-weight: 400; height:40px; border-radius: 0px; border-bottom: 1px solid gray;">
+                                    <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard
+                                </a>
+                                <a id="logoutBtn" class="dropdown-item" type="button"
+                                    style="font-size: 17px; width: 170px;font-weight: 400;height:40px; border-radius: 0px;">
+                                    <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -263,8 +267,10 @@
                                 <div style="display: flex; column-gap: 20px;">
                                     <a href="subscription.html" onclick="handleSubscription(event);"
                                         class="primary-btn">Subscribe<span class="arrow_right"></span></a>
-                                    <img src="img/icon/android-svgrepo-com 1.svg" style="width: 40px;">
-                                    <img src="img/icon/apple-svgrepo-com 1.svg" style="width: 40px;">
+                                    <a href="https://play.google.com/store/apps/details?id=com.user.mbayat&pli=1" target="_blank" id="android">
+                                        <img src="img/icon/android-svgrepo-com 1.svg" style="width: 40px;"></a>
+                                    <a href="#" id="apple">
+                                        <img src="img/icon/apple-svgrepo-com 1.svg"  style="width: 40px;"></a>
                                 </div>
                             </div>
                         </div>
@@ -326,7 +332,7 @@
                     </div>
                     <div class="col-lg-6 order-1 order-lg-2">
                         <div class="about-image type1">
-                            <img src="img/How.png" alt="about image">
+                            <img src="img/image.png" alt="about image">
                         </div>
                     </div>
                 </div>
@@ -337,7 +343,8 @@
     <section class="pkg-bg position-relative">
         <div class="container">
             <div class="row align-items-center py-5">
-                <div class="col-lg-7 position-static text-center"><img src="img/box_mini.png" class="img-fluid"></div>
+                <div class="col-lg-7 position-static text-center"><img src="img/image-mobile-mockup.png"
+                        class="img-fluid"></div>
                 <div class="col-lg-5 mt-2">
                     <h3 class="text-uppercase text-center text-lg-left text-md-left d-none d-lg-block d-md-block">PICK
                         <span class="d-block">YOUR Package</span>
@@ -371,9 +378,10 @@
                                 <div id="act_1" class="subscbt text-uppercase font-weight-semibold">
                                     <span id="sub_1" style="cursor: pointer;">1 Month</span>
                                 </div>
-                                <div class="subsc-value position-absolute h2 font-weight-bold" style="margin-bottom: 40px;">
-                                    <span id="show_sub_1" >
-                                        <span class="d-block total pl-1" >Total</span> <span>KD 15</span>
+                                <div class="subsc-value position-absolute h2 font-weight-bold"
+                                    style="margin-bottom: 40px;">
+                                    <span id="show_sub_1">
+                                        <span class="d-block total pl-1" style="margin: auto;">Total</span> <span style="font-size: 20px;margin: auto;">15 KD</span>
                                     </span>
                                 </div>
                             </div>
@@ -383,7 +391,7 @@
                                 </div>
                                 <div class="subsc-value position-absolute h2 font-weight-bold">
                                     <span id="show_sub_2">
-                                        <span class="d-block total pl-1">Total</span> <span>KD 40</span>
+                                        <span class="d-block total pl-1" style="margin: auto;">Total</span> <span style="font-size: 20px;margin: auto;">40 KD</span>
                                     </span>
                                 </div>
                             </div>
@@ -392,14 +400,14 @@
                                     <span id="sub_3" style="cursor: pointer;">6 Months</span>
                                 </div>
                                 <div class="subsc-value position-absolute h2 font-weight-bold">
-                                    <span id="show_sub_3">
-                                        <span class="d-block total pl-1">Total</span> <span>KD 75</span>
+                                    <span id="show_sub_3" style="margin: auto;">
+                                        <span class="d-block total pl-1" style="margin: auto;">Total</span> <span style="font-size: 20px;margin: auto;">75 KD</span>
                                     </span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="text-center text-lg-left text-md-left">
+                        <div class="text-center text-lg-left text-md-left" style="margin-top: -50px;">
                             <a href="subscription.html" onclick="setPlan();"
                                 class="btn subscribe py-2 px-5 text-uppercase mt-5 mt-lg-4 ">Subscribe</a>
                         </div>
@@ -540,6 +548,52 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+
+        document.getElementById('userDropdownBtn').addEventListener('click', function () {
+            // Toggle the display property of the dropdown menu when the button is clicked
+            const dropdownMenu = document.querySelector('#userDropdown .dropdown-menu');
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        const token = localStorage.getItem('access_token')
+        console.log("isLoggedIn1", token);
+
+        // Get references to the buttons and the dropdown
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const userDropdown = document.getElementById('userDropdown');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        if (token) {
+            // Hide login and signup buttons
+            console.log("isLoggedIn2", token);
+
+            loginBtn.style.display = 'none';
+            signupBtn.style.display = 'none';
+
+            // Show the user dropdown
+            userDropdown.style.display = 'block';
+
+            // Logout functionality
+            logoutBtn.addEventListener('click', () => {
+                // Perform logout actions, e.g., clear the access_token from localStorage and redirect to the logout page
+                localStorage.removeItem('access_token');
+                window.location.href = 'login.html';
+            });
+        } else {
+            // If not logged in, show login and signup buttons and hide the user dropdown
+            userDropdown.style.display = 'none';
+            loginBtn.style.display = 'block';
+            signupBtn.style.display = 'block';
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Latest Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

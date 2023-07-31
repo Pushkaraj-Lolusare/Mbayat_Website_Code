@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome to Mbayat </title>
-
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -26,551 +25,1339 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
+<style>
+    #logout a:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        color: rgb(110, 198, 183);
+    }
+
+    .add-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgb(110, 198, 183);
+        border: none;
+        border-radius: 15px;
+        width: 100px;
+        height: 30px;
+        cursor: pointer;
+        color: white;
+        font-size: 12.5px;
+        margin: auto;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .button-icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 18px;
+        margin-right: 5px;
+    }
+
+    .button-text {
+        font-weight: bold;
+    }
+
+    .pause-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgb(163, 54, 75);
+        border: none;
+        border-radius: 15px;
+        width: 100px;
+        height: 30px;
+        cursor: pointer;
+        color: white;
+        font-size: 12.5px;
+        margin: auto;
+    }
+
+    .pause-button-icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 15px;
+        margin-right: 5px;
+    }
+
+    .pause-button-text {
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    body {
+        margin: 0;
+        /* overflow: hidden; */
+    }
+
+    #canvas {
+        width: 100%;
+        height: 100%;
+    }
+
+    .gallery-container {
+        margin: auto;
+        width: 55%;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 10px;
+        margin-top: 5px;
+    }
+
+    .gallery-date {
+        margin: auto;
+        width: 30%;
+        padding: 5px 20px;
+    }
+
+    
+</style>
+<style>
+    .carousel-slide {
+        display: flex;
+        overflow: hidden;
+        width: 50%;
+        /* Display one slide at a time */
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+
+    }
+
+    .slide {
+        flex: 0 0 100%;
+        margin-right: 10px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px;
+        /* border: 1px solid red; */
+        display: flex;
+        flex-direction: column;
+        height: 300px;
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        animation: slideAnimation 6s linear infinite;
+        width: 300px;
+        /* 6s for 2s per slide, adjust as needed */
+    }
+
+    .carousel {
+        margin: 0 auto;
+        width: 50%;
+        /* You can adjust the width as needed */
+        max-height: 300px;
+        /* You can adjust the height as needed */
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .carousel-container {
+        width: 70%;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .carousel-slide {
+        display: flex;
+        width: 300%;
+        height: 300px;
+        transition: transform 0.4s ease-in-out;
+    }
+
+    .carousel-slide div {
+        flex: 0 0 33.33%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .carousel-slide img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        /* border: 1px solid red; */
+        width: 142px;
+    }
+
+    .dropbtn {
+        background-color: #f1f1f1;
+        color: #333;
+        padding: 10px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        /* border: 1px solid red; */
+        width: 142px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        min-width: 120px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        cursor: pointer;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f9f9f9;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: rgb(110, 198, 183);
+    }
+
+    .dropbtn:hover {
+        background-color: rgb(110, 198, 183);
+        color: white;
+
+    }
+
+    .dropdown .dropbtn {
+        position: relative;
+        padding-right: 25px;
+        /* Added padding for the icon */
+    }
+
+    .dropdown .dropdown-icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px 5px 0 5px;
+        border-color: #333 transparent transparent transparent;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .dropdown.open .dropdown-icon {
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    #logout-link:hover {
+        color: rgb(110, 198, 183);
+    }
+
+    .dropdown-content a {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .dropdown-content a i {
+        margin-right: 10px;
+    }
+
+    #pause-button {
+        background: none;
+        border: none;
+        outline: none;
+        position: relative;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    #pause-button i {
+        font-size: 16px;
+        color: #000;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #pause-button .fas.fa-pause:before {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 4px;
+        height: 12px;
+        background-color: #000;
+    }
+
+    #pause-button .fas.fa-pause:after {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 14px;
+        width: 4px;
+        height: 12px;
+        background-color: #000;
+    }
+
+    #add-button {
+        padding: 10px 15px;
+        background-color: #2196F3;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #add-button i {
+        margin-right: 5px;
+    }
+
+    .pause-button i {
+        font-size: 12px;
+        margin-right: 0px;
+
+    }
+
+    .nav-item.dropdown-item {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        max-height: 400px;
+        overflow: auto;
+    }
+
+    .interest-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #container input[name="item-checkbox"] {
+        margin-right: 5px;
+    }
+
+    #sub_container {
+        display: flex;
+        /* flex-direction: ; */
+        gap: 10px;
+    }
+
+    #sub_container input[name="subitem-checkbox"] {
+        margin-right: 5px;
+    }
+
+    #container h6,
+    #sub_container h6 {
+        margin: 5px 0;
+        font-weight: bold;
+    }
+
+    /* CSS for Address Display */
+    /* CSS for Address Display */
+    .address-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .address-div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .address-div label {
+        margin-bottom: 5px;
+    }
+
+    .address-div button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .address-div input[type="radio"] {
+        margin-right: 10px;
+    }
+
+    /* CSS for Address Display */
+    .address-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .address-div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .address-div label {
+        margin-bottom: 5px;
+    }
+
+    .address-div button {
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+    }
+
+    .address-div button.edit-button {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+
+    .address-div button.edit-button svg {
+        margin-right: 5px;
+    }
+
+    .address-div button.delete-button {
+        background-color: #f44336;
+        color: #fff;
+    }
+
+    .address-div button.delete-button svg {
+        margin-right: 5px;
+    }
+
+    .address-div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .button-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .edit-button,
+    .delete-button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        color: #333;
+        margin-left: 10px;
+    }
+
+    .edit-button:hover,
+    .delete-button:hover {
+        color: #007bff;
+    }
+
+    /* Style for the address container */
+    .address-container {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+
+    .address-container label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    /* Style for the edit and delete buttons */
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+
+    .edit-button {
+        border: none;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        margin-right: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .edit-button:hover {
+        background-color: #0056b3;
+    }
+
+    .delete-button {
+        border: none;
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .delete-button:hover {
+        background-color: #c82333;
+    }
+
+    .address-div input[type="radio"] {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+
+    .dropbtn.active {
+        background-color: rgb(110, 198, 183);
+    }
+
+    #vendor-signup-btn {
+        background-color: rgb(177, 43, 82);
+        border: 1px solid black;
+    }
+
+    #corporate-signup-btn {
+        background-color: rgb(177, 43, 82);
+        border: 1px solid black;
+    }
+</style>
+
 <body>
-    </head>
-    <style>
-        #logout a:hover {
-            cursor: pointer;
-            text-decoration: underline;
-            color: rgb(110, 198, 183);
-        }
-
-        .add-button {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: rgb(110, 198, 183);
-            border: none;
-            border-radius: 15px;
-            width: 100px;
-            height: 30px;
-            cursor: pointer;
-            color: white;
-            font-size: 12.5px;
-            margin: auto;
-            display: block;
-            margin-bottom: 20px;
-        }
-
-        .button-icon {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 18px;
-            margin-right: 5px;
-        }
-
-        .button-text {
-            font-weight: bold;
-        }
-
-        .pause-button {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: rgb(163, 54, 75);
-            border: none;
-            border-radius: 15px;
-            width: 100px;
-            height: 30px;
-            cursor: pointer;
-            color: white;
-            font-size: 12.5px;
-            margin: auto;
-        }
-
-        .pause-button-icon {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 15px;
-            margin-right: 5px;
-        }
-
-        .pause-button-text {
-            font-weight: bold;
-            margin-left: 10px;
-        }
-
-        body {
-            margin: 0;
-            /* overflow: hidden; */
-        }
-
-        #canvas {
-            width: 100%;
-            height: 100%;
-        }
-
-        .gallery-container {
-            margin: auto;
-            width: 55%;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            border-radius: 10px;
-            margin-top: 5px;
-        }
-
-        .gallery-date {
-            margin: auto;
-            width: 30%;
-            padding: 5px 20px;
-        }
-    </style>
-    <style>
-        .carousel-slide {
-            display: flex;
-            overflow: hidden;
-            width: 50%;
-            /* Display one slide at a time */
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-
-        }
-
-        .slide {
-            flex: 0 0 100%;
-            margin-right: 10px;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px;
-            /* border: 1px solid red; */
-            display: flex;
-            flex-direction: column;
-            height: 300px;
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            animation: slideAnimation 6s linear infinite;
-            width: 300px;
-            /* 6s for 2s per slide, adjust as needed */
-        }
-
-        .carousel {
-            margin: 0 auto;
-            width: 50%;
-            /* You can adjust the width as needed */
-            max-height: 300px;
-            /* You can adjust the height as needed */
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .carousel-container {
-            width: 70%;
-            margin: 0 auto;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .carousel-slide {
-            display: flex;
-            width: 300%;
-            height: 300px;
-            transition: transform 0.4s ease-in-out;
-        }
-
-        .carousel-slide div {
-            flex: 0 0 33.33%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .carousel-slide img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            /* border: 1px solid red; */
-            width: 142px;
-        }
-
-        .dropbtn {
-            background-color: #f1f1f1;
-            color: #333;
-            padding: 10px;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            /* border: 1px solid red; */
-            width: 142px;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            min-width: 120px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: #333;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            cursor: pointer;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f9f9f9;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown:hover .dropbtn {
-            background-color: rgb(110, 198, 183);
-        }
-
-        .dropbtn:hover {
-            background-color: rgb(110, 198, 183);
-            color: white;
-
-        }
-
-        .dropdown .dropbtn {
-            position: relative;
-            padding-right: 25px;
-            /* Added padding for the icon */
-        }
-
-        .dropdown .dropdown-icon {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 5px 5px 0 5px;
-            border-color: #333 transparent transparent transparent;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .dropdown.open .dropdown-icon {
-            transform: translateY(-50%) rotate(180deg);
-        }
-
-        #logout-link:hover {
-            color: rgb(110, 198, 183);
-        }
-
-        .dropdown-content a {
-            display: flex;
-            align-items: center;
-            padding: 12px 16px;
-            text-decoration: none;
-            color: #333;
-        }
-
-        .dropdown-content a i {
-            margin-right: 10px;
-        }
-
-        #pause-button {
-            background: none;
-            border: none;
-            outline: none;
-            position: relative;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-        }
-
-        #pause-button i {
-            font-size: 16px;
-            color: #000;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        #pause-button .fas.fa-pause:before {
-            content: "";
-            position: absolute;
-            top: 6px;
-            left: 6px;
-            width: 4px;
-            height: 12px;
-            background-color: #000;
-        }
-
-        #pause-button .fas.fa-pause:after {
-            content: "";
-            position: absolute;
-            top: 6px;
-            left: 14px;
-            width: 4px;
-            height: 12px;
-            background-color: #000;
-        }
-
-        #add-button {
-            padding: 10px 15px;
-            background-color: #2196F3;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #add-button i {
-            margin-right: 5px;
-        }
-
-        .pause-button i {
-            font-size: 12px;
-            margin-right: 0px;
-
-        }
-
-        .nav-item.dropdown-item {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        #container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            max-height: 400px;
-            overflow: auto;
-        }
-
-        .interest-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        #container input[name="item-checkbox"] {
-            margin-right: 5px;
-        }
-
-        #sub_container {
-            display: flex;
-            /* flex-direction: ; */
-            gap: 10px;
-        }
-
-        #sub_container input[name="subitem-checkbox"] {
-            margin-right: 5px;
-        }
-
-        #container h6,
-        #sub_container h6 {
-            margin: 5px 0;
-            font-weight: bold;
-        }
-
-        /* CSS for Address Display */
-        /* CSS for Address Display */
-        .address-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .address-div {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .address-div label {
-            margin-bottom: 5px;
-        }
-
-        .address-div button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .address-div input[type="radio"] {
-            margin-right: 10px;
-        }
-
-        /* CSS for Address Display */
-        .address-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .address-div {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .address-div label {
-            margin-bottom: 5px;
-        }
-
-        .address-div button {
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-        }
-
-        .address-div button.edit-button {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-
-        .address-div button.edit-button svg {
-            margin-right: 5px;
-        }
-
-        .address-div button.delete-button {
-            background-color: #f44336;
-            color: #fff;
-        }
-
-        .address-div button.delete-button svg {
-            margin-right: 5px;
-        }
-
-        .address-div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        .button-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .edit-button,
-        .delete-button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            color: #333;
-            margin-left: 10px;
-        }
-
-        .edit-button:hover,
-        .delete-button:hover {
-            color: #007bff;
-        }
-
-        /* Style for the address container */
-        .address-container {
-            border: 1px solid #ccc;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-        }
-
-        .address-container label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        /* Style for the edit and delete buttons */
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 10px;
-        }
-
-        .edit-button {
-            border: none;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            margin-right: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-
-        .edit-button:hover {
-            background-color: #0056b3;
-        }
-
-        .delete-button {
-            border: none;
-            background-color: #dc3545;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-
-        .delete-button:hover {
-            background-color: #c82333;
-        }
-
-        .address-div input[type="radio"] {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-        }
-
-        .dropbtn.active {
-            background-color: rgb(110, 198, 183);
-        }
-
-        #vendor-signup-btn {
-            background-color: rgb(177, 43, 82);
-            border: 1px solid black;
-        }
-
-        #corporate-signup-btn {
-            background-color: rgb(177, 43, 82);
-            border: 1px solid black;
-        }
-    </style>
-
-    </style>
-
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row" style="display: flex; justify-content: space-between;">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="index.html"><img src="img/company_logo.jpg" alt=""></a>
+                    </div>
+                </div>
+
+                <div style="display: flex; ">
+                    <div class="header__nav__option" id="accountname" style="text-align: center; padding-top: 36px">
+
+                    </div>
+                    <div class="header__nav__option" id="accountname" style="text-align: center;">
+                        <div class="dropdown">
+                            <button class="dropbtn">
+                                <i class="fas fa-user"></i>&nbsp; &nbsp;
+                                Account
+                                <i class="dropdown-icon  "></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a id="logout-link"
+                                    style="font-size: 15px; border-bottom: 1px solid gray; border-radius: 0px;"
+                                    class="nav-link" id="account-orders-tab" data-toggle="tab" href="#account-orders"
+                                    role="tab" aria-controls="account-orders" aria-selected="false"><i
+                                        class="fas fa-shopping-bag"></i>&nbsp; &nbsp;My
+                                    Orders</a>
+                                <a id="logout-link"
+                                    style="font-size: 15px; border-bottom: 1px solid gray;border-radius: 0px;"
+                                    class="nav-link" id="account-address-tab" data-toggle="tab" href="#account-address"
+                                    role="tab" aria-controls="account-address" aria-selected="false"><i
+                                        class="fas fa-address-card"></i>&nbsp;
+                                    &nbsp;Address</a>
+                                <a id="logout-link"
+                                    style="font-size: 15px; border-bottom: 1px solid gray;border-radius: 0px;"
+                                    class="nav-link" id="account-address-tab" data-toggle="tab" href="#account-wishlist"
+                                    role="tab" aria-controls="account-address" aria-selected="false"><i
+                                        class="fas fa-heart"></i>&nbsp; &nbsp;Wishlist</a>
+                                <a id="logout-link" onclick="return handleLogout(event);"
+                                    style="font-size: 15px; border-radius: 0px;"><i
+                                        class="fas fa-sign-out-alt"></i>&nbsp; &nbsp;Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+    <!-- Breadcrumb Area -->
+    <div class="tm-breadcrumb-area tm-padding-section bg-img" style="margin-bottom: 20px;" >
+        <div class="container" >
+            <div class="row" >
+                <div class="col-lg-6">
+                    <div class="tm-breadcrumb" >
+                        <h2>My Account</h2>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li>Welcome...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// Breadcrumb Area -->
+    <!-- Main Content -->
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- My Account Area -->
+        <div class="tm-section tm-my-account-area bg-white tm-padding-section">
+            <div class="container">
+                <div class="tm-myaccount">
+                    <ul style="margin-bottom: 50px;"
+                        class="nav tm-tabgroup justify-content-start justify-content-lg-center" id="account"
+                        role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active nav-button" id="account-dashboard-tab" data-toggle="tab"
+                                href="#account-dashboard" role="tab" aria-controls="account-dashboard"
+                                aria-selected="true"><i class="fas fa-chart-line"></i>&nbsp; &nbsp;Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-button" id="account-acdetails-tab" data-toggle="tab"
+                                href="#account-acdetails" role="tab" aria-controls="account-acdetails"
+                                aria-selected="false"><i class="fas fa-user-circle"></i>&nbsp; &nbsp;Profile</a>
+                        </li>
+                        <div class="dropdown" style="margin-top: 8.7px; width: 210px; margin-left: 10px; ">
+                            <button class="dropbtn" style="height: 50px; font-weight: bold; width: 210px">
+                                <i class="fas fa-gift"></i>&nbsp; &nbsp;
+                                Gifts
+                                <i class="dropdown-icon  "></i>
+                            </button>
+                            <div class="dropdown-content" style="width: 210px">
+                                <a id="logout-link"
+                                    style="font-size: 15px; border-bottom: 1px solid gray; border-radius: 0px;"
+                                    class="nav-link" id="account-orders-tab" data-toggle="tab" href="#account-box"
+                                    role="tab" aria-controls="account-orders" aria-selected="false"><i
+                                        class="fas fa-box"></i>&nbsp;Gift a Box</a>
+                                <a id="logout-link"
+                                    style="font-size: 15px; border-bottom: 1px solid gray; border-radius: 0px;"
+                                    class="nav-link" id="account-orders-tab" data-toggle="tab" href="#gift-History"
+                                    role="tab" aria-controls="account-orders" aria-selected="false"><i
+                                        class="fas fa-history"></i>&nbsp; Gift Box History</a>
+                                <a id="logout-link"
+                                    style="font-size: 15px; border-bottom: 1px solid gray;border-radius: 0px;"
+                                    class="nav-link" id="account-address-tab" data-toggle="tab"
+                                    href="#account-Subscription" role="tab" aria-controls="account-address"
+                                    aria-selected="false"><i class="fas fa-hand-holding-usd"></i>&nbsp;Gift a
+                                    subscription</a>
+                                <a id="logout-link"
+                                    style="font-size: 15px; border-bottom: 1px solid gray;border-radius: 0px;"
+                                    class="nav-link" id="account-address-tab" data-toggle="tab"
+                                    href="#account-Subscription-History" role="tab" aria-controls="account-address"
+                                    aria-selected="false"><i class="fas fa-history"></i>&nbsp;
+                                    Subscription History</a>
+                            </div>
+                        </div>
+                    </ul>
+                    <div class="tab-content" id="account-ontent">
+                        <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
+                            aria-labelledby="account-dashboard-tab">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div
+                                    style="width: 45%; height: 130px; border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;padding: 10px 10px; display: flex; ">
+                                    <div style="width: 65%;">
+                                        <div
+                                            style=" display:flex; column-gap: 20px; align-items: center;padding:2px 10.5px;">
+                                            <span>
+                                                <h5 style="margin: auto;">Months</h5>
+                                                <h5 style="margin: auto; text-align: center; font-weight: bold;">1
+                                                </h5>
+                                            </span>
+                                            <div style="border: 0.1px solid black; height :70px; "></div>
+                                            <span>
+                                                <h6 style="margin: auto;font-weight: bold;">Active Subscribtion</h6>
+                                                <p style="margin: auto; text-align: center;">15-07-2023 - 14-08-2023
+                                                </p>
+                                            </span>
+                                        </div>
+                                        <div
+                                            style="margin-top: 10px; display:flex;width: 65%; column-gap: 20px; align-items: center;padding:2px 11px;">
+                                            <span>
+                                                <h6 style="margin: auto;">Next Box</h6>
+                                            </span>
+                                            <div style="border: 0.1px solid black; height :25px; "></div>
+                                            <span>
+                                                <h6 style="margin: auto; text-align: center;">19 Days</h6>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div style=" width:34%; padding-top: 15px; padding-bottom: 0;">
+                                        <button class="add-button">
+                                            <i class="fas fa-plus"
+                                                style="margin-left: -5px; border: 2px solid white; padding: 4px; border-radius: 100%;height: 22px ;padding-top: 4px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span class="button-text" style="margin-left: -20PX;">Add</span>
+                                        </button>
+                                        <button class="pause-button">
+                                            <i class="fas fa-pause"
+                                                style="margin-left: 5px; border: 2px solid white; padding:4px;height: 22px; border-radius: 50%;padding-top: 3.4px;"></i>
+                                            <span class="pause-button-text">Pause</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div style="width: 53%; padding-top: 10px ; ">
+                                    <div
+                                        style="color: white;width: 80%; margin: auto; height: 35px; display: flex; align-items: center; background-color: rgb(73,197,182); border-radius: 3px; justify-content: space-between; padding: 10px 7px;">
+                                        <h6 style="color: white; font-weight: bold; margin-top: 10px;">Box History
+                                        </h6>
+                                        <div
+                                            style="color: white;display: flex; align-items: center; padding: 15px; column-gap: 10px; ">
+                                            <p style="color: white;margin-top: 15px;">Last received</p>
+                                            <div style="border: 1px solid white; height: 25px;"></div>
+                                            <p style="color: white;margin-top: 15px;">15 July</p>
+                                        </div>
+                                    </div>
+                                    <img src="img/Group 1000001287.png"
+                                        style="margin: auto; display: block; margin-top: 10px;" />
+                                    <div
+                                        style="margin:auto; width: 55%; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px; margin-top: 5px;">
+                                        <p style="margin: auto;width: 30%;padding: 5px 20px;">July 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
+                                data-interval="2000"
+                                style="box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;margin-top: 30px;">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <h5>Slide 1 Heading</h5>
+                                        <img class="d-block w-100" src="img/Group 1000001237.svg" alt="Slide 1"
+                                            style="width: 10px; padding: 50px;">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <h5>Slide 2 Heading</h5>
+                                        <img class="d-block w-100" src="img/Group 1000001237.svg" alt="Slide 2"
+                                            style="width: 10px;  padding: 50px;">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <h5>Slide 3 Heading</h5>
+                                        <img class="d-block w-100" src="img/Group 1000001237.svg" alt="Slide 3"
+                                            style="width: 10px; padding: 50px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-orders" role="tabpanel"
+                            aria-labelledby="account-orders-tab">
+                            <div class="tm-myaccount-orders">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="tm-myaccount-orders-col-id">ORDER ID</th>
+                                                <th class="tm-myaccount-orders-col-date">DATE</th>
+                                                <th class="tm-myaccount-orders-col-status">STATUS</th>
+                                                <th class="tm-myaccount-orders-col-total">TOTAL</th>
+                                                <th class="tm-myaccount-orders-col-view">VIEW</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#12345</td>
+                                                <td>30 December 2018</td>
+                                                <td>On Hold</td>
+                                                <td>$132.00 for 2 items</td>
+                                                <td><a href="checkout.html" class="tm-button tm-button-sm">View
+                                                        <b></b></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#12346</td>
+                                                <td>30 December 2018</td>
+                                                <td>On Hold</td>
+                                                <td>$220.00 for 3 items</td>
+                                                <td><a href="checkout.html" class="tm-button tm-button-sm">View
+                                                        <b></b></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-address" role="tabpanel"
+                            aria-labelledby="account-address-tab">
+                            <div class="tm-myaccount-address">
+                                <p><b>The following addresses will be used on the checkout page by default.</b></p>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="tm-myaccount-address-billing">
+                                            <a href="#" class="edit-button">Edit</a>
+                                            <h3>Billing Address</h3>
+                                            <address>
+                                                Jonathon Doe<br>
+                                                Example company<br>
+                                                516 Wintheiser Circles <br>
+                                                Lake Jordanmouth <br>
+                                                Jordan
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 mt-30 mt-md-0">
+                                        <div class="tm-myaccount-address-shipping">
+                                            <a href="#" class="edit-button">Edit</a>
+                                            <h3>Shipping Address</h3>
+                                            <address>
+                                                Jonathon Doe<br>
+                                                Example company<br>
+                                                516 Wintheiser Circles <br>
+                                                Lake Jordanmouth <br>
+                                                Jordan
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-acdetails" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="tm-myaccount-acdetails">
+                                        <form action="#" class="tm-form tm-form-bordered">
+                                            <!-- <h4>Account Details</h4> -->
+                                            <div class="tm-form-inner">
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="acdetails-firstname">First name</label>
+                                                    <input type="text" id="acdetails-firstname">
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="acdetails-lastname">Last name</label>
+                                                    <input type="text" id="acdetails-lastname">
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="acdetails-email">Email address</label>
+                                                    <input type="email" id="acdetails-email">
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="acdetails-password">Mobile Number</label>
+                                                    <input type="number" id="acdetails-password">
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="acdetails-displayname">Date of Birth</label>
+                                                    <input type="date" id="acdetails-displayname">
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="acdetails-gender">Gender</label>
+                                                    <select name="Gender" id="acdetails-gender"
+                                                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
+                                                        <option>Select gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                                    <!-- <div> -->
+                                                    <h6>Please select 5 Interests</h6>
+                                                    <div id="fraction-component"></div>
+                                                    <!-- </div> -->
+                                                    <div class="check-box_flex" id="container">
+                                                    </div>
+                                                </div>
+                                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                                    <h6>Please select Sub-Interests</h6>
+                                                    <div class="check-box_flex" id="sub_container">
+
+                                                    </div>
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <button type="button" class="tm-button"
+                                                        onclick="openAddAddressModal()"> <i class="fas fa-plus"
+                                                            style="margin-right: 15px;height: 22px;"></i>Add
+                                                        Address</button>
+                                                </div>
+                                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                                    <div class="address_container" id="address_container">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <button type="submit" class="tm-button">Save Changes
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div id="addAddressModal" class="modal"
+                                            style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
+                                            <div class="modal-content" style="padding: 20px;">
+                                                <div style="display: flex; justify-content: space-between;">
+                                                    <h2>Add New Address</h2>
+                                                    <span class="close" onclick="closeAddAddressModal()">&times;</span>
+                                                </div>
+                                                <form id="addAddressForm">
+                                                    <!-- Add address form fields -->
+
+                                                    <div class="tm-form-field" style="width: 45%;">
+                                                        <label for="addressName">Address Name</label><br />
+                                                        <input type="text" id="addressName" value="" />
+                                                    </div>
+                                                    <div class="tm-form-field" style="width: 45%;">
+                                                        <label for="country">Country</label><br />
+                                                        <input type="text" id="country" value="Kuwait" disabled />
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field" style="width: 45%;">
+                                                            <label for="state">State</label>
+                                                            <select id="state" onchange="populateAreas()">
+                                                                <option value="">Select State</option>
+                                                                <option value="Al Asimah">Al Asimah</option>
+                                                                <option value="Farwaniya">Farwaniya</option>
+                                                                <option value="Hawalli">Hawalli</option>
+                                                                <option value="Ahmadi">Ahmadi</option>
+                                                                <option value="Mubarak Alkabeer">Mubarak Alkabeer
+                                                                </option>
+                                                                <option value="Jahra">Jahra</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="tm-form-field" style="width: 45%;">
+                                                            <label for="area">Area</label>
+                                                            <select id="area">
+                                                                <option value="">Select Area</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="block">Block</label><br />
+                                                            <input type="text" id="block" value="" />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="street">Street</label><br />
+                                                            <input type="text" id="street" value="" />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="houseNo">House No.</label><br />
+                                                            <input type="text" id="houseNo" value="" />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="apartment">Apartment</label><br />
+                                                            <input type="text" id="apartment" value="" />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="floor">Floor</label><br />
+                                                            <input type="text" id="floor" value="" />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="avenue">Avenue</label><br />
+                                                            <input type="text" id="avenue" value="" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="tm-form-field" style="width: 45%;">
+                                                        <label for="direction">Direction</label><br />
+                                                        <input type="text" id="direction" value="" />
+                                                    </div>
+                                                    <div class="tm-form-field" style="margin-top: 100px;">
+                                                        <button type="button" class="tm-button"
+                                                            onclick="addNewAddress()">Add Address</button>
+                                                        <button type="button" class="tm-button"
+                                                            onclick="closeAddAddressModal()"
+                                                            style="background-color: #ccc; border: none;">Cancel</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <div id="editAddressModal" class="modal"
+                                            style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
+                                            <div class="modal-content" style="padding: 20px;">
+                                                <div style="display: flex; justify-content: space-between;">
+                                                    <h2>Edit Address</h2>
+                                                    <span class="close" onclick="closeEditAddressModal()">&times;</span>
+                                                </div>
+                                                <form id="addAddressForm">
+                                                    <!-- Add address form fields -->
+
+                                                    <div class="tm-form-field" style="width: 45%;">
+                                                        <label for="editAddressName">Address Name</label><br />
+                                                        <input type="text" id="editAddressName" value="" />
+                                                    </div>
+                                                    <div class="tm-form-field" style="width: 45%;">
+                                                        <label for="editAddressCountry">Country</label><br />
+                                                        <input type="text" id="editAddressCountry" value="Kuwait"
+                                                            disabled />
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field" style="width: 45%;">
+                                                            <label for="editAddressState">State</label>
+                                                            <select id="editAddressState" onchange="populateAreas()">
+                                                                <option value="">Select State</option>
+                                                                <option value="Al Asimah">Al Asimah</option>
+                                                                <option value="Farwaniya">Farwaniya</option>
+                                                                <option value="Hawalli">Hawalli</option>
+                                                                <option value="Ahmadi">Ahmadi</option>
+                                                                <option value="Mubarak Alkabeer">Mubarak Alkabeer
+                                                                </option>
+                                                                <option value="Jahra">Jahra</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="tm-form-field" style="width: 45%;">
+                                                            <label for="editAddressArea">Area</label>
+                                                            <select id="editAddressArea">
+                                                                <option value="">Select Area</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="editAddressBlock">Block</label><br />
+                                                            <input type="text" id="editAddressBlock" value="" />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="editAddressStreet">Street</label><br />
+                                                            <input type="text" id="editAddressStreet" value="" />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="country">House No.</label><br />
+                                                            <input type="text" id="country" value="" />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="editAddressApartment">Apartment</label><br />
+                                                            <input type="text" id="editAddressApartment" value="" />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="editAddressFloor">Floor</label><br />
+                                                            <input type="text" id="editAddressFloor" value="" />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="editAddressAvenue">Avenue</label><br />
+                                                            <input type="text" id="editAddressAvenue" value="" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="tm-form-field" style="width: 45%;">
+                                                        <label for="editAddressDirection">Direction</label><br />
+                                                        <input type="text" id="editAddressDirection" value="" />
+                                                    </div>
+                                                    <div class="tm-form-field" style="margin-top: 100px;">
+                                                        <button type="button" class="tm-button"
+                                                            onclick="updateAddress()">Add Address</button>
+                                                        <button type="button" class="tm-button"
+                                                            onclick="closeEditAddressModal()"
+                                                            style="background-color: #ccc; border: none;">Cancel</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="gift-acdetails" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+                            <h1>Gift</h1>
+                        </div>
+                        <div class="tab-pane fade" id="account-wishlist" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+                            <h1>Wishlist</h1>
+                        </div>
+                        <div class="tab-pane fade" id="account-box" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+                            <div
+                                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 15%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">Gift
+                                    a box</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="tm-myaccount-acdetails">
+                                        <form action="#" class="tm-form tm-form-bordered">
+                                            <h4>Account Details</h4>
+                                            <div class="tm-form-inner">
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="acdetails-firstname">First name</label>
+                                                    <input type="text" id="acdetails-firstname">
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="acdetails-lastname">Last name</label>
+                                                    <input type="text" id="acdetails-lastname">
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="acdetails-email">Email address</label>
+                                                    <input type="email" id="acdetails-email">
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="acdetails-password">Mobile Number</label>
+                                                    <input type="number" id="acdetails-password">
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="acdetails-note">Note</label>
+                                                    <textarea type="text" id="acdetails-note"></textarea>
+                                                </div>
+                                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                                    <h6>Please select 5 Interests</h6>
+                                                    <div id="fraction-component"></div>
+                                                    <div class="check-box_flex" id="container">
+                                                    </div>
+                                                </div>
+                                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                                    <h6>Please select Sub-Interests</h6>
+                                                    <div class="check-box_flex" id="sub_container">
+
+                                                    </div>
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <button type="button" class="tm-button"
+                                                        onclick="openAddAddressModal()"> <i class="fas fa-plus"
+                                                            style="margin-right: 15px;height: 22px;"></i>Add
+                                                        Address</button>
+                                                </div>
+                                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                                    <div class="address_container" id="address_container">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <button type="submit" class="tm-button">Save Changes
+                                                        <b></b></button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane fade" id="gift-History" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+                            <h1>Gift a Subscription</h1>
+                        </div>
+                        <div class="tab-pane fade" id="account-Subscription" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+                            <h1>Gift a Subscription</h1>
+                        </div>
+                        <div class="tab-pane fade" id="account-Subscription-History" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+                            <h1>Subscription history</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--// My Account Area -->
+
+    </main>
+    <!--// Main Content -->
+    <!--// Main Content -->
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__logo" style="width: 70%;">
+                            <a href="/"><img src="img/logo-mbyat (1).png" alt=""></a>
+                        </div>
+                        <p>Mbayat is a mystery subscription box tailored to costumer's interest, where you will get
+                            the
+                            opportunity to try and experience new products and services matching your interest
+                            provided
+                            by local brands and companies each month.</p>
+                        <a href="#"><img src="img/logo.png" alt=""
+                                style="width: 65px; height: 45px; border-radius: 2px;"></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>NewLetter</h6>
+                        <div class="footer__newslatter">
+                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                            <form action="#">
+                                <input type="text" placeholder="Your email">
+                                <button type="submit"><span class="icon_mail_alt"></span></button>
+                            </form>
+                        </div>
+                        <div class="hero__social">
+                            <!-- <a href="#"><i class="fa fa-facebook"></i></a> -->
+                            <a href="https://twitter.com/trymbayat"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/trymbayat/"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>CONTACT US</h6>
+                        <div class="footer__newslatter">
+                            <p>MBAYAT Kuwait, Sharq, Ahmed Al Jaber Street, Al Gaz Tower,</p>
+                            <div class="social_add">
+                                <a href="tell:+965 90015060">+965 90015060</a>
+                                <a href="info:info@trymbayat.com">info@trymbayat.com</a>
+                                <div>
+                                    <a href="#" class="btn btn-primary px-4 py-2 mt-4" id="vendor-signup-btn">Vendor
+                                        Signup</a>
+                                    <a href="#" class="btn btn-primary px-4 py-2 mt-4"
+                                        id="corporate-signup-btn">Corporate Signup</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row footer__copyright__text">
+                <div class="col-lg-6 text-left">
+                    <div class="">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <p>Copyright ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="#" target="_blank"> MBAYAT</a>
+                        </p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="footer-link">
+                        <ul>
+                            <li>
+                                <a href="contact.html">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="about.html">About Us</a>
+                            </li>
+                            <li>
+                                <a href="privacy-statement.html">Privacy policy</a>
+                            </li>
+                            <li>
+                                <a href="terms-and-conditions.html">Terms & Conditions</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Carousel logic
+        const carouselSlide = document.querySelector('.carousel-slide');
+        const slides = carouselSlide.querySelectorAll('div');
+        const slideWidth = slides[0].clientWidth;
+        const slideDuration = 2000; // 2 seconds
+        const totalDuration = slides.length * slideDuration;
+        let counter = 0;
+        let interval;
+
+        function startSlide() {
+            interval = setInterval(() => {
+                carouselSlide.style.transition = 'transform 0.4s ease-in-out';
+                carouselSlide.style.transform = 'translateX(' + (-slideWidth * counter) + 'px)';
+                counter++;
+
+                if (counter >= slides.length) {
+                    counter = 0;
+                }
+            }, slideDuration);
+
+            setTimeout(() => {
+                clearInterval(interval);
+                carouselSlide.style.transition = 'none';
+                carouselSlide.style.transform = 'translateX(0)';
+                counter = 0;
+                startSlide();
+            }, totalDuration);
+        }
+
+        startSlide();
+
+        carouselSlide.addEventListener('transitionend', () => {
+            if (counter >= slides.length) {
+                carouselSlide.style.transition = 'none';
+                carouselSlide.style.transform = 'translateX(0)';
+                counter = 0;
+            }
+        });
+    </script>
     <script>
         const ALLOWED_PATHS = ['/my-account.html'];
 
@@ -606,7 +1393,7 @@
             var name = localStorage.getItem("first_name");
 
             var accountName = document.getElementById("accountname");
-            var logoutLink = document.getElementById("logout");
+            // var logoutLink = document.getElementById("logout");
 
             if (!isLoggedIn()) {
                 window.location.href = 'login.html';
@@ -617,7 +1404,7 @@
             welcomeText.textContent = `Welcome, ${name}!`;
 
             accountName.appendChild(welcomeText);
-            logoutLink.addEventListener("click", handleLogout);
+            // logoutLink.addEventListener("click", handleLogout);
         });
 
 
@@ -786,6 +1573,17 @@
             modal.style.display = 'none';
         }
 
+        function openEditAddressModal(address) {
+            const modal = document.getElementById('editAddressModal');
+            modal.style.display = 'block';
+        }
+
+        // Function to close the Add Address modal
+        function closeEditAddressModal() {
+            const modal = document.getElementById('editAddressModal');
+            modal.style.display = 'none';
+        }
+
         async function fetchAddresses() {
             const userId = localStorage.getItem("loginId");
             const token = localStorage.getItem("access_token");
@@ -802,9 +1600,9 @@
                 }
 
                 const addresses = await response.json();
-                console.log(addresses.data)
+                console.log(addresses.data);
 
-                const addresse = addresses.data
+                const addresse = addresses.data;
 
                 const subContainer = document.getElementById('address_container');
                 addresse.forEach(address => {
@@ -812,14 +1610,19 @@
                     addressDiv.classList.add('address-div');
                     addressDiv.innerHTML = `
                     <div>
-                        <input type="checkbox" name="address-radio" value="${address.state}-${address.country}" onclick="editAddress(event)">
+                        <input type="checkbox" name="address-radio" value="${address.state}-${address.country}" onclick="editAddress(event)" />
                         <label>${address.houseNo}, ${address.apartment}, ${address.floor}, ${address.avenue}, ${address.direction}, ${address.street1}, ${address.street2}, ${address.city}, ${address.state}, ${address.country}.</label>
                     </div>
                     <div class="button-container">
-                    <button type="button" class="edit-button" style="border-radius: 10px; display:flex; height: 40px; padding: 15px; align-items:center" onclick="editAddress(event)"><i class="fas fa-edit" style="margin-right:10px"></i>Edit</button>
-                    <button style="border-radius: 10px; display: flex; height: 40px; padding: 15px; align-items:center" type="button" class="delete-button" onclick="deleteAddress(this)"><i class="fas fa-trash-alt" style="margin-right:10px"></i>Delete</button>
+                        <button onclick="handleEditButtonClick(${JSON.stringify(address)})" type="button" class="edit-button" style="border-radius: 10px; display:flex; height: 40px; padding: 15px; align-items:center">
+                            <i class="fas fa-edit" style="margin-right:10px"></i>Edit
+                        </button>
+                        <button style="border-radius: 10px; display: flex; height: 40px; padding: 15px; align-items:center" type="button" class="delete-button" onclick="deleteAddress(this)">
+                            <i class="fas fa-trash-alt" style="margin-right:10px"></i>Delete
+                        </button>
                     </div>
-        `; subContainer.appendChild(addressDiv);
+                `;
+                    subContainer.appendChild(addressDiv);
                 });
             } catch (error) {
                 console.error('Error fetching addresses:', error);
@@ -913,722 +1716,13 @@
 
             document.getElementById('state').addEventListener('change', populateAreas);
         });
+        function handleEditButtonClick(addressString) {
+            const address = JSON.parse(addressString);
+            openEditAddressModal(address);
+        }
 
     </script>
 
-    <body>
-        <!-- Page Preloder -->
-        <div id="preloder">
-            <div class="loader"></div>
-        </div>
-
-        <!-- Header Section Begin -->
-        <header class="header">
-            <div class="container">
-                <div class="row" style="display: flex; justify-content: space-between;">
-                    <div class="col-lg-3 col-md-3">
-                        <div class="header__logo">
-                            <a href="index.html"><img src="img/company_logo.jpg" alt=""></a>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; ">
-                        <div class="header__nav__option" id="accountname" style="text-align: center; padding-top: 36px">
-
-                        </div>
-                        <div class="header__nav__option" id="accountname" style="text-align: center;">
-                            <div class="dropdown">
-                                <button class="dropbtn">
-                                    <i class="fas fa-user"></i>&nbsp; &nbsp;
-                                    Account
-                                    <i class="dropdown-icon  "></i>
-                                </button>
-                                <div class="dropdown-content">
-                                    <a id="logout-link"
-                                        style="font-size: 15px; border-bottom: 1px solid gray; border-radius: 0px;"
-                                        class="nav-link" id="account-orders-tab" data-toggle="tab"
-                                        href="#account-orders" role="tab" aria-controls="account-orders"
-                                        aria-selected="false"><i class="fas fa-shopping-bag"></i>&nbsp; &nbsp;My
-                                        Orders</a>
-                                    <a id="logout-link"
-                                        style="font-size: 15px; border-bottom: 1px solid gray;border-radius: 0px;"
-                                        class="nav-link" id="account-address-tab" data-toggle="tab"
-                                        href="#account-address" role="tab" aria-controls="account-address"
-                                        aria-selected="false"><i class="fas fa-address-card"></i>&nbsp;
-                                        &nbsp;Address</a>
-                                    <a id="logout-link"
-                                        style="font-size: 15px; border-bottom: 1px solid gray;border-radius: 0px;"
-                                        class="nav-link" id="account-address-tab" data-toggle="tab"
-                                        href="#account-wishlist" role="tab" aria-controls="account-address"
-                                        aria-selected="false"><i class="fas fa-heart"></i>&nbsp; &nbsp;Wishlist</a>
-                                    <a id="logout-link" onclick="return handleLogout(event);"
-                                        style="font-size: 15px; border-radius: 0px;"><i
-                                            class="fas fa-sign-out-alt"></i>&nbsp; &nbsp;Logout</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="canvas__open"><i class="fa fa-bars"></i></div>
-            </div>
-        </header>
-        <!-- Header Section End -->
-        <!-- Breadcrumb Area -->
-        <div class="tm-breadcrumb-area tm-padding-section bg-img" style="margin-bottom: 20px;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="tm-breadcrumb">
-                            <h2>My Account</h2>
-                            <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li>Welcome...</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--// Breadcrumb Area -->
-        <!-- Main Content -->
-        <!-- Main Content -->
-        <main class="main-content">
-
-            <!-- My Account Area -->
-            <div class="tm-section tm-my-account-area bg-white tm-padding-section">
-                <div class="container">
-                    <div class="tm-myaccount">
-                        <ul style="margin-bottom: 50px;"
-                            class="nav tm-tabgroup justify-content-start justify-content-lg-center" id="account"
-                            role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active nav-button" id="account-dashboard-tab" data-toggle="tab"
-                                    href="#account-dashboard" role="tab" aria-controls="account-dashboard"
-                                    aria-selected="true"><i class="fas fa-chart-line"></i>&nbsp; &nbsp;Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link nav-button" id="account-acdetails-tab" data-toggle="tab"
-                                    href="#account-acdetails" role="tab" aria-controls="account-acdetails"
-                                    aria-selected="false"><i class="fas fa-user-circle"></i>&nbsp; &nbsp;Profile</a>
-                            </li>
-                            <div class="dropdown" style="margin-top: 8.7px; width: 195px; margin-left: 10px; ">
-                                <button class="dropbtn" style="height: 50px; font-weight: bold; width: 195px">
-                                    <i class="fas fa-gift"></i>&nbsp; &nbsp;
-                                    Gifts
-                                    <i class="dropdown-icon  "></i>
-                                </button>
-                                <div class="dropdown-content" style="width: 195px">
-                                    <a id="logout-link"
-                                        style="font-size: 15px; border-bottom: 1px solid gray; border-radius: 0px;"
-                                        class="nav-link" id="account-orders-tab" data-toggle="tab" href="#account-box"
-                                        role="tab" aria-controls="account-orders" aria-selected="false"><i
-                                            class="fas fa-box"></i>&nbsp; &nbsp;Gift a Box</a>
-                                    <a id="logout-link"
-                                        style="font-size: 15px; border-bottom: 1px solid gray;border-radius: 0px;"
-                                        class="nav-link" id="account-address-tab" data-toggle="tab"
-                                        href="#account-Subscription" role="tab" aria-controls="account-address"
-                                        aria-selected="false"><i class="fas fa-hand-holding-usd"></i>&nbsp; &nbsp;Gift a
-                                        subscription</a>
-                                </div>
-                            </div>
-                        </ul>
-                        <div class="tab-content" id="account-ontent">
-                            <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
-                                aria-labelledby="account-dashboard-tab">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <div
-                                        style="width: 45%; height: 130px; border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;padding: 10px 10px; display: flex; ">
-                                        <div style="width: 65%;">
-                                            <div
-                                                style=" display:flex; column-gap: 20px; align-items: center;padding:2px 10.5px;">
-                                                <span>
-                                                    <h5 style="margin: auto;">Months</h5>
-                                                    <h5 style="margin: auto; text-align: center; font-weight: bold;">1
-                                                    </h5>
-                                                </span>
-                                                <div style="border: 0.1px solid black; height :70px; "></div>
-                                                <span>
-                                                    <h6 style="margin: auto;font-weight: bold;">Active Subscribtion</h6>
-                                                    <p style="margin: auto; text-align: center;">15-07-2023 - 14-08-2023
-                                                    </p>
-                                                </span>
-                                            </div>
-                                            <div
-                                                style="margin-top: 10px; display:flex;width: 65%; column-gap: 20px; align-items: center;padding:2px 11px;">
-                                                <span>
-                                                    <h6 style="margin: auto;">Next Box</h6>
-                                                </span>
-                                                <div style="border: 0.1px solid black; height :25px; "></div>
-                                                <span>
-                                                    <h6 style="margin: auto; text-align: center;">19 Days</h6>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div style=" width:34%; padding-top: 15px; padding-bottom: 0;">
-                                            <button class="add-button">
-                                                <i class="fas fa-plus"
-                                                    style="margin-left: -5px; border: 2px solid white; padding: 4px; border-radius: 100%;height: 22px ;padding-top: 4px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span class="button-text" style="margin-left: -20PX;">Add</span>
-                                            </button>
-                                            <button class="pause-button">
-                                                <i class="fas fa-pause"
-                                                    style="margin-left: 5px; border: 2px solid white; padding:4px;height: 22px; border-radius: 50%;padding-top: 3.4px;"></i>
-                                                <span class="pause-button-text">Pause</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div style="width: 53%; padding-top: 10px ; ">
-                                        <div
-                                            style="color: white;width: 80%; margin: auto; height: 35px; display: flex; align-items: center; background-color: rgb(73,197,182); border-radius: 3px; justify-content: space-between; padding: 10px 7px;">
-                                            <h6 style="color: white; font-weight: bold; margin-top: 10px;">Box History
-                                            </h6>
-                                            <div
-                                                style="color: white;display: flex; align-items: center; padding: 15px; column-gap: 10px; ">
-                                                <p style="color: white;margin-top: 15px;">Last received</p>
-                                                <div style="border: 1px solid white; height: 25px;"></div>
-                                                <p style="color: white;margin-top: 15px;">15 July</p>
-                                            </div>
-                                        </div>
-                                        <img src="img/Group 1000001287.png"
-                                            style="margin: auto; display: block; margin-top: 10px;" />
-                                        <div
-                                            style="margin:auto; width: 55%; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px; margin-top: 5px;">
-                                            <p style="margin: auto;width: 30%;padding: 5px 20px;">July 2023</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
-                                    data-interval="2000"
-                                    style="box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;margin-top: 30px;">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <h5>Slide 1 Heading</h5>
-                                            <img class="d-block w-100" src="img/Group 1000001237.svg" alt="Slide 1"
-                                                style="width: 10px; padding: 50px;">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <h5>Slide 2 Heading</h5>
-                                            <img class="d-block w-100" src="img/Group 1000001237.svg" alt="Slide 2"
-                                                style="width: 10px;  padding: 50px;">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <h5>Slide 3 Heading</h5>
-                                            <img class="d-block w-100" src="img/Group 1000001237.svg" alt="Slide 3"
-                                                style="width: 10px; padding: 50px;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="account-orders" role="tabpanel"
-                                aria-labelledby="account-orders-tab">
-                                <div class="tm-myaccount-orders">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th class="tm-myaccount-orders-col-id">ORDER ID</th>
-                                                    <th class="tm-myaccount-orders-col-date">DATE</th>
-                                                    <th class="tm-myaccount-orders-col-status">STATUS</th>
-                                                    <th class="tm-myaccount-orders-col-total">TOTAL</th>
-                                                    <th class="tm-myaccount-orders-col-view">VIEW</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>#12345</td>
-                                                    <td>30 December 2018</td>
-                                                    <td>On Hold</td>
-                                                    <td>$132.00 for 2 items</td>
-                                                    <td><a href="checkout.html" class="tm-button tm-button-sm">View
-                                                            <b></b></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>#12346</td>
-                                                    <td>30 December 2018</td>
-                                                    <td>On Hold</td>
-                                                    <td>$220.00 for 3 items</td>
-                                                    <td><a href="checkout.html" class="tm-button tm-button-sm">View
-                                                            <b></b></a></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="account-address" role="tabpanel"
-                                aria-labelledby="account-address-tab">
-                                <div class="tm-myaccount-address">
-                                    <p><b>The following addresses will be used on the checkout page by default.</b></p>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="tm-myaccount-address-billing">
-                                                <a href="#" class="edit-button">Edit</a>
-                                                <h3>Billing Address</h3>
-                                                <address>
-                                                    Jonathon Doe<br>
-                                                    Example company<br>
-                                                    516 Wintheiser Circles <br>
-                                                    Lake Jordanmouth <br>
-                                                    Jordan
-                                                </address>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 mt-30 mt-md-0">
-                                            <div class="tm-myaccount-address-shipping">
-                                                <a href="#" class="edit-button">Edit</a>
-                                                <h3>Shipping Address</h3>
-                                                <address>
-                                                    Jonathon Doe<br>
-                                                    Example company<br>
-                                                    516 Wintheiser Circles <br>
-                                                    Lake Jordanmouth <br>
-                                                    Jordan
-                                                </address>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="account-acdetails" role="tabpanel"
-                                aria-labelledby="account-acdetails-tab">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="tm-myaccount-acdetails">
-                                            <form action="#" class="tm-form tm-form-bordered">
-                                                <!-- <h4>Account Details</h4> -->
-                                                <div class="tm-form-inner">
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <label for="acdetails-firstname">First name</label>
-                                                        <input type="text" id="acdetails-firstname">
-                                                    </div>
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <label for="acdetails-lastname">Last name</label>
-                                                        <input type="text" id="acdetails-lastname">
-                                                    </div>
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <label for="acdetails-email">Email address</label>
-                                                        <input type="email" id="acdetails-email">
-                                                    </div>
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <label for="acdetails-password">Mobile Number</label>
-                                                        <input type="number" id="acdetails-password">
-                                                    </div>
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <label for="acdetails-displayname">Date of Birth</label>
-                                                        <input type="date" id="acdetails-displayname">
-                                                    </div>
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <label for="acdetails-gender">Gender</label>
-                                                        <select name="Gender" id="acdetails-gender"
-                                                            style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
-                                                            <option>Select gender</option>
-                                                            <option value="Male">Male</option>
-                                                            <option value="Female">Female</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="tm-form-field col-lg-12 col-md-12 col-12">
-                                                        <!-- <div> -->
-                                                        <h6>Please select 5 Interests</h6>
-                                                        <div id="fraction-component"></div>
-                                                        <!-- </div> -->
-                                                        <div class="check-box_flex" id="container">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tm-form-field col-lg-12 col-md-12 col-12">
-                                                        <h6>Please select Sub-Interests</h6>
-                                                        <div class="check-box_flex" id="sub_container">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <button type="button" class="tm-button"
-                                                            onclick="openAddAddressModal()"> <i class="fas fa-plus"
-                                                                style="margin-right: 15px;height: 22px;"></i>Add
-                                                            Address</button>
-                                                    </div>
-                                                    <div class="tm-form-field col-lg-12 col-md-12 col-12">
-                                                        <div class="address_container" id="address_container">
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <button type="submit" class="tm-button">Save Changes
-                                                            <b></b></button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            <div id="addAddressModal" class="modal"
-                                                style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
-                                                <div class="modal-content" style="padding: 20px;">
-                                                    <div style="display: flex; justify-content: space-between;">
-                                                        <h2>Add New Address</h2>
-                                                        <span class="close"
-                                                            onclick="closeAddAddressModal()">&times;</span>
-                                                    </div>
-                                                    <form id="addAddressForm">
-                                                        <!-- Add address form fields -->
-
-                                                        <div class="tm-form-field" style="width: 45%;">
-                                                            <label for="country">Address Name</label><br />
-                                                            <input type="text" id="country" value="" />
-                                                        </div>
-                                                        <div class="tm-form-field" style="width: 45%;">
-                                                            <label for="country">Country</label><br />
-                                                            <input type="text" id="country" value="Kuwait" disabled />
-                                                        </div>
-
-                                                        <div
-                                                            style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                                            <div class="tm-form-field" style="width: 45%;">
-                                                                <label for="state">State</label>
-                                                                <select id="state" onchange="populateAreas()">
-                                                                    <option value="">Select State</option>
-                                                                    <option value="Al Asimah">Al Asimah</option>
-                                                                    <option value="Farwaniya">Farwaniya</option>
-                                                                    <option value="Hawalli">Hawalli</option>
-                                                                    <option value="Ahmadi">Ahmadi</option>
-                                                                    <option value="Mubarak Alkabeer">Mubarak Alkabeer
-                                                                    </option>
-                                                                    <option value="Jahra">Jahra</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="tm-form-field" style="width: 45%;">
-                                                                <label for="area">Area</label>
-                                                                <select id="area">
-                                                                    <option value="">Select Area</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                                            <div class="tm-form-field">
-                                                                <label for="country">Block</label><br />
-                                                                <input type="text" id="country" value="" />
-                                                            </div>
-                                                            <div class="tm-form-field">
-                                                                <label for="country">Street</label><br />
-                                                                <input type="text" id="country" value="" />
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                                            <div class="tm-form-field">
-                                                                <label for="country">House No.</label><br />
-                                                                <input type="text" id="country" value="" />
-                                                            </div>
-                                                            <div class="tm-form-field">
-                                                                <label for="country">Apartment</label><br />
-                                                                <input type="text" id="country" value="" />
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                                            <div class="tm-form-field">
-                                                                <label for="country">Floor</label><br />
-                                                                <input type="text" id="country" value="" />
-                                                            </div>
-                                                            <div class="tm-form-field">
-                                                                <label for="country">Avenue</label><br />
-                                                                <input type="text" id="country" value="" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="tm-form-field" style="width: 45%;">
-                                                            <label for="country">Direction</label><br />
-                                                            <input type="text" id="country" value="" />
-                                                        </div>
-                                                        <div class="tm-form-field" style="margin-top: 100px;">
-                                                            <button type="button" class="tm-button"
-                                                                onclick="addNewAddress()">Add Address</button>
-                                                            <button type="button" class="tm-button"
-                                                                onclick="closeAddAddressModal()"
-                                                                style="background-color: #ccc; border: none;">Cancel</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="gift-acdetails" role="tabpanel"
-                                aria-labelledby="account-acdetails-tab">
-                                <h1>Gift</h1>
-                            </div>
-                            <div class="tab-pane fade" id="account-wishlist" role="tabpanel"
-                                aria-labelledby="account-acdetails-tab">
-                                <h1>Wishlist</h1>
-                            </div>
-                            <div class="tab-pane fade" id="account-box" role="tabpanel"
-                                aria-labelledby="account-acdetails-tab">
-                                <div
-                                    style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 15%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-                                    <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">Gift
-                                        a box</h4>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="tm-myaccount-acdetails">
-                                            <form action="#" class="tm-form tm-form-bordered">
-                                                <h4>Account Details</h4>
-                                                <div class="tm-form-inner">
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <label for="acdetails-firstname">First name</label>
-                                                        <input type="text" id="acdetails-firstname">
-                                                    </div>
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <label for="acdetails-lastname">Last name</label>
-                                                        <input type="text" id="acdetails-lastname">
-                                                    </div>
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <label for="acdetails-email">Email address</label>
-                                                        <input type="email" id="acdetails-email">
-                                                    </div>
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <label for="acdetails-password">Mobile Number</label>
-                                                        <input type="number" id="acdetails-password">
-                                                    </div>
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <label for="acdetails-note">Note</label>
-                                                        <textarea type="text" id="acdetails-note"></textarea>
-                                                    </div>
-                                                    <div class="tm-form-field col-lg-12 col-md-12 col-12">
-                                                        <h6>Please select 5 Interests</h6>
-                                                        <div id="fraction-component"></div>
-                                                        <div class="check-box_flex" id="container">
-                                                        </div>
-                                                    </div>
-                                                    <div class="tm-form-field col-lg-12 col-md-12 col-12">
-                                                        <h6>Please select Sub-Interests</h6>
-                                                        <div class="check-box_flex" id="sub_container">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <button type="button" class="tm-button"
-                                                            onclick="openAddAddressModal()"> <i class="fas fa-plus"
-                                                                style="margin-right: 15px;height: 22px;"></i>Add
-                                                            Address</button>
-                                                    </div>
-                                                    <div class="tm-form-field col-lg-12 col-md-12 col-12">
-                                                        <div class="address_container" id="address_container">
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="tm-form-field tm-form-fieldhalf">
-                                                        <button type="submit" class="tm-button">Save Changes
-                                                            <b></b></button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            <!-- <div id="addAddressModal" class="modal">
-                                                <div class="modal-content">
-                                                    <span class="close" onclick="closeAddAddressModal()">&times;</span>
-                                                    <h2>Add New Address</h2>
-                                                    <form id="addAddressForm">
-                                                        <div class="tm-form-field">
-                                                            <label for="country">Country</label>
-                                                            <input type="text" id="country" value="Kuwait" disabled>
-                                                        </div>
-                                                        <div class="tm-form-field">
-                                                            <label for="state">State</label>
-                                                            <select id="state" onchange="populateAreas()">
-                                                            </select>
-                                                        </div>
-                                                        <div class="tm-form-field">
-                                                            <label for="area">Area</label>
-                                                            <select id="area">
-                                                            </select>
-                                                        </div>
-                                                        <div class="tm-form-field">
-                                                        </div>
-                                                        <div class="tm-form-field">
-                                                            <button type="button" class="tm-button"
-                                                                onclick="addNewAddress()">Add Address</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div> -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="tab-pane fade" id="account-Subscription" role="tabpanel"
-                                aria-labelledby="account-acdetails-tab">
-                                <h1>Gift a Subscription</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--// My Account Area -->
-
-        </main>
-        <!--// Main Content -->
-        <!--// Main Content -->
-        <!-- Footer Section Begin -->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <div class="footer__about">
-                            <div class="footer__logo" style="width: 70%;">
-                                <a href="/"><img src="img/logo-mbyat (1).png" alt=""></a>
-                            </div>
-                            <p>Mbayat is a mystery subscription box tailored to costumer's interest, where you will get
-                                the
-                                opportunity to try and experience new products and services matching your interest
-                                provided
-                                by local brands and companies each month.</p>
-                            <a href="#"><img src="img/logo.png" alt=""
-                                    style="width: 65px; height: 45px; border-radius: 2px;"></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <div class="footer__widget">
-                            <h6>NewLetter</h6>
-                            <div class="footer__newslatter">
-                                <p>Be the first to know about new arrivals, look books, sales & promos!</p>
-                                <form action="#">
-                                    <input type="text" placeholder="Your email">
-                                    <button type="submit"><span class="icon_mail_alt"></span></button>
-                                </form>
-                            </div>
-                            <div class="hero__social">
-                                <!-- <a href="#"><i class="fa fa-facebook"></i></a> -->
-                                <a href="https://twitter.com/trymbayat"><i class="fa fa-twitter"></i></a>
-                                <a href="https://www.instagram.com/trymbayat/"><i class="fa fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="footer__widget">
-                            <h6>CONTACT US</h6>
-                            <div class="footer__newslatter">
-                                <p>MBAYAT Kuwait, Sharq, Ahmed Al Jaber Street, Al Gaz Tower,</p>
-                                <div class="social_add">
-                                    <a href="tell:+965 90015060">+965 90015060</a>
-                                    <a href="info:info@trymbayat.com">info@trymbayat.com</a>
-                                    <div>
-                                        <a href="#" class="btn btn-primary px-4 py-2 mt-4" id="vendor-signup-btn">Vendor
-                                            Signup</a>
-                                        <a href="#" class="btn btn-primary px-4 py-2 mt-4"
-                                            id="corporate-signup-btn">Corporate Signup</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="row footer__copyright__text">
-                    <div class="col-lg-6 text-left">
-                        <div class="">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            <p>Copyright ©
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>
-                                <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="#" target="_blank"> MBAYAT</a>
-                            </p>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="footer-link">
-                            <ul>
-                                <li>
-                                    <a href="contact.html">Contact Us</a>
-                                </li>
-                                <li>
-                                    <a href="about.html">About Us</a>
-                                </li>
-                                <li>
-                                    <a href="privacy-statement.html">Privacy policy</a>
-                                </li>
-                                <li>
-                                    <a href="terms-and-conditions.html">Terms & Conditions</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Footer Section End -->
-
-        <!-- Search Begin -->
-        <div class="search-model">
-            <div class="h-100 d-flex align-items-center justify-content-center">
-                <div class="search-close-switch">+</div>
-                <form class="search-model-form">
-                    <input type="text" id="search-input" placeholder="Search here.....">
-                </form>
-            </div>
-        </div>
-        <!-- Search End -->
-
-        <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/jquery.nicescroll.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/jquery.countdown.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/main.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-        <script>
-            // Carousel logic
-            const carouselSlide = document.querySelector('.carousel-slide');
-            const slides = carouselSlide.querySelectorAll('div');
-            const slideWidth = slides[0].clientWidth;
-            const slideDuration = 2000; // 2 seconds
-            const totalDuration = slides.length * slideDuration;
-            let counter = 0;
-            let interval;
-
-            function startSlide() {
-                interval = setInterval(() => {
-                    carouselSlide.style.transition = 'transform 0.4s ease-in-out';
-                    carouselSlide.style.transform = 'translateX(' + (-slideWidth * counter) + 'px)';
-                    counter++;
-
-                    if (counter >= slides.length) {
-                        counter = 0;
-                    }
-                }, slideDuration);
-
-                setTimeout(() => {
-                    clearInterval(interval);
-                    carouselSlide.style.transition = 'none';
-                    carouselSlide.style.transform = 'translateX(0)';
-                    counter = 0;
-                    startSlide();
-                }, totalDuration);
-            }
-
-            startSlide();
-
-            carouselSlide.addEventListener('transitionend', () => {
-                if (counter >= slides.length) {
-                    carouselSlide.style.transition = 'none';
-                    carouselSlide.style.transform = 'translateX(0)';
-                    counter = 0;
-                }
-            });
-        </script>
-
-    </body>
+</body>
 
 </html>
