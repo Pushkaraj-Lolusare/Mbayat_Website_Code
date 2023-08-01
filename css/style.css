@@ -5325,7 +5325,7 @@ button, input, optgroup, select, textarea {
 	content: "";
 	position: absolute;
 	border: 0;
-	background-image: url(../images/icons/down-caret.png);
+	/* background-image: url(../images/icons/down-caret.png); */
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-attachment: scroll;

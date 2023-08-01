@@ -20,6 +20,44 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/main.css" type="text/css">
 </head>
+<style>
+    /* CSS for mobile and tablet screens */
+    @media (max-width: 767px) {
+        .main-content {
+            flex-direction: column;
+        }
+
+        .tm-section.tm-login-register-area {
+            margin-bottom: 20px;
+        }
+
+        .tm-login-register-area,
+        .responsive-div {
+            width: 100%;
+            margin: auto;
+
+        }
+    }
+
+    /* CSS for PC screens */
+    @media (min-width: 768px) {
+        .main-content {
+            flex-direction: row;
+        }
+
+        .tm-section.tm-login-register-area {
+            width: 60%;
+            margin-right: 30px;
+            margin-bottom: 0;
+        }
+
+        .responsive-div {
+            width: 50%;
+            margin-left: 0;
+            padding-top: 50px;
+        }
+    }
+</style>
 <script>
     function handleLogin(event) {
         event.preventDefault();
@@ -107,7 +145,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="index.html"><img src="img/company_logo.jpg" alt=""></a>
+                        <a href="index.html"><img src="img/Mbayat-Final-Logo (1).png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -127,7 +165,7 @@
         </div>
     </header>
     <!-- Breadcrumb Area -->
-    <div class="tm-breadcrumb-area tm-padding-section bg-img">
+    <!-- <div class="tm-breadcrumb-area tm-padding-section bg-img">   
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -141,13 +179,13 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--// Breadcrumb Area -->
     <!-- Header Section End -->
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content" style="display: flex; margin-bottom: 40px; margin: auto; justify-content: space-around;">
         <!-- Login Register Area -->
-        <div class="tm-section tm-login-register-area bg-white tm-padding-section">
+        <div class="tm-section tm-login-register-area bg-white tm-padding-section" style=" width:auto">
             <div class="container">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-6">
@@ -169,8 +207,13 @@
                                     <input type="checkbox" name="login-remember" id="login-remember">
                                     <label for="login-remember">Remember Me</label>
                                 </div>
-                                <div class="tm-form-field">
-                                    <button type="submit" class="tm-button">Login <b></b></button>
+                                <div style="display: flex; align-items: center;">
+                                    <div class="tm-form-field">
+                                        <button type="submit" class="tm-button">Login </button>
+                                    </div>
+                                    <div class="tm-form-field">
+                                        <a href="signup.html">Signup</a>
+                                    </div>
                                 </div>
                                 <div class="tm-form-field">
                                     <a href="#">Forgot your password?</a>
@@ -182,6 +225,10 @@
             </div>
         </div>
         <!--// Login Register Area -->
+        <div class="responsive-div" style="margin-bottom: 30px;">
+            <img src="img/login page.jpg" alt="" style="width: 80%; height: 80%; margin:auto">
+        </div>
+
     </main>
     <!--// Main Content -->
     <!-- Footer Section Begin -->
@@ -228,8 +275,8 @@
                                 <div>
                                     <a href="venderSignup.html" class="btn btn-primary px-4 py-2 mt-4"
                                         id="vendor-signup-btn">Vendor Signup</a>
-                                    <a href="corporateSignup.html" class="btn btn-primary px-4 py-2 mt-4"
-                                        id="corporate-signup-btn">Corporate Signup</a>
+                                    <!-- <a href="corporateSignup.html" class="btn btn-primary px-4 py-2 mt-4"
+                                        id="corporate-signup-btn">Corporate Signup</a> -->
                                 </div>
                             </div>
                         </div>

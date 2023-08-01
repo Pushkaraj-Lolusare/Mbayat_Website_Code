@@ -33,6 +33,11 @@
 
 </head>
 <style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
     #loginButton:hover {
         cursor: pointer;
         text-decoration: underline;
@@ -94,12 +99,27 @@
     #logoutBtn:hover {
         color: rgb(53, 183, 156);
     }
-    #android:hover{
+
+    #android:hover {
         transform: scale(1.1);
     }
-    #apple:hover{
+
+    #apple:hover {
         transform: scale(1.1);
     }
+
+    #userDropdownBtn {
+        background-color: #f1f1f1;
+        color: #333;
+        padding: 10px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        /* border: 1px solid red; */
+        width: 182px;
+    }
+
+    
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -219,7 +239,7 @@
             <div class="row" style="justify-content: space-between;">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="#"><img src="img/company_logo.jpg" alt=""></a>
+                        <a href="#"><img src="img/Mbayat-Final-Logo (1).png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3">
@@ -228,21 +248,20 @@
                             <a id="loginBtn" href="login.html">Login</a>
                             <a id="signupBtn" class="active" href="signup.html">Signup</a>
                         </div>
-                        <div id="userDropdown" class="dropdown" style="width: 170px;">
+                        <div id="userDropdown" class="dropdown" style="width: 184px;">
                             <button id="userDropdownBtn" class="btn btn-primary dropdown-toggle" type="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                style="width: 100%; background-color: aliceblue; color: black; border: none; outline: none;">
+                                data-toggle="dropdown" aria-haspopup="true">
                                 <i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                                Account
+                                <span style="margin-right: 20px;">Account</span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="userDropdownBtn"
                                 style="width: 100%;padding: 0px;">
                                 <a class="dropdown-item" href="my-account.html"
-                                    style="font-size: 17px; width: 170px;font-weight: 400; height:40px; border-radius: 0px; border-bottom: 1px solid gray;">
+                                    style="font-size: 17px; width: 182px;font-weight: 400; height:40px; border-radius: 0px; border-bottom: 1px solid rgb(210, 210, 210);">
                                     <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard
                                 </a>
                                 <a id="logoutBtn" class="dropdown-item" type="button"
-                                    style="font-size: 17px; width: 170px;font-weight: 400;height:40px; border-radius: 0px;">
+                                    style="font-size: 17px; width: 182px;font-weight: 400;height:40px; border-radius: 0px;">
                                     <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout
                                 </a>
                             </div>
@@ -267,10 +286,11 @@
                                 <div style="display: flex; column-gap: 20px;">
                                     <a href="subscription.html" onclick="handleSubscription(event);"
                                         class="primary-btn">Subscribe<span class="arrow_right"></span></a>
-                                    <a href="https://play.google.com/store/apps/details?id=com.user.mbayat&pli=1" target="_blank" id="android">
+                                    <a href="https://play.google.com/store/apps/details?id=com.user.mbayat&pli=1"
+                                        target="_blank" id="android">
                                         <img src="img/icon/android-svgrepo-com 1.svg" style="width: 40px;"></a>
                                     <a href="#" id="apple">
-                                        <img src="img/icon/apple-svgrepo-com 1.svg"  style="width: 40px;"></a>
+                                        <img src="img/icon/apple-svgrepo-com 1.svg" style="width: 40px;"></a>
                                 </div>
                             </div>
                         </div>
@@ -332,7 +352,7 @@
                     </div>
                     <div class="col-lg-6 order-1 order-lg-2">
                         <div class="about-image type1">
-                            <img src="img/image.png" alt="about image">
+                            <img src="img/stb-boxes-09.jpg" alt="about image" style="margin-top: -50px;">
                         </div>
                     </div>
                 </div>
@@ -343,7 +363,7 @@
     <section class="pkg-bg position-relative">
         <div class="container">
             <div class="row align-items-center py-5">
-                <div class="col-lg-7 position-static text-center"><img src="img/image-mobile-mockup.png"
+                <div class="col-lg-7 position-static text-center"><img src="img/image mobile mockup.png"
                         class="img-fluid"></div>
                 <div class="col-lg-5 mt-2">
                     <h3 class="text-uppercase text-center text-lg-left text-md-left d-none d-lg-block d-md-block">PICK
@@ -352,8 +372,8 @@
                     <p class="pt-1 text-center text-lg-left text-md-left">When everything you like comes in a box</p>
                     <p class="text-center text-lg-left text-md-left pb-5 pb-lg-0 pb-md-0">For only 15 KD a month open up
                         a world of new products and experiences and explore the local market through the Mbayat box.</p>
-                    <div class="count-block mt-4">
-                        <ul class="list-unstyled p-0 d-flex">
+                    <div class="count-block mt-4" style="margin-top: -30px;">
+                        <ul class="list-unstyled p-0 d-flex" style="margin-bottom: -20px;">
                             <li class="d-inline-block d-flex">
                                 <div class="count-bg text-center float-left position-relative"><span
                                         class="count-num">9</span> <span
@@ -381,7 +401,8 @@
                                 <div class="subsc-value position-absolute h2 font-weight-bold"
                                     style="margin-bottom: 40px;">
                                     <span id="show_sub_1">
-                                        <span class="d-block total pl-1" style="margin: auto;">Total</span> <span style="font-size: 20px;margin: auto;">15 KD</span>
+                                        <span class="d-block total pl-1" style="margin: auto;font-weight: 500;">Total 15
+                                            KD</span>
                                     </span>
                                 </div>
                             </div>
@@ -391,25 +412,29 @@
                                 </div>
                                 <div class="subsc-value position-absolute h2 font-weight-bold">
                                     <span id="show_sub_2">
-                                        <span class="d-block total pl-1" style="margin: auto;">Total</span> <span style="font-size: 20px;margin: auto;">40 KD</span>
+                                        <span class="d-block total pl-1" style="margin: auto;font-weight: 500;">Total 40
+                                            KD</span>
                                     </span>
                                 </div>
                             </div>
                             <div class="tab-block" style="margin-top: 70px;">
                                 <div id="act_3" class="subscbt text-uppercase font-weight-semibold">
-                                    <span id="sub_3" style="cursor: pointer;">6 Months</span>
+                                    <span id="sub_3" style="cursor: pointer; ">6 Months</span>
                                 </div>
                                 <div class="subsc-value position-absolute h2 font-weight-bold">
                                     <span id="show_sub_3" style="margin: auto;">
-                                        <span class="d-block total pl-1" style="margin: auto;">Total</span> <span style="font-size: 20px;margin: auto;">75 KD</span>
+                                        <span class="d-block total pl-1" style="margin: auto; font-weight: 500;">Total
+                                            75 KD</span>
                                     </span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="text-center text-lg-left text-md-left" style="margin-top: -50px;">
-                            <a href="subscription.html" onclick="setPlan();"
-                                class="btn subscribe py-2 px-5 text-uppercase mt-5 mt-lg-4 ">Subscribe</a>
+                        <div class="text-center text-lg-left text-md-left"
+                            style="margin-top: -50px; padding: 0px; ">
+                            <a href="subscription.html" onclick="setPlan();" id="subscribed"
+                                class="btn subscribe py-2 px-5 text-uppercase mt-5 mt-lg-4 "
+                                style=" margin-left: 70px; ">Subscribe</a>
                         </div>
                     </div>
                 </div>
@@ -479,9 +504,11 @@
                                 <a href="info:info@trymbayat.com">info@trymbayat.com</a>
                                 <div>
                                     <a href="venderSignup.html" class="btn btn-primary px-4 py-2 mt-4"
-                                        id="vendor-signup-btn">Vendor Signup</a>
-                                    <a href="corporateSignup.html" class="btn btn-primary px-4 py-2 mt-4"
-                                        id="corporate-signup-btn">Corporate Signup</a>
+                                        id="vendor-signup-btn"
+                                        style="background-color: rgb(177,43,82); border: 1px solid black;">Vendor
+                                        Signup</a>
+                                    <!-- <a href="corporateSignup.html" class="btn btn-primary px-4 py-2 mt-4"
+                                        id="corporate-signup-btn">Corporate Signup</a> -->
                                 </div>
                             </div>
                         </div>
