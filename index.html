@@ -29,8 +29,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-Cw8FZc+5IiEQMzN5wl4oCx4w77LThnMf5eB8Pm1WObU9eHmDpplKTt6Xe/B+49uNAX69NR/8hSN6GR8imdb8A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
 </head>
 <style>
     * {
@@ -119,7 +117,46 @@
         width: 182px;
     }
 
-    
+    #signupBtn:hover {
+        color: black;
+    }
+
+    #loginBtn:hover {
+        color: black;
+    }
+</style>
+<style>
+    @media (max-width: 767px) {
+        .logo-image {
+            width: 200px;
+            height: auto;
+            align-items: center;
+            margin-top: -20px;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        .logo-image {
+            width: 400px;
+            height: auto;
+            margin-top: 0px;
+        }
+    }
+
+    /* @media (min-width: 992px) {
+       .logo-image {}
+   } */
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        appearance: textfield;
+        /* Firefox */
+    }
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -239,7 +276,7 @@
             <div class="row" style="justify-content: space-between;">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="#"><img src="img/Mbayat-Final-Logo (1).png" alt=""></a>
+                        <a href="./index.html"><img class="logo-image" src="img/Mbayat-Final-Logo (1).png" alt="" style="margin-top: 12px;"></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3">
@@ -274,7 +311,7 @@
     </header>
     <!-- Header Section End -->
     <!-- Hero Section Begin -->
-    <section class="hero">
+    <section class="hero" style="margin-top: 20px;">
         <div class="hero__slider owl-carousel">
             <div class="hero__items set-bg" data-setbg="img/hero/bg-main.png">
                 <div class="container">
@@ -363,7 +400,7 @@
     <section class="pkg-bg position-relative">
         <div class="container">
             <div class="row align-items-center py-5">
-                <div class="col-lg-7 position-static text-center"><img src="img/image mobile mockup.png"
+                <div class="col-lg-7 position-static text-center"><img src="img/image banner (1).png"
                         class="img-fluid"></div>
                 <div class="col-lg-5 mt-2">
                     <h3 class="text-uppercase text-center text-lg-left text-md-left d-none d-lg-block d-md-block">PICK
@@ -430,8 +467,7 @@
                             </div>
                         </div>
 
-                        <div class="text-center text-lg-left text-md-left"
-                            style="margin-top: -50px; padding: 0px; ">
+                        <div class="text-center text-lg-left text-md-left" style="margin-top: -50px; padding: 0px; ">
                             <a href="subscription.html" onclick="setPlan();" id="subscribed"
                                 class="btn subscribe py-2 px-5 text-uppercase mt-5 mt-lg-4 "
                                 style=" margin-left: 70px; ">Subscribe</a>

@@ -20,7 +20,38 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
+<style>
+    @media (max-width: 767px) {
+        .logo-image {
+            width: 200px;
+            height: auto;
+            align-items: center;
+            margin-top: 7px;
+        }
+    }
 
+    @media (min-width: 768px) and (max-width: 991px) {
+        .logo-image {
+            width: 400px;
+            height: auto;
+        }
+    }
+
+    /* @media (min-width: 992px) {
+       .logo-image {}
+   } */
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        appearance: textfield;
+        /* Firefox */
+    }
+</style>
 
 <body>
     <!-- Page Preloder -->
@@ -61,35 +92,17 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="index.html"><img src="img/Mbayat-Final-Logo (1).png" alt=""></a>
+                        <a href="./index.html"><img class="logo-image" src="img/Mbayat-Final-Logo (1).png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <!-- <nav class="header__menu mobile-menu">
-                        <ul>
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contacts</a></li>
-                        </ul>
-                    </nav> -->
+                    
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <!-- <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a> -->
                         <a href="login.html">Login</a>
                         <a class="active" href="signup.html">Signup</a>
-                        <!-- <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div> -->
+                       
                     </div>
                 </div>
             </div>
@@ -100,7 +113,7 @@
     <!-- Header Section End -->
 
     <!-- Map Begin -->
-    <div class="map">
+    <div class="map" style="margin-top: 20px;">
         <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3476.619021601804!2d47.98392401491189!3d29.38144238212838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf85c8f1850df1%3A0x930bef7f53bcc5!2sALGAZ%20TOWER!5e0!3m2!1sen!2sin!4v1679941013418!5m2!1sen!2sin"
             width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
