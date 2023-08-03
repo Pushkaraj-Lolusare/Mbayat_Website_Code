@@ -18,6 +18,115 @@
   <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
   <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
   <link rel="stylesheet" href="css/style.css" type="text/css">
+  <link rel="stylesheet" href="css/main.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-Cw8FZc+5IiEQMzN5wl4oCx4w77LThnMf5eB8Pm1WObU9eHmDpplKTt6Xe/B+49uNAX69NR/8hSN6GR8imdb8A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    #logout a:hover {
+      cursor: pointer;
+      text-decoration: underline;
+      color: rgb(110, 198, 183);
+    }
+
+    .add-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgb(110, 198, 183);
+      border: none;
+      border-radius: 15px;
+      width: 100px;
+      height: 30px;
+      cursor: pointer;
+      color: white;
+      font-size: 12.5px;
+      margin: auto;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .button-icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 18px;
+      margin-right: 5px;
+    }
+
+    .button-text {
+      font-weight: bold;
+    }
+
+    .pause-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgb(163, 54, 75);
+      border: none;
+      border-radius: 15px;
+      width: 100px;
+      height: 30px;
+      cursor: pointer;
+      color: white;
+      font-size: 12.5px;
+      margin: auto;
+    }
+
+    .pause-button-icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 15px;
+      margin-right: 5px;
+    }
+
+    .pause-button-text {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    body {
+      margin: 0;
+      /* overflow: hidden; */
+    }
+
+    #canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .gallery-container {
+      margin: auto;
+      width: 55%;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      border-radius: 10px;
+      margin-top: 5px;
+    }
+
+    .gallery-date {
+      margin: auto;
+      width: 30%;
+      padding: 5px 20px;
+    }
+
+    @media only screen and (max-width: 768px) {
+
+      .add-button .button-text,
+      .pause-button .pause-button-text {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <script>
@@ -45,67 +154,851 @@
 
   window.addEventListener('load', redirectIfNotAllowed);
 
-  function handleLogout(event) {
-    event.preventDefault();
-    localStorage.removeItem("access_token");
-    window.location.reload();
+  function fetchData() {
+    fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
+      .then(response => response.json())
+      .then(data => {
+        const interests = data.results;
+        console.log(interests);
+        const container = document.getElementById('container');
+
+        container.innerHTML = '';
+
+        interests.forEach(interest => {
+          const checkbox = document.createElement('input');
+          checkbox.className = 'form-check-input';
+          checkbox.id = interest.id;
+          checkbox.type = 'checkbox';
+          checkbox.name = 'item-checkbox';
+          checkbox.value = interest.name;
+
+          const label = document.createElement('label');
+          label.className = 'form-check-label';
+          label.htmlFor = checkbox.id;
+          label.textContent = interest.name;
+
+          const div = document.createElement('div');
+          div.className = 'form-check';
+          div.appendChild(checkbox);
+          div.appendChild(label);
+
+          checkbox.addEventListener('change', function () {
+            if (this.checked) {
+              fetchSubinterests(interest);
+            } else {
+              removeSubinterests(interest.id);
+            }
+          });
+          container.appendChild(div);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching interests:', error);
+      });
   }
 
-  function handleSubscription(event) {
-    event.preventDefault();
+  function fetchSubinterests(interest, userSubInterests) {
+    fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interest.id}`)
+      .then(response => response.json())
+      .then(subInterestsData => {
+        const subinterests = subInterestsData.data;
+        const subinterestContainer = document.createElement('div');
+        subinterestContainer.className = 'interest-container';
+        subinterestContainer.id = `interest_${interest.id}`;
+        subinterestContainer.style.marginRight = '20px';
+        const interestHeading = document.createElement('h6');
+        interestHeading.textContent = `${interest.name}`;
+        subinterestContainer.appendChild(interestHeading);
 
-    if (isLoggedIn()) {
-      // User is logged in, perform subscription logic here
-      // ...
-      // Redirect to the subscription page
-      window.location.href = 'subscription.html';
-    } else {
-      // User is not logged in, redirect to the login page
-      window.location.href = 'login.html';
-    }
+        const subinterestsContainer = document.getElementById('sub_container');
+        subinterests.forEach(subInterest => {
+          const subInterestCheckbox = document.createElement('input');
+          subInterestCheckbox.type = 'checkbox';
+          subInterestCheckbox.name = 'subitem-checkbox';
+          subInterestCheckbox.value = subInterest.id;
+          subInterestCheckbox.checked = isSubinterestChecked(subInterest.id, userSubInterests);
+          subinterestContainer.appendChild(subInterestCheckbox);
+
+          const subInterestLabel = document.createElement('label');
+          subInterestLabel.textContent = subInterest.name;
+          subinterestContainer.appendChild(subInterestLabel);
+        });
+        subinterestsContainer.appendChild(subinterestContainer);
+      })
+      .catch(error => {
+        console.error('Error fetching subinterests:', error);
+      });
   }
-  function redirectIfNotAllowed() {
-    if (!isAllowedPath(window.location.pathname)) {
-      if (!isLoggedIn() && window.location.pathname === '/subscription.html') {
-        window.location.href = 'login.html';
-      } else {
-        redirectIfNotLoggedIn();
+
+  function removeSubinterests(interestId) {
+    const subContainer = document.getElementById('sub_container');
+    const interestContainer = document.getElementById(`interest_${interestId}`);
+    subContainer.removeChild(interestContainer);
+  }
+
+  fetchData();
+
+  function populateAccountDetailsForm(userId) {
+    const token = localStorage.getItem("access_token");
+    fetch(`https://15.185.57.60/api/v1/users/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
       }
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        const userInterests = data.interests.map(interest => interest.id);
+        const userSubInterests = data.subInterests.map(subinterest => subinterest.id);
+        const interestsCheckboxes = document.querySelectorAll('#container input[name="item-checkbox"]');
+        interestsCheckboxes.forEach(checkbox => {
+          checkbox.checked = userInterests.includes(checkbox.id);
+          if (checkbox.checked) {
+            fetchSubinterests({ id: checkbox.id, name: checkbox.value }, userSubInterests);
+          }
+        });
+      })
+      .catch(function (error) {
+        console.error("Error fetching user data:", error);
+      });
+  }
+
+  const userId = localStorage.getItem("loginId");
+  if (userId) {
+    populateAccountDetailsForm(userId);
+  }
+
+  function isSubinterestChecked(subinterestId, userSubInterests) {
+    return userSubInterests.includes(subinterestId);
+  }
+
+  function openAddAddressModal() {
+    const modal = document.getElementById('addAddressModal');
+    modal.style.display = 'block';
+  }
+
+  function closeAddAddressModal() {
+    const modal = document.getElementById('addAddressModal');
+    modal.style.display = 'none';
+  }
+
+  function openEditAddressModal(address) {
+    const modal = document.getElementById('editAddressModal');
+    modal.style.display = 'block';
+  }
+
+  function closeEditAddressModal() {
+    const modal = document.getElementById('editAddressModal');
+    modal.style.display = 'none';
+  }
+
+  async function fetchAddresses() {
+    const userId = localStorage.getItem("loginId");
+    const token = localStorage.getItem("access_token");
+    try {
+      const response = await fetch(`https://15.185.57.60/api/v1/users/get-all-shipping-address/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch addresses.');
+      }
+
+      const addresses = await response.json();
+      const addresse = addresses.data;
+
+      const subContainer = document.getElementById('address_container');
+      addresse.forEach(address => {
+        const addressDiv = document.createElement('div');
+        addressDiv.classList.add('address-div');
+        addressDiv.innerHTML = `
+              <div>
+                <input class="class-button" name="address-radio-group" check-address-id="${address.id}" type="radio" value="${address.state}-${address.country}" onclick="editAddress(event)" />
+                <label>
+                  ${address.country}${address.state ? ', ' + address.state : ''}${address.city ? ', ' + address.city : ''}${address.street2 ? ', ' + address.street2 : ''}${address.street1 ? ', ' + address.street1 : ''}${address.direction ? ', ' + address.direction : ''}${address.avenue ? ', ' + address.avenue : ''}${address.floor ? ', ' + address.floor : ''}${address.apartment ? ', ' + address.apartment : ''}${address.houseNo ? ', ' + address.houseNo : ''}.
+                </label>    
+              </div>
+              <div class="button-container">
+                <button edit-address-id="${address.id}" type="button" class="edit-button" style="background-color: rgb(73,197,182);border-radius: 10px; display:flex; height: 40px; padding: 15px; align-items:center">
+                  <i class="fas fa-edit" id="icon" style="margin-right:10px"></i><span id="text">Edit</span>
+                </button>
+                <button style="background-color: rgb(240,78,106);border-radius: 10px; display: flex; height: 40px; padding: 15px; align-items:center" type="button" class="delete-button" data-address-id="${address.id}">
+                  <i class="fas fa-trash-alt" id="icon" style="margin-right:10px"></i><span id="text">Delete</span>
+                </button>
+              </div>
+        `;
+        subContainer.appendChild(addressDiv);
+      });
+      subContainer.addEventListener('click', function (event) {
+        const target = event.target;
+        if (target.classList.contains('delete-button')) {
+          const addressId = target.getAttribute('data-address-id');
+          deleteAddress(addressId);
+        } else if (target.classList.contains('edit-button')) {
+          const addressId = target.getAttribute('edit-address-id');
+          openEditAddressModal(addressId);
+        } else if (target.classList.contains('class-button')) {
+          const addressId = target.getAttribute('check-address-id');
+          console.log('Checked Address ID:', addressId);
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching addresses:', error);
     }
   }
+
+  fetchAddresses()
+
+  function deleteAddress(addressId) {
+    const buttonElement = event.target;
+    const shippingId = addressId
+    console.log("shippingId", shippingId)
+    const addressDiv = buttonElement.parentElement.parentElement;
+    console.log("addressDiv", addressDiv)
+    const userId = localStorage.getItem("loginId");
+    const token = localStorage.getItem("access_token");
+
+    fetch("https://15.185.57.60/api/v1/users/delete-shipping-address", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ shippingId: shippingId }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Address deleted:', data);
+        addressDiv.remove();
+      })
+      .catch((error) => {
+        console.error('Error deleting address:', error);
+      });
+  }
+
+  function editAddress(event) {
+    const target = event.target;
+    if (target.type === 'radio') {
+      const selectedValue = target.value;
+      const [state, country] = selectedValue.split('-');
+      const selectedAddressDiv = document.getElementById('selectedAddress');
+      selectedAddressDiv.textContent = `${state}, ${country}`;
+    }
+  }
+
+  function toggleGiftDropdown() {
+    var dropdown = document.querySelector(".dropdown-content");
+    var dropbtn = document.querySelector(".dropbtn");
+
+    dropbtn.classList.toggle("active");
+
+    if (dropdown.style.display === "block") {
+      dropdown.style.display = "none";
+      dropbtn.classList.remove("active");
+    } else {
+      dropdown.style.display = "block";
+      dropbtn.classList.add("active");
+    }
+  }
+
+  document.addEventListener("click", function (event) {
+    var dropdown = document.querySelector(".dropdown-content");
+    var dropbtn = document.querySelector(".dropbtn");
+
+    if (!event.target.matches(".dropbtn") && dropdown.style.display === "block") {
+      dropdown.style.display = "none";
+      dropbtn.classList.remove("active");
+    }
+  });
+
+  const areasByState = {
+    'Al Asimah': ['Kuwait City', 'Sharq', 'Jaber Al-Ahmad City', 'Mirqab', 'Dasman', 'Salhiya', 'Salmiya', 'Hawally', 'Mishref', 'Bayan'],
+    'Hawalli': ['Mishref', 'Salmiya', 'Bayan', 'Rumaithiya', 'Salwa', 'Rai'],
+    'Farwaniya': ['Al Dajeej', 'Abdullah Al-Mubarak Al-Sabah', 'Al-Rai', 'Jleeb Al-Shuyoukh', 'Al-Riggae', 'Khaitan'],
+    'Ahmadi': ['Fintas', 'Manqaf', 'Wafrah', 'Riqqh'],
+    'Mubarak Alkabeer': ['Abu Fatira', 'Abu Halifa', 'Al Wafra', 'Bnaider', 'Fahaheel', 'Jaber Al Ahmad', 'Mangaf'],
+    'Jahra': ['Naseem', 'Al Sulaibikhat', 'Amghara', 'Kabad', 'Jahra Industrial Area', 'Qasr']
+  }
+
+  function populateAreas() {
+    const stateDropdown = document.getElementById('state');
+
+    const selectedState = stateDropdown.value;
+    // console.log("selectedState", selectedState);
+    const areaDropdown = document.getElementById('area');
+
+    areaDropdown.innerHTML = '';
+
+    const selectAreaOption = document.createElement('option');
+    selectAreaOption.value = '';
+    selectAreaOption.textContent = 'Select Area';
+    areaDropdown.appendChild(selectAreaOption);
+
+    const selectedStateAreas = areasByState[selectedState];
+    // console.log("selectedStateAreas", selectedStateAreas);
+
+    if (selectedStateAreas) {
+      selectedStateAreas.forEach(area => {
+        const option = document.createElement('option');
+        option.value = area;
+        option.textContent = area;
+        areaDropdown.appendChild(option);
+        // console.log("areaDropdown", areaDropdown);
+      });
+    }
+    console.log("stateDropdown", stateDropdown);
+    console.log("areaDropdown", areaDropdown);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    populateAreas();
+
+    document.getElementById('state').addEventListener('change', populateAreas);
+  });
+
+  function handleEditButtonClick(addressString) {
+    const address = JSON.parse(addressString);
+    openEditAddressModal(address);
+  }
+
+// function populateDropdown() {
+//     const dropdown = document.getElementById('dropdown');
+//     const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'];
+
+//     // Clear existing options
+//     dropdown.innerHTML = '';
+
+//     // Create and append new options
+//     options.forEach((option, index) => {
+//         const optionElement = document.createElement('option');
+//         optionElement.value = index + 1; // You can set the value as per your requirement
+//         optionElement.textContent = option;
+//         optionElement.style.display="block"
+//         dropdown.appendChild(optionElement);
+//     });
+// }
+
+// populateDropdown();
 
 </script>
+
 <style>
   @media (max-width: 767px) {
-     .logo-image {
-         width: 200px;
-         height: auto;
-         align-items: center;
-         margin-top: 7px;
-     }
- }
+    .logo-image {
+      width: 200px;
+      height: auto;
+      align-items: center;
+      margin-top: 7px;
+    }
 
- @media (min-width: 768px) and (max-width: 991px) {
-     .logo-image {
-         width: 400px;
-         height: auto;
-     }
- }
+    #text {
+      display: none;
+    }
 
- /* @media (min-width: 992px) {
+    #icon {
+      margin-left: -4px;
+    }
+
+    .delete-button,
+    .edit-button {
+      width: 35px;
+      margin: auto;
+    }
+
+    .edit-button {
+      margin-left: 5px;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+    }
+
+    /* .class-button {
+      margin-top: 30px;
+      border: 1px solid red;
+    } */
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    .logo-image {
+      width: 400px;
+      height: auto;
+    }
+  }
+
+  /* @media (min-width: 992px) {
      .logo-image {}
  } */
 
- input[type="number"]::-webkit-inner-spin-button,
- input[type="number"]::-webkit-outer-spin-button {
-     -webkit-appearance: none;
-     margin: 0;
- }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
- input[type="number"] {
-     appearance: textfield;
-     /* Firefox */
- }
+  input[type="number"] {
+    appearance: textfield;
+    /* Firefox */
+  }
+</style>
+<style>
+  .carousel-slide {
+    display: flex;
+    overflow: hidden;
+    width: 50%;
+    /* Display one slide at a time */
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+
+  }
+
+  .slide {
+    flex: 0 0 100%;
+    margin-right: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    animation: slideAnimation 6s linear infinite;
+    width: 300px;
+    /* 6s for 2s per slide, adjust as needed */
+  }
+
+  .carousel {
+    margin: 0 auto;
+    width: 50%;
+    /* You can adjust the width as needed */
+    max-height: 300px;
+    /* You can adjust the height as needed */
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .carousel-container {
+    width: 70%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .carousel-slide {
+    display: flex;
+    width: 300%;
+    height: 300px;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .carousel-slide div {
+    flex: 0 0 33.33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .carousel-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    /* border: 1px solid red; */
+    width: 142px;
+  }
+
+  .dropbtn {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    /* border: 1px solid red; */
+    width: 142px;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #f9f9f9;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown:hover .dropbtn {
+    background-color: rgb(110, 198, 183);
+  }
+
+  .dropbtn:hover {
+    background-color: rgb(110, 198, 183);
+    color: white;
+
+  }
+
+  .dropdown .dropbtn {
+    position: relative;
+    padding-right: 25px;
+    /* Added padding for the icon */
+  }
+
+  .dropdown .dropdown-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: #333 transparent transparent transparent;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .dropdown.open .dropdown-icon {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  #logout-link:hover {
+    color: rgb(110, 198, 183);
+  }
+
+  .dropdown-content a {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .dropdown-content a i {
+    margin-right: 10px;
+  }
+
+  #pause-button {
+    background: none;
+    border: none;
+    outline: none;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+
+  #pause-button i {
+    font-size: 16px;
+    color: #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #pause-button .fas.fa-pause:before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 4px;
+    height: 12px;
+    background-color: #000;
+  }
+
+  #pause-button .fas.fa-pause:after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 14px;
+    width: 4px;
+    height: 12px;
+    background-color: #000;
+  }
+
+  #add-button {
+    padding: 10px 15px;
+    background-color: #2196F3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #add-button i {
+    margin-right: 5px;
+  }
+
+  .pause-button i {
+    font-size: 12px;
+    margin-right: 0px;
+
+  }
+
+  .nav-item.dropdown-item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-height: 400px;
+    overflow: auto;
+  }
+
+  .interest-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #container input[name="item-checkbox"] {
+    margin-right: 5px;
+  }
+
+  #sub_container {
+    display: flex;
+    /* flex-direction: ; */
+    gap: 10px;
+  }
+
+  #sub_container input[name="subitem-checkbox"] {
+    margin-right: 5px;
+  }
+
+  #container h6,
+  #sub_container h6 {
+    margin: 5px 0;
+    font-weight: bold;
+  }
+
+  /* CSS for Address Display */
+  /* CSS for Address Display */
+  .address-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .address-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .address-div label {
+    margin-bottom: 5px;
+  }
+
+  .address-div button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .address-div input[type="radio"] {
+    margin-right: 10px;
+  }
+
+  /* CSS for Address Display */
+  .address-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .address-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .address-div label {
+    margin-bottom: 5px;
+  }
+
+  .address-div button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+  }
+
+  .address-div button.edit-button {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+
+  .address-div button.edit-button svg {
+    margin-right: 5px;
+  }
+
+  .address-div button.delete-button {
+    background-color: #f44336;
+    color: #fff;
+  }
+
+  .address-div button.delete-button svg {
+    margin-right: 5px;
+  }
+
+  .address-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .button-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .edit-button,
+  .delete-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    margin-left: 10px;
+  }
+
+  .edit-button:hover,
+  .delete-button:hover {
+    color: #007bff;
+  }
+
+  /* Style for the address container */
+  .address-container {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+
+  .address-container label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  /* Style for the edit and delete buttons */
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  .edit-button {
+    border: none;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .edit-button:hover {
+    background-color: #0056b3;
+  }
+
+  .delete-button {
+    border: none;
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .delete-button:hover {
+    background-color: #c82333;
+  }
+
+  .address-div input[type="radio"] {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  .dropbtn.active {
+    background-color: rgb(110, 198, 183);
+  }
+
+  #vendor-signup-btn {
+    background-color: rgb(177, 43, 82);
+    border: 1px solid black;
+  }
+
+  #corporate-signup-btn {
+    background-color: rgb(177, 43, 82);
+    border: 1px solid black;
+  }
 </style>
 
 
@@ -147,33 +1040,13 @@
           </div>
         </div>
         <div class="col-lg-6 col-md-6">
-          <!-- <nav class="header__menu mobile-menu">
-                        <ul>
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contacts</a></li>
-                        </ul>
-                    </nav> -->
         </div>
-        <div class="col-lg-3 col-md-3">
+        <!-- <div class="col-lg-3 col-md-3">
           <div class="header__nav__option">
-            <!-- <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a> -->
             <a href="login.html">Login</a>
             <a class="active" href="signup.html">Signup</a>
-            <!-- <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div> -->
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="canvas__open"><i class="fa fa-bars"></i></div>
     </div>
@@ -181,7 +1054,7 @@
   <!-- Header Section End -->
 
   <!-- Breadcrumb Section Begin -->
-  <section class="breadcrumb-option">
+  <section class="breadcrumb-option" style="margin-top: 20px;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -199,92 +1072,232 @@
   <!-- Breadcrumb Section End -->
 
   <!-- Checkout Section Begin -->
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <div class="footer__about">
-            <div class="footer__logo" style="width: 70%;">
-              <a href="/"><img src="img/logo-mbyat (1).png" alt=""></a>
-            </div>
-            <p>Mbayat is a mystery subscription box tailored to costumer's interest, where you will get the
-              opportunity to try and experience new products and services matching your interest provided
-              by local brands and companies each month.</p>
-            <a href="#"><img src="img/logo.png" alt="" style="width: 65px; height: 45px; border-radius: 2px;"></a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <div class="footer__widget">
-            <h6>NewLetter</h6>
-            <div class="footer__newslatter">
-              <p>Be the first to know about new arrivals, look books, sales & promos!</p>
-              <form action="#">
-                <input type="text" placeholder="Your email">
-                <button type="submit"><span class="icon_mail_alt"></span></button>
-              </form>
-            </div>
-            <div class="hero__social">
-              <!-- <a href="#"><i class="fa fa-facebook"></i></a> -->
-              <a href="https://twitter.com/trymbayat"><i class="fa fa-twitter"></i></a>
-              <a href="https://www.instagram.com/trymbayat/"><i class="fa fa-instagram"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6">
-          <div class="footer__widget">
-            <h6>CONTACT US</h6>
-            <div class="footer__newslatter">
-              <p>MBAYAT Kuwait, Sharq, Ahmed Al Jaber Street, Al Gaz Tower,</p>
-              <div class="social_add">
-                <a href="tell:+965 90015060">+965 90015060</a>
-                <a href="info:info@trymbayat.com">info@trymbayat.com</a>
-                <div>
-                  <a href="venderSignup.html" class="btn btn-primary px-4 py-2 mt-4" id="vendor-signup-btn">Vendor
-                    Signup</a>
-                  <!-- <a href="corporateSignup.html" class="btn btn-primary px-4 py-2 mt-4"
-                                    id="corporate-signup-btn">Corporate Signup</a> -->
+  <section>
+    <div class="row">
+      <div class="col-12">
+        <div class="tm-myaccount-acdetails">
+          <form action="#" class="tm-form tm-form-bordered"
+            style="width: 90%; margin: auto; margin-top: 20px; margin-bottom: 20px;">
+            <div class="tm-form-inner">
+              <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                <!-- <div> -->
+                <h6>Please select 5 Interests</h6>
+                <div id="fraction-component"></div>
+                <!-- </div> -->
+                <div class="check-box_flex" id="container">
                 </div>
               </div>
+              <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                <h6>Please select Sub-Interests</h6>
+                <div class="check-box_flex" id="sub_container">
+                </div>
+              </div>
+
+              <button type="button" onclick="openAddAddressModal()"
+                style="height: 40px; font-weight: bold;margin-left: 20px; margin-top: 20px; background-color: rgb(177,43,82); border-radius:10px; color: white;">
+                <!--rgb(177,43,82)-->
+                <i class="fas fa-plus" style="margin-right: 10px;"></i><span>Add
+                  Address</span></button>
+              
+
+              <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                <div class="address_container" id="address_container">
+                </div>
+              </div>
+              <div style="width:300px; margin-left: 20px; margin-top: 20px; ">
+                <h6>Please select plan</h6>
+                <div style="position: relative;">
+                  <select id="dropdown" style="width:40%">
+                    <option>Select plan</option>
+                    <option value=""><span>1
+                        Month</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>15
+                        KD</span></option>
+                    <option value=""><span>3
+                        Months</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>45
+                        KD</span></option>
+                    <option value=""><span>6
+                        Months</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>75
+                        KD</span></option>
+                  </select>
+                  <i class="fas fa-chevron-down"
+                    style="position: absolute; margin-top: 25px; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+                </div>
+              </div>
+
+              <div class="tm-form-field col-lg-12 col-md-12 col-12"  >
+                <button
+                style="font-weight: bold;font-size: large;  margin: auto; display: block ; width: 250px; background-color: rgb(53,183,156); margin-top: 30px; border-radius: 15px; color: white;">Pay</button>
+              </div>
+
+              <div id="addAddressModal" class="modal"
+                style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
+                <div class="modal-content" style="padding: 20px;">
+                  <div style="display: flex; justify-content: space-between;">
+                    <h2>Add New Address</h2>
+                    <span class="close" onclick="closeAddAddressModal()">&times;</span>
+                  </div>
+                  <form id="addAddressForm">
+                    <!-- Add address form fields -->
+
+                    <div class="tm-form-field" style="width: 45%;">
+                      <label for="addressName">Address Name</label><br />
+                      <input type="text" id="addressName" value="" />
+                    </div>
+                    <div class="tm-form-field" style="width: 45%;">
+                      <label for="country">Country</label><br />
+                      <input type="text" id="country" value="Kuwait" disabled />
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                      <div class="tm-form-field" style="width: 45%;">
+                        <label for="state">State</label>
+                        <select id="state" onchange="populateAreas()">
+                          <option value="">Select State</option>
+                          <option value="Al Asimah">Al Asimah</option>
+                          <option value="Farwaniya">Farwaniya</option>
+                          <option value="Hawalli">Hawalli</option>
+                          <option value="Ahmadi">Ahmadi</option>
+                          <option value="Mubarak Alkabeer">Mubarak Alkabeer
+                          </option>
+                          <option value="Jahra">Jahra</option>
+                        </select>
+                      </div>
+                      <div class="tm-form-field" style="width: 45%;">
+                        <label for="area">Area</label>
+                        <select id="area">
+                          <option value="">Select Area</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                      <div class="tm-form-field">
+                        <label for="block">Block</label><br />
+                        <input type="text" id="block" value="" />
+                      </div>
+                      <div class="tm-form-field">
+                        <label for="street">Street</label><br />
+                        <input type="text" id="street" value="" />
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                      <div class="tm-form-field">
+                        <label for="houseNo">House No.</label><br />
+                        <input type="text" id="houseNo" value="" />
+                      </div>
+                      <div class="tm-form-field">
+                        <label for="apartment">Apartment</label><br />
+                        <input type="text" id="apartment" value="" />
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                      <div class="tm-form-field">
+                        <label for="floor">Floor</label><br />
+                        <input type="text" id="floor" value="" />
+                      </div>
+                      <div class="tm-form-field">
+                        <label for="avenue">Avenue</label><br />
+                        <input type="text" id="avenue" value="" />
+                      </div>
+                    </div>
+                    <div class="tm-form-field" style="width: 45%;">
+                      <label for="direction">Direction</label><br />
+                      <input type="text" id="direction" value="" />
+                    </div>
+                    <div class="tm-form-field" style="margin-top: 100px;">
+                      <button type="button" class="tm-button" onclick="addNewAddress()">Add Address</button>
+                      <button type="button" class="tm-button" onclick="closeAddAddressModal()"
+                        style="background-color: #ccc; border: none;">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div id="editAddressModal" class="modal"
+                style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
+                <div class="modal-content" style="padding: 20px;">
+                  <div style="display: flex; justify-content: space-between;">
+                    <h2>Edit Address</h2>
+                    <span class="close" onclick="closeEditAddressModal()">&times;</span>
+                  </div>
+                  <form id="addAddressForm">
+                    <!-- Add address form fields -->
+
+                    <div class="tm-form-field" style="width: 45%;">
+                      <label for="editAddressName">Address Name</label><br />
+                      <input type="text" id="editAddressName" value="" />
+                    </div>
+                    <div class="tm-form-field" style="width: 45%;">
+                      <label for="editAddressCountry">Country</label><br />
+                      <input type="text" id="editAddressCountry" value="Kuwait" disabled />
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                      <div class="tm-form-field" style="width: 45%;">
+                        <label for="editAddressState">State</label>
+                        <select id="editAddressState" onchange="populateAreas()">
+                          <option value="">Select State</option>
+                          <option value="Al Asimah">Al Asimah</option>
+                          <option value="Farwaniya">Farwaniya</option>
+                          <option value="Hawalli">Hawalli</option>
+                          <option value="Ahmadi">Ahmadi</option>
+                          <option value="Mubarak Alkabeer">Mubarak Alkabeer
+                          </option>
+                          <option value="Jahra">Jahra</option>
+                        </select>
+                      </div>
+                      <div class="tm-form-field" style="width: 45%;">
+                        <label for="editAddressArea">Area</label>
+                        <select id="editAddressArea">
+                          <option value="">Select Area</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                      <div class="tm-form-field">
+                        <label for="editAddressBlock">Block</label><br />
+                        <input type="text" id="editAddressBlock" value="" />
+                      </div>
+                      <div class="tm-form-field">
+                        <label for="editAddressStreet">Street</label><br />
+                        <input type="text" id="editAddressStreet" value="" />
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                      <div class="tm-form-field">
+                        <label for="country">House No.</label><br />
+                        <input type="text" id="country" value="" />
+                      </div>
+                      <div class="tm-form-field">
+                        <label for="editAddressApartment">Apartment</label><br />
+                        <input type="text" id="editAddressApartment" value="" />
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                      <div class="tm-form-field">
+                        <label for="editAddressFloor">Floor</label><br />
+                        <input type="text" id="editAddressFloor" value="" />
+                      </div>
+                      <div class="tm-form-field">
+                        <label for="editAddressAvenue">Avenue</label><br />
+                        <input type="text" id="editAddressAvenue" value="" />
+                      </div>
+                    </div>
+                    <div class="tm-form-field" style="width: 45%;">
+                      <label for="editAddressDirection">Direction</label><br />
+                      <input type="text" id="editAddressDirection" value="" />
+                    </div>
+                    <div class="tm-form-field" style="margin-top: 100px;">
+                      <button type="button" class="tm-button" onclick="updateAddress()">Add Address</button>
+                      <button type="button" class="tm-button" onclick="closeEditAddressModal()"
+                        style="background-color: #ccc; border: none;">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
             </div>
-
-          </div>
-        </div>
-      </div>
-      <div class="row footer__copyright__text">
-        <div class="col-lg-6 text-left">
-          <div class="">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            <p>Copyright ©
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="#" target="_blank"> MBAYAT</a>
-            </p>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="footer-link">
-            <ul>
-              <li>
-                <a href="contact.html">Contact Us</a>
-              </li>
-              <li>
-                <a href="about.html">About Us</a>
-              </li>
-              <li>
-                <a href="privacy-statement.html">Privacy policy</a>
-              </li>
-              <li>
-                <a href="terms-and-conditions.html">Terms & Conditions</a>
-              </li>
-            </ul>
-          </div>
-
+          </form>
         </div>
       </div>
     </div>
-  </footer>
+  </section>
   <!-- Checkout Section End -->
 
   <!-- Footer Section Begin -->
@@ -330,8 +1343,8 @@
                 <div>
                   <a href="venderSignup.html" class="btn btn-primary px-4 py-2 mt-4" id="vendor-signup-btn">Vendor
                     Signup</a>
-                  <a href="corporateSignup.html" class="btn btn-primary px-4 py-2 mt-4"
-                    id="corporate-signup-btn">Corporate Signup</a>
+                  <!-- <a href="corporateSignup.html" class="btn btn-primary px-4 py-2 mt-4"
+                                    id="corporate-signup-btn">Corporate Signup</a> -->
                 </div>
               </div>
             </div>

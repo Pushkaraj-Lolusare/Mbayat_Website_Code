@@ -124,6 +124,41 @@
                 display: none;
             }
         }
+
+        /* Styles for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
     <style>
         .carousel-slide {
@@ -591,7 +626,7 @@
 
                 const subscriptions = await response.json();
                 const data = subscriptions.results
-                console.log("data", data);
+                // console.log("data", data);
 
                 function calculateTotalMonths(data) {
                     return data.reduce((total, data) => total + data.totalMonths, 0);
@@ -613,7 +648,7 @@
                 }
 
                 const totalMonths = calculateTotalMonths(data);
-                console.log(totalMonths);
+                // console.log(totalMonths);
                 const totalMonthsElement = document.getElementById('totalMonths');
                 totalMonthsElement.textContent = totalMonths;
 
@@ -629,8 +664,8 @@
                     const nextBoxDate = data[0].nextBoxDate;
                     const currentDate = new Date();
                     const diffInTime = new Date(nextBoxDate) - currentDate;
-                    const diffInDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24)); 
-                    console.log(diffInDays);
+                    const diffInDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
+                    // console.log(diffInDays);
                     document.getElementById('daysLeft').textContent = `${diffInDays} Days`;
                 }
 
@@ -643,9 +678,24 @@
             }
         }
 
-        // Call the function to fetch subscriptions
         fetchSubscriptions();
 
+        
+
+        function openPauseModal() {
+            const pauseModal = document.getElementById('pauseModal');
+            pauseModal.style.display = 'block';
+        }
+
+        function closePauseModal() {
+            const pauseModal = document.getElementById('pauseModal');
+            pauseModal.style.display = 'none';
+        }
+
+        function pauseSubscription(duration) {
+            console.log(`Paused subscription for ${duration} month(s)`);
+            // closePauseModal();
+        }
 
     </script>
 
@@ -695,7 +745,8 @@
             <div class="row" style="display: flex; justify-content: space-between;">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img class="logo-image" src="img/Mbayat-Final-Logo (1).png" alt="" style="margin-top: 10px;"></a>
+                        <a href="./index.html"><img class="logo-image" src="img/Mbayat-Final-Logo (1).png" alt=""
+                                style="margin-top: 10px;"></a>
                     </div>
                 </div>
 
@@ -717,12 +768,12 @@
                                     role="tab" aria-controls="account-orders" aria-selected="false"><i
                                         class="fas fa-shopping-bag"></i>&nbsp; &nbsp;My
                                     Orders</a>
-                                <a id="logout-link"
+                                <!-- <a id="logout-link"
                                     style="font-size: 15px; border-bottom: 1px solid gray;border-radius: 0px;"
                                     class="nav-link" id="account-address-tab" data-toggle="tab" href="#account-address"
                                     role="tab" aria-controls="account-address" aria-selected="false"><i
                                         class="fas fa-address-card"></i>&nbsp;
-                                    &nbsp;Address</a>
+                                    &nbsp;Address</a> -->
                                 <a id="logout-link"
                                     style="font-size: 15px; border-bottom: 1px solid gray;border-radius: 0px;"
                                     class="nav-link" id="account-address-tab" data-toggle="tab" href="#account-wishlist"
@@ -824,22 +875,41 @@
                                             </span>
                                             <div style="border: 0.1px solid black; height :25px; "></div>
                                             <span>
-                                                <h6 id="daysLeft"  style="margin: auto; text-align: center;"></h6>
+                                                <h6 id="daysLeft" style="margin: auto; text-align: center;"></h6>
                                             </span>
                                         </div>
                                     </div>
                                     <div style="width: 34%; padding-top: 15px; padding-bottom: 0;">
                                         <button class="add-button" style="display: flex; align-items: center;">
-                                            <i class="fas fa-plus"
-                                                style=" border: 2px solid white; padding: 4px; border-radius: 100%; height: 22px; padding-top: 4px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span class="button-text"
-                                                style="margin-left: -20px; display: inline;">Add</span>
+                                            <a href="subscription.html" style="text-decoration: none; color: white"><i
+                                                    class="fas fa-plus"
+                                                    style=" border: 2px solid white; padding: 4px; border-radius: 100%; height: 22px; padding-top: 4px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span class="button-text"
+                                                    style="margin-left: -20px; display: inline;">Add</span></a>
                                         </button>
-                                        <button class="pause-button" style="display: flex; align-items: center;">
+                                        <button class="pause-button" style="display: flex; align-items: center;"
+                                            onclick="openPauseModal()">
                                             <i class="fas fa-pause"
                                                 style="margin-left: 5px; border: 2px solid white; padding: 4px; height: 22px; border-radius: 50%; padding-top: 3.4px;"></i>
                                             <span class="pause-button-text" style="display: inline;">Pause</span>
                                         </button>
+                                    </div>
+                                </div>
+                                <!-- Pause Modal -->
+                                <div id="pauseModal" class="modal">
+                                    <div class="modal-content">
+                                        <span class="close" onclick="closePauseModal()">&times;</span>
+                                        <h3>Pause Subscription</h3>
+                                        <p>Select the duration you want to pause your subscription:</p>
+                                        <div>
+                                            <button onclick="pauseSubscription(1)">1 Month</button>
+                                            <button onclick="pauseSubscription(2)">2 Months</button>
+                                            <button onclick="pauseSubscription(3)">3 Months</button>
+                                        </div>
+                                        <div style="margin-top: 20px;">
+                                            <button onclick="closePauseModal()">No</button>
+                                            <button onclick="closePauseModal()">Yes</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div
@@ -1518,6 +1588,7 @@
                 .then(response => response.json())
                 .then(data => {
                     const interests = data.results;
+                    // console.log(interests);
                     const container = document.getElementById('container');
 
                     container.innerHTML = '';
@@ -1551,11 +1622,12 @@
                         container.appendChild(div);
 
                         // Check the checkbox for interest if it is present in userInterests
-                        const userInterests = JSON.parse(localStorage.getItem("userInterests")) || [];
-                        if (userInterests.includes(interest.id)) {
-                            checkbox.checked = true;
-                            fetchSubinterests(interest); // Fetch subinterests for checked interest
-                        }
+                        // const userInterests = JSON.parse(localStorage.getItem("userInterests")) || [];
+                        // // console.log("userInterests",userInterests);
+                        // if (userInterests.includes(interest.id)) {
+                        //     checkbox.checked = true;
+                        //     fetchSubinterests(interest); // Fetch subinterests for checked interest
+                        // }
                     });
                 })
                 .catch(error => {
@@ -1567,6 +1639,7 @@
             fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interest.id}`)
                 .then(response => response.json())
                 .then(subInterestsData => {
+                    // console.log("subInterestsData", subInterestsData);
                     const subinterests = subInterestsData.data;
                     const subinterestContainer = document.createElement('div');
                     subinterestContainer.className = 'interest-container';
@@ -1662,7 +1735,6 @@
         }
 
         function isSubinterestChecked(subinterestId, userSubInterests) {
-            // Check if the subinterestId is present in the userSubInterests array
             return userSubInterests.includes(subinterestId);
         }
 
@@ -1671,7 +1743,6 @@
             modal.style.display = 'block';
         }
 
-        // Function to close the Add Address modal
         function closeAddAddressModal() {
             const modal = document.getElementById('addAddressModal');
             modal.style.display = 'none';
@@ -1682,7 +1753,6 @@
             modal.style.display = 'block';
         }
 
-        // Function to close the Add Address modal
         function closeEditAddressModal() {
             const modal = document.getElementById('editAddressModal');
             modal.style.display = 'none';
@@ -1704,7 +1774,7 @@
                 }
 
                 const addresses = await response.json();
-                console.log(addresses.data);
+                // console.log(addresses.data);
 
                 const addresse = addresses.data;
 
@@ -1714,18 +1784,20 @@
                     addressDiv.classList.add('address-div');
                     addressDiv.innerHTML = `
                     <div>
-            <input class="class-button" name="address-radio-group" check-address-id="${address.id}" type="radio" value="${address.state}-${address.country}" onclick="editAddress(event)" />
-            <label>${address.houseNo}, ${address.apartment}, ${address.floor}, ${address.avenue}, ${address.direction}, ${address.street1}, ${address.street2}, ${address.city}, ${address.state}, ${address.country}.</label>
-        </div>
-        <div class="button-container">
-            <button edit-address-id="${address.id}" type="button" class="edit-button" style="background-color: rgb(73,197,182);border-radius: 10px; display:flex; height: 40px; padding: 15px; align-items:center">
-                <i class="fas fa-edit" style="margin-right:10px"></i>Edit
-            </button>
-            <button style="background-color: rgb(240,78,106);border-radius: 10px; display: flex; height: 40px; padding: 15px; align-items:center" type="button" class="delete-button" data-address-id="${address.id}">
-                <i class="fas fa-trash-alt" style="margin-right:10px"></i>Delete
-            </button>
-        </div>
-    `;
+                        <input class="class-button" name="address-radio-group" check-address-id="${address.id}" type="radio" value="${address.state}-${address.country}" onclick="editAddress(event)" />
+                        <label>
+                            ${address.country}${address.state ? ', ' + address.state : ''}${address.city ? ', ' + address.city : ''}${address.street2 ? ', ' + address.street2 : ''}${address.street1 ? ', ' + address.street1 : ''}${address.direction ? ', ' + address.direction : ''}${address.avenue ? ', ' + address.avenue : ''}${address.floor ? ', ' + address.floor : ''}${address.apartment ? ', ' + address.apartment : ''}${address.houseNo ? ', ' + address.houseNo : ''}.
+                        </label>
+                    </div>
+                    <div class="button-container">
+                        <button edit-address-id="${address.id}" type="button" class="edit-button" style="background-color: rgb(73,197,182);border-radius: 10px; display:flex; height: 40px; padding: 15px; align-items:center">
+                            <i class="fas fa-edit" style="margin-right:10px"></i>Edit
+                        </button>
+                        <button style="background-color: rgb(240,78,106);border-radius: 10px; display: flex; height: 40px; padding: 15px; align-items:center" type="button" class="delete-button" data-address-id="${address.id}">
+                            <i class="fas fa-trash-alt" style="margin-right:10px"></i>Delete
+                        </button>
+                    </div>
+                    `;
                     subContainer.appendChild(addressDiv);
                 });
                 subContainer.addEventListener('click', function (event) {
@@ -1857,8 +1929,8 @@
                     // console.log("areaDropdown", areaDropdown);
                 });
             }
-            console.log("stateDropdown", stateDropdown);
-            console.log("areaDropdown", areaDropdown);
+            // console.log("stateDropdown", stateDropdown);
+            // console.log("areaDropdown", areaDropdown);
         }
 
         document.addEventListener('DOMContentLoaded', function () {
