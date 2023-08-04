@@ -118,6 +118,10 @@
       width: 30%;
       padding: 5px 20px;
     }
+    
+    #termsCheckbox:hover{
+cursor: pointer;
+    }
 
     @media only screen and (max-width: 768px) {
 
@@ -253,11 +257,33 @@
         const userInterests = data.interests.map(interest => interest.id);
         const userSubInterests = data.subInterests.map(subinterest => subinterest.id);
         const interestsCheckboxes = document.querySelectorAll('#container input[name="item-checkbox"]');
+        let checkedInterestsCount = 0;
         interestsCheckboxes.forEach(checkbox => {
           checkbox.checked = userInterests.includes(checkbox.id);
+
           if (checkbox.checked) {
+            checkedInterestsCount++;
             fetchSubinterests({ id: checkbox.id, name: checkbox.value }, userSubInterests);
           }
+
+          checkbox.addEventListener('change', function () {
+            if (this.checked) {
+              if (checkedInterestsCount >= 5) {
+                this.checked = false;
+                alert('You can select up to 5 interests only.');
+              } else {
+                fetchSubinterests({ id: checkbox.id, name: checkbox.value }, userSubInterests);
+                checkedInterestsCount++;
+              }
+            } else {
+              checkedInterestsCount--;
+              removeSubinterests(this.id);
+              const subinterestCheckboxes = document.querySelectorAll(`#sub_container input[value="${this.id}"]`);
+              subinterestCheckboxes.forEach(subCheckbox => {
+                subCheckbox.checked = false;
+              });
+            }
+          });
         });
       })
       .catch(function (error) {
@@ -1092,14 +1118,11 @@
                 <div class="check-box_flex" id="sub_container">
                 </div>
               </div>
-
               <button type="button" onclick="openAddAddressModal()"
                 style="height: 40px; font-weight: bold;margin-left: 20px; margin-top: 20px; background-color: rgb(177,43,82); border-radius:10px; color: white;">
                 <!--rgb(177,43,82)-->
                 <i class="fas fa-plus" style="margin-right: 10px;"></i><span>Add
                   Address</span></button>
-              
-
               <div class="tm-form-field col-lg-12 col-md-12 col-12">
                 <div class="address_container" id="address_container">
                 </div>
@@ -1123,10 +1146,15 @@
                     style="position: absolute; margin-top: 25px; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
                 </div>
               </div>
-
-              <div class="tm-form-field col-lg-12 col-md-12 col-12"  >
+              <div class="tm-form-field col-lg-12 col-md-12 col-12">
+           
+                    <input type="checkbox" id="termsCheckbox" style="border: 1px solid red; cursor: pointer;" required>
+              I agree to the terms and conditions
+               
+            </div>
+              <div class="tm-form-field col-lg-12 col-md-12 col-12">
                 <button
-                style="font-weight: bold;font-size: large;  margin: auto; display: block ; width: 250px; background-color: rgb(53,183,156); margin-top: 30px; border-radius: 15px; color: white;">Pay</button>
+                  style="font-weight: bold;font-size: large;  margin: auto; display: block ; width: 250px; background-color: rgb(53,183,156); margin-top: 30px; border-radius: 15px; color: white;">Pay</button>
               </div>
 
               <div id="addAddressModal" class="modal"
@@ -1399,6 +1427,24 @@
     </div>
   </div>
   <!-- Search End -->
+
+  <!--terms and conditon checkbox-->
+  <script>
+    const termsCheckbox = document.getElementById("termsCheckbox");
+    const payButton = document.getElementById("payButton");
+
+    termsCheckbox.addEventListener("change", function () {
+      payButton.disabled = !this.checked;
+    });
+    // payButton.addEventListener("click", function () {
+    //   if (!termsCheckbox.checked) {
+    //     alert("Please check the terms and conditions before proceeding with the payment.");
+    //   } else {
+
+    //   }
+    // });
+
+  </script>
 
   <!-- Js Plugins -->
   <script src="js/jquery-3.3.1.min.js"></script>

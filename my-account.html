@@ -609,8 +609,8 @@
 
     <script>
         async function fetchSubscriptions() {
-            const userId = localStorage.getItem("loginId"); // Replace "user_id" with the actual key for the user ID in localStorage
-            const token = localStorage.getItem("access_token"); // Replace "access_token" with the actual key for the access token in localStorage
+            const userId = localStorage.getItem("loginId");
+            const token = localStorage.getItem("access_token");
 
             try {
                 const response = await fetch(`https://15.185.57.60/api/v1/subscription/get-user-subscription-lists/${userId}?fetchType=all`, {
@@ -625,8 +625,10 @@
                 }
 
                 const subscriptions = await response.json();
-                const data = subscriptions.results
-                // console.log("data", data);
+                const data = subscriptions.results.reverse()
+                console.log(data);
+
+                localStorage.setItem("subscriptionId", data[0].id)
 
                 function calculateTotalMonths(data) {
                     return data.reduce((total, data) => total + data.totalMonths, 0);
@@ -648,7 +650,6 @@
                 }
 
                 const totalMonths = calculateTotalMonths(data);
-                // console.log(totalMonths);
                 const totalMonthsElement = document.getElementById('totalMonths');
                 totalMonthsElement.textContent = totalMonths;
 
@@ -665,22 +666,15 @@
                     const currentDate = new Date();
                     const diffInTime = new Date(nextBoxDate) - currentDate;
                     const diffInDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
-                    // console.log(diffInDays);
                     document.getElementById('daysLeft').textContent = `${diffInDays} Days`;
                 }
-
-                // Call the function to update the days left on page load
                 updateDaysLeft();
-
-
             } catch (error) {
                 console.error('Error fetching subscriptions:', error);
             }
         }
 
         fetchSubscriptions();
-
-        
 
         function openPauseModal() {
             const pauseModal = document.getElementById('pauseModal');
@@ -694,9 +688,31 @@
 
         function pauseSubscription(duration) {
             console.log(`Paused subscription for ${duration} month(s)`);
-            // closePauseModal();
         }
 
+        const loginId = localStorage.getItem("loginId");
+        const accessToken = localStorage.getItem("access_token");
+
+        function mysteryBoxes() {
+            fetch(`https://15.185.57.60/api/v1/users/users-mystery-boxes/${loginId}`, {
+                method: "GET",
+                headers: {
+
+                    "Authorization": `Bearer ${accessToken}`,
+                    "Content-Type": "application/json",
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("mys", data);
+
+
+                })
+                .catch(error => {
+                    console.error("Error fetching user mystery boxes data:", error);
+                });
+        }
+        mysteryBoxes()
     </script>
 
 </head>
@@ -708,6 +724,79 @@
             align-items: center;
             margin-top: 7px;
         }
+
+        #pauseModal {
+            margin: auto;
+            margin-left: -20px;
+            /* width: 90%; */
+        }
+
+        .modal-content {
+            width: 90%;
+        }
+
+        .button-text {
+            display: none;
+        }
+
+        .pause-button-text {
+            display: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .add-button {
+            width: 60px;
+            padding-top: 16px;
+            margin-top: 20px;
+        }
+
+        .pause-button {
+            width: 60px;
+        }
+
+        .subscription-div {
+            width: 300px;
+            margin: auto;
+            height: auto;
+            border-radius: 10px;
+            display: flex;
+            column-gap: 10px;
+            flex-direction: column;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            padding: 10px 10px;
+        }
+
+        .add-pause-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 20px;
+            column-gap: 20px;
+            width: 100px
+        }
+
+        .subscription-div1 {
+            width: 300px;
+        }
+
+        .subscription-div2 {
+            width: 300px;
+        }
+
+        .box-history-div {
+            margin: auto;
+            width: 340px;
+            padding-top: 30px;
+            margin-top: 20px;
+            padding-left: 10px;
+        }
+
     }
 
     @media (min-width: 768px) and (max-width: 991px) {
@@ -715,11 +804,60 @@
             width: 400px;
             height: auto;
         }
+
+        .subscription-div {
+            width: 420px;
+            margin: auto;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            padding: 10px 10px;
+            display: flex;
+            column-gap: 10px;
+        }
+
+        .box-history-div {
+            margin: auto;
+            width: 440px;
+            padding-top: 30px;
+            margin-top: 20px;
+            padding-left: 10px;
+        }
     }
 
-    /* @media (min-width: 992px) {
-       .logo-image {}
-   } */
+    @media (min-width: 992px) {
+        .subscription-div {
+            width: 420px;
+            margin: auto;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            padding: 10px 10px;
+            display: flex;
+            column-gap: 10px;
+        }
+
+        .box-history-div {
+            margin: auto;
+            width: 440px;
+            padding-top: 30px;
+            margin-top: 20px;
+            padding-left: 10px;
+        }
+    }
+
+    .add-pause-div {
+        width: 34%;
+        padding-top: 15px;
+        padding-bottom: 0;
+    }
+
+    .subscription-div2 {
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+        padding: 2px 10.5px;
+    }
 
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
@@ -730,6 +868,65 @@
     input[type="number"] {
         appearance: textfield;
         /* Firefox */
+    }
+
+    .close {
+        margin-top: -40px;
+    }
+
+    .month:hover {
+        background-color: rgb(53, 183, 156);
+        color: white;
+    }
+
+    .no-pause {
+        background-color: rgb(163, 54, 75);
+        color: white;
+    }
+
+    .yes-pause {
+        background-color: rgb(53, 183, 156);
+        color: white;
+    }
+
+    .modal-content {
+        width: 370px;
+    }
+
+    .button-text {
+        display: inline;
+        margin-left: -20px;
+    }
+
+    .pause-button-text {
+        display: inline;
+    }
+
+    .add-button {
+        display: flex;
+        align-items: center;
+    }
+
+    .pause-button {
+        display: flex;
+        align-items: center;
+    }
+
+    .add-anchor {
+        border: 2px solid white;
+        padding: 4px;
+        border-radius: 100%;
+        height: 22px;
+        padding-top: 4px;
+    }
+
+    .pause-anchor {
+        margin-left: 5px;
+        border: 2px solid white;
+        padding: 4px;
+        height: 22px;
+        border-radius: 50%;
+        padding-top: 3.4px;
     }
 </style>
 
@@ -847,12 +1044,10 @@
                     <div class="tab-content" id="account-ontent">
                         <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
                             aria-labelledby="account-dashboard-tab">
-                            <div style="display: flex; justify-content: space-between; flex-direction: column;">
-                                <div
-                                    style=" margin: auto ;width: auto ; height:auto; border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;padding: 10px 10px; display: flex; column-gap: 10px; ">
-                                    <div style="width: 300px">
-                                        <div
-                                            style=" display:flex; column-gap: 10px; align-items: center;padding:2px 10.5px;">
+                            <div style=" display: flex; justify-content: space-between; flex-direction: column;">
+                                <div class="subscription-div">
+                                    <div class="subscription-div1">
+                                        <div class="subscription-div2">
                                             <span>
                                                 <h5 style="margin: auto;">Months</h5>
                                                 <h5 id="totalMonths"
@@ -879,78 +1074,81 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div style="width: 34%; padding-top: 15px; padding-bottom: 0;">
-                                        <button class="add-button" style="display: flex; align-items: center;">
+                                    <div class="add-pause-div">
+                                        <button class="add-button">
                                             <a href="subscription.html" style="text-decoration: none; color: white"><i
-                                                    class="fas fa-plus"
-                                                    style=" border: 2px solid white; padding: 4px; border-radius: 100%; height: 22px; padding-top: 4px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span class="button-text"
-                                                    style="margin-left: -20px; display: inline;">Add</span></a>
+                                                    class="fas fa-plus add-anchor"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span class="button-text">Add</span></a>
                                         </button>
-                                        <button class="pause-button" style="display: flex; align-items: center;"
-                                            onclick="openPauseModal()">
-                                            <i class="fas fa-pause"
-                                                style="margin-left: 5px; border: 2px solid white; padding: 4px; height: 22px; border-radius: 50%; padding-top: 3.4px;"></i>
-                                            <span class="pause-button-text" style="display: inline;">Pause</span>
+                                        <button class="pause-button" onclick="openPauseModal()">
+                                            <i class="fas fa-pause pause-anchor"></i>
+                                            <span class="pause-button-text">Pause</span>
                                         </button>
                                     </div>
                                 </div>
                                 <!-- Pause Modal -->
-                                <div id="pauseModal" class="modal">
-                                    <div class="modal-content">
-                                        <span class="close" onclick="closePauseModal()">&times;</span>
-                                        <h3>Pause Subscription</h3>
-                                        <p>Select the duration you want to pause your subscription:</p>
-                                        <div>
-                                            <button onclick="pauseSubscription(1)">1 Month</button>
-                                            <button onclick="pauseSubscription(2)">2 Months</button>
-                                            <button onclick="pauseSubscription(3)">3 Months</button>
-                                        </div>
-                                        <div style="margin-top: 20px;">
-                                            <button onclick="closePauseModal()">No</button>
-                                            <button onclick="closePauseModal()">Yes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    style=" margin: auto ;width: auto; padding-top: 30px ;  margin-top: 20px; padding-left: 10px ;">
+
+                                <div class="box-history-div">
                                     <div
                                         style="color: white;width: auto; height: 35px; display: flex; align-items: center; background-color: rgb(73,197,182); border-radius: 3px; justify-content: space-between; padding: 10px 7px;">
                                         <h6 style="color: white; font-weight: bold; margin-top: 10px;">Box History
                                         </h6>
                                         <div
                                             style="color: white;display: flex; align-items: center; padding: 15px; column-gap: 10px; ">
-                                            <p style="color: white;margin-top: 15px;">Last received</p>
+                                            <p style="color: white;margin-top: 15px;"></p> <!--Last received-->
                                             <div style="border: 1px solid white; height: 25px;"></div>
-                                            <p style="color: white;margin-top: 15px;">15 July</p>
+                                            <p style="color: white;margin-top: 15px;"></p> <!--15 July-->
                                         </div>
                                     </div>
-                                    <img src="img/Group 1000001287.png"
-                                        style="margin: auto; display: block; margin-top: 10px;" />
+                                    <!-- <img src="img/Group 1000001287.png"
+                                        style="margin: auto; display: block; margin-top: 10px;" /> -->
                                     <div
+                                        style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; height: 250px; margin-top: 10px; border-radius: 10px;display: flex; justify-content: center; align-items: center;">
+                                        <p style="margin: auto; width: 50%; text-align: center; ">Mystery Box coming...
+                                        </p>
+                                    </div>
+                                    <!-- <div
                                         style="margin: auto; width: auto ; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px; margin-top: 5px;">
                                         <p style="margin: auto;padding: 5px 17px; width: 40%;">July 2023</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
                                     data-interval="2000"
-                                    style=" box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;margin-top: 30px;">
+                                    style="margin: auto; margin-top: 30px ; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; width: 430px;">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <h5>Slide 1 Heading</h5>
-                                            <img class="d-block w-100" src="img/Group 1000001237.svg" alt="Slide 1"
-                                                style="width: 10px; padding: 50px;">
+                                            <h5>Comming soon...</h5>
+                                            <img src="img/Group 1000001237.svg" alt="Slide 1"
+                                                style="width: 400px;height: 200px; padding: 50px;">
                                         </div>
                                         <div class="carousel-item">
-                                            <h5>Slide 2 Heading</h5>
-                                            <img class="d-block w-100" src="img/Group 1000001237.svg" alt="Slide 2"
-                                                style="width: 10px;  padding: 50px;">
+                                            <h5>Comming soon...</h5>
+                                            <img src="img/Group 1000001237.svg" alt="Slide 2"
+                                                style="width: 400px;height: 200px;  padding: 50px;">
                                         </div>
                                         <div class="carousel-item">
-                                            <h5>Slide 3 Heading</h5>
-                                            <img class="d-block w-100" src="img/Group 1000001237.svg" alt="Slide 3"
-                                                style="width: 10px; padding: 50px;">
+                                            <h5>Comming soon...</h5>
+                                            <img src="img/Group 1000001237.svg" alt="Slide 3"
+                                                style="width: 400px;height: 200px;  padding: 50px;">
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="pauseModal" class="modal">
+                                <div class="modal-content">
+                                    <div>
+                                        <h4>Pause Subscription</h4>
+                                        <span class="close" onclick="closePauseModal()">&times;</span>
+                                    </div>
+                                    <p>Select the duration you want to pause your subscription:</p>
+                                    <div>
+                                        <button class="month" onclick="pauseSubscription(1)">1 Month</button>
+                                        <button class="month" onclick="pauseSubscription(2)">2 Months</button>
+                                        <button class="month" onclick="pauseSubscription(3)">3 Months</button>
+                                    </div>
+                                    <div style="margin-top: 20px;">
+                                        <button class="no-pause" onclick="closePauseModal()">No</button>
+                                        <button class="yes-pause" onclick="closePauseModal()">Yes</button>
                                     </div>
                                 </div>
                             </div>
@@ -1652,6 +1850,25 @@
                     const subinterestsContainer = document.getElementById('sub_container');
                     subinterests.forEach(subInterest => {
                         const subInterestCheckbox = document.createElement('input');
+                        subInterestCheckbox.addEventListener('change', function () {
+                            // Check if the subinterest is present in userSubInterests
+                            const isChecked = userSubInterests.includes(subInterest.id);
+
+                            // If the checkbox is checked and the subinterest is not in userSubInterests, add it
+                            if (this.checked && !isChecked) {
+                                userSubInterests.push(subInterest.id);
+                            }
+
+                            // If the checkbox is unchecked and the subinterest is in userSubInterests, remove it
+                            if (!this.checked && isChecked) {
+                                const index = userSubInterests.indexOf(subInterest.id);
+                                if (index !== -1) {
+                                    userSubInterests.splice(index, 1);
+                                }
+                            }
+                        });
+
+
                         subInterestCheckbox.type = 'checkbox';
                         subInterestCheckbox.name = 'subitem-checkbox';
                         subInterestCheckbox.value = subInterest.id;
@@ -1704,25 +1921,39 @@
                             break;
                         }
                     }
+
                     const userInterests = data.interests.map(interest => interest.id);
                     const userSubInterests = data.subInterests.map(subinterest => subinterest.id);
-                    // console.log("userSubInterests", userSubInterests);
 
                     const interestsCheckboxes = document.querySelectorAll('#container input[name="item-checkbox"]');
+                    let checkedInterestsCount = 0;
                     interestsCheckboxes.forEach(checkbox => {
                         checkbox.checked = userInterests.includes(checkbox.id);
-                        if (checkbox.checked) {
-                            fetchSubinterests({ id: checkbox.id, name: checkbox.value }, userSubInterests); // Fetch subinterests for checked interest
-                        }
-                    });
 
-                    // const subinterestsCheckboxes = document.querySelectorAll('#sub_container input[name="subitem-checkbox"]');
-                    // console.log("subinterestsCheckboxes",subinterestsCheckboxes);
-                    // subinterestsCheckboxes.forEach(checkbox => {
-                    //     console.log("cjheck", checkbox);
-                    //     const subinterestId = checkbox.id;
-                    //     checkbox.checked = userSubInterests.includes(subinterestId); // Check using custom function
-                    // });
+                        if (checkbox.checked) {
+                            checkedInterestsCount++;
+                            fetchSubinterests({ id: checkbox.id, name: checkbox.value }, userSubInterests);
+                        }
+
+                        checkbox.addEventListener('change', function () {
+                            if (this.checked) {
+                                if (checkedInterestsCount >= 5) {
+                                    this.checked = false;
+                                    alert('You can select up to 5 interests only.');
+                                } else {
+                                    fetchSubinterests({ id: checkbox.id, name: checkbox.value }, userSubInterests);
+                                    checkedInterestsCount++;
+                                }
+                            } else {
+                                checkedInterestsCount--;
+                                removeSubinterests(this.id);
+                                const subinterestCheckboxes = document.querySelectorAll(`#sub_container input[value="${this.id}"]`);
+                                subinterestCheckboxes.forEach(subCheckbox => {
+                                    subCheckbox.checked = false;
+                                });
+                            }
+                        });
+                    });
                 })
                 .catch(function (error) {
                     console.error("Error fetching user data:", error);
