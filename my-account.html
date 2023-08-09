@@ -117,6 +117,122 @@
             padding: 5px 20px;
         }
 
+
+        /* terms and condition gift box */
+        .term-condition label {
+            font-size: 15px;
+            color: #000;
+        }
+
+        .term-condition span {
+            font-size: 15px;
+            color: #6fc7b7;
+        }
+
+
+
+        /*style for gift history */
+
+        .gift-cards-history {
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+
+        .gift-card {
+
+            color: #111111;
+            font-size: 20px;
+            font-weight: 400;
+            font-family: "Nunito Sans", sans-serif;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 1px solid #dadada;
+            width: 70%;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            height: 220px;
+            margin-top: 10px;
+            border-radius: 10px;
+
+
+        }
+
+        .gift-card-top {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #dadada;
+        }
+
+        .gift-card-top-left {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gift-card-bottom {
+            display: flex;
+            padding: 10px;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+        }
+
+        .gift-card-bottom-left {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .gift-card-bottom-right {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .gift-card-bottom-left-left {
+            padding: 10px;
+        }
+
+        .gift-card-bottom-left-right {
+            padding: 10px;
+
+        }
+
+        .gift-card-bottom-right button {
+            border: 1px solid #6FC7B7;
+            color: #6FC7B7;
+            border-radius: 5px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /*style for subscribe carrds history */
+
+
+        .subscribe-cards-history {
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
         @media only screen and (max-width: 768px) {
 
             .add-button .button-text,
@@ -140,24 +256,10 @@
 
         .modal-content {
             background-color: #fefefe;
-            margin: 15% auto;
+            margin: 0% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
         }
     </style>
     <style>
@@ -421,6 +523,42 @@
             font-weight: bold;
         }
 
+
+        #box-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-height: 400px;
+            overflow: auto;
+        }
+
+        .interest-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #box-container input[name="box-item-checkbox"] {
+            margin-right: 5px;
+        }
+
+        #box-sub_container {
+            display: flex;
+            /* flex-direction: ; */
+            gap: 10px;
+        }
+
+        #box-sub_container input[name="box-subitem-checkbox"] {
+            margin-right: 5px;
+        }
+
+        #box-container h6,
+        #box-sub_container h6 {
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+
         /* CSS for Address Display */
         /* CSS for Address Display */
         .address-container {
@@ -605,6 +743,11 @@
             background-color: rgb(177, 43, 82);
             border: 1px solid black;
         }
+
+        .sub-box-container {
+            display: flex;
+
+        }
     </style>
 
     <script>
@@ -713,6 +856,256 @@
                 });
         }
         mysteryBoxes()
+
+        var giftFirstNameValidation = (event) => {
+            const firstNameValue = event.target.value.trim();
+            validFirstName = /^[A-Za-z]+$/;
+            let firstNameErr = document.getElementById('first-name-err');
+
+
+
+            let firstCharOfFirstName = firstNameValue.charAt(0)
+
+            if (firstNameValue == "") {
+
+
+                firstNameErr.innerHTML = "First Name is required";
+
+            } else if (!validFirstName.test(firstNameValue)) {
+
+                firstNameErr.innerHTML = "First Name must be only string without white spaces";
+            }
+            else if (firstCharOfFirstName !== firstCharOfFirstName.toUpperCase()) {
+                firstNameErr.innerHTML = "First letter should be capital";
+
+            }
+            else {
+
+                firstNameErr.innerHTML = "";
+                return true;
+
+            }
+
+        }
+
+        var giftLastNameValidation = function (event) {
+
+            lastNameValue = event.target.value.trim();
+            validLastName = /^[A-Za-z]+$/;
+            let lastNameErr = document.getElementById('last-name-err');
+
+            let firstCharOfLastName = lastNameValue.charAt(0)
+
+            if (lastNameValue == "") {
+
+
+                lastNameErr.innerHTML = "Last Name is required";
+
+            } else if (!validLastName.test(lastNameValue)) {
+
+                lastNameErr.innerHTML = "Last Name must be only string without white spaces";
+            }
+            else if (firstCharOfLastName !== firstCharOfLastName.toUpperCase()) {
+                lastNameErr.innerHTML = "First letter should be capital";
+
+            }
+            else {
+
+                lastNameErr.innerHTML = "";
+                return true;
+
+            }
+        }
+
+        var giftEmailValidation = (event) => {
+            emailValue = event.target.value.trim();
+            let validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            let emailErr = document.getElementById('email-err');
+
+            if (emailValue.match(validEmailRegex)) {
+                return true;
+            } else {
+                emailErr.innerHTML = "Invalid E-mail Address";
+            }
+        }
+
+        var giftPhoneNumberValidation = (event) => {
+
+            let mobileNumber = event.target.value.trim();
+            let mobileNumberErr = document.getElementById('mobile-number-err')
+
+
+            if (mobileNumber.length !== 8) {
+                let mobileNumberErr = document.getElementById('mobile-number-err');
+
+                // alert('Enter a valid mobile number');
+                mobileNumberErr.innerHTML = "Invalid Phone Number";
+
+                return;
+            } else {
+                mobileNumberErr.innerHTML = "";
+
+                return true;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('gift-box-register');
+            const submitButton = document.getElementById('gift-box-pay');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                // Handle form submission logic here
+
+                const firstName = document.getElementById('gift-acdetails-firstname').value;
+                const lastName = document.getElementById('gift-acdetails-lastname').value;
+                const email = document.getElementById('gift-acdetails-email').value;
+                const mobileNumber = document.getElementById('gift-acdetails-mobile').value;
+
+                const data = {
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email,
+                    mobile_number: mobileNumber,
+
+                    country_code: '+91',
+
+                };
+
+
+                const terms = document.getElementById('gift-box-terms');
+                let termsErr = document.getElementById('terms-err');
+
+                if (!terms.checked) {
+
+                    termsErr.innerHTML = 'Please accept the Terms and Conditions to proceed with the signup'
+                    return;
+                } else {
+                    termsErr.innerHTML = ''
+                    return true;
+
+                }
+
+
+
+            });
+        });
+
+        var subscriptionFirstNameValidation = (event) => {
+            const firstNameValue = event.target.value.trim();
+            validFirstName = /^[A-Za-z]+$/;
+            let firstNameErr = document.getElementById('subscription-first-name-err');
+
+
+
+            let firstCharOfFirstName = firstNameValue.charAt(0)
+
+            if (firstNameValue == "") {
+
+
+                firstNameErr.innerHTML = "First Name is required";
+
+            } else if (!validFirstName.test(firstNameValue)) {
+
+                firstNameErr.innerHTML = "First Name must be only string without white spaces";
+            }
+            else if (firstCharOfFirstName !== firstCharOfFirstName.toUpperCase()) {
+                firstNameErr.innerHTML = "First letter should be capital";
+
+            }
+            else {
+
+                firstNameErr.innerHTML = "";
+                return true;
+
+            }
+
+        }
+
+        var subscriptionLastNameValidation = function (event) {
+
+            lastNameValue = event.target.value.trim();
+            validLastName = /^[A-Za-z]+$/;
+            let lastNameErr = document.getElementById('subscription-last-name-err');
+
+            let firstCharOfLastName = lastNameValue.charAt(0)
+
+            if (lastNameValue == "") {
+
+
+                lastNameErr.innerHTML = "Last Name is required";
+
+            } else if (!validLastName.test(lastNameValue)) {
+
+                lastNameErr.innerHTML = "Last Name must be only string without white spaces";
+            }
+            else if (firstCharOfLastName !== firstCharOfLastName.toUpperCase()) {
+                lastNameErr.innerHTML = "First letter should be capital";
+
+            }
+            else {
+
+                lastNameErr.innerHTML = "";
+                return true;
+
+            }
+        }
+
+        var subscriptionPhoneNumberValidation = (event) => {
+            let mobileNumber = event.target.value.trim();
+            let mobileNumberErr = document.getElementById('subscription-mobile-number-err')
+
+
+            if (mobileNumber.length !== 8) {
+
+                mobileNumberErr.innerHTML = "Invalid Phone Number";
+
+                return;
+            } else {
+                mobileNumberErr.innerHTML = "";
+
+                return true;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('subscription-register');
+            const submitButton = document.getElementById('subscription-pay');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const firstName = document.getElementById('subcription-acdetails-firstname').value;
+                const lastName = document.getElementById('subcription-acdetails-lastname').value;
+                const mobileNumber = document.getElementById('subcription-acdetails-mobile').value;
+
+                const data = {
+                    first_name: firstName,
+                    last_name: lastName,
+                    mobile_number: mobileNumber,
+                    country_code: '+91',
+                };
+
+                const terms = document.getElementById('subscription-box-terms');
+                if (!terms.checked) {
+                    alert('Please accept the Terms and Conditions to proceed with the signup');
+                    return;
+                }
+            });
+        });
+
+        var acdetailsDisplayDob = (event) => {
+            let dataStr = event.target.value;
+            const inputDate = new Date(dataStr);
+            const today = new Date();
+            let acdetailsDisplayDobErr = document.getElementById('acdetailsDisplayDobErr')
+            if (!isNaN(inputDate) && inputDate < today) {
+                acdetailsDisplayDobErr.innerHTML = ''
+                return true;
+            }
+            else {
+                acdetailsDisplayDobErr.innerHTML = 'Invalid Date'
+            }
+        }
     </script>
 
 </head>
@@ -732,6 +1125,7 @@
         }
 
         .modal-content {
+
             width: 90%;
         }
 
@@ -797,6 +1191,34 @@
             padding-left: 10px;
         }
 
+        .gift-card {
+            color: #111111;
+            font-size: 10px;
+            font-weight: 400;
+            font-family: "Nunito Sans", sans-serif;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 1px solid #dadada;
+            width: 100%;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            height: 220px;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .gift-card .gift-card-top {
+            width: 100%;
+            padding-top: 20px;
+            padding: 0px 20px;
+            padding-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #dadada;
+        }
     }
 
     @media (min-width: 768px) and (max-width: 991px) {
@@ -890,7 +1312,9 @@
     }
 
     .modal-content {
-        width: 370px;
+
+
+        width: 100%;
     }
 
     .button-text {
@@ -1041,14 +1465,16 @@
                             </div>
                         </div>
                     </ul>
+
                     <div class="tab-content" id="account-ontent">
+
                         <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
                             aria-labelledby="account-dashboard-tab">
                             <div style=" display: flex; justify-content: space-between; flex-direction: column;">
                                 <div class="subscription-div">
                                     <div class="subscription-div1">
                                         <div class="subscription-div2">
-                                            <span>
+                                            <span style="display: flex;align-items: center; gap: 10px;">
                                                 <h5 style="margin: auto;">Months</h5>
                                                 <h5 id="totalMonths"
                                                     style="margin: auto; text-align: center; font-weight: 500;">
@@ -1056,7 +1482,7 @@
                                             </span>
                                             <div style="border: 0.1px solid black; height :70px; "></div>
                                             <span>
-                                                <h6 style="margin: auto;font-weight: bold;">Active Subscribtion</h6>
+                                                <p style="margin: auto;font-weight: bold;">Active Subscribtion</p>
                                                 <div style="display: flex;">
                                                     <p id="startDate" style="margin: auto; text-align: center;"></p>-
                                                     <p id="endDate" style="margin: auto; text-align: center;"></p>
@@ -1064,7 +1490,7 @@
                                             </span>
                                         </div>
                                         <div
-                                            style="margin-top: 10px; display:flex;width: 65%; column-gap: 10px; align-items: center;padding:2px 11px;">
+                                            style="margin-top: 10px; display:flex;align-items: center;justify-content: center; width: 65%; column-gap: 10px; align-items: center;padding:2px 11px;">
                                             <span>
                                                 <h6 style="margin: auto;">Next Box</h6>
                                             </span>
@@ -1153,34 +1579,45 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="account-orders" role="tabpanel"
                             aria-labelledby="account-orders-tab">
+
+
                             <div class="tm-myaccount-orders">
+
+                                <div
+                                    style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 30%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                    <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">My
+                                        Account</h4>
+                                </div>
+
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
                                         <thead>
                                             <tr>
                                                 <th class="tm-myaccount-orders-col-id">ORDER ID</th>
-                                                <th class="tm-myaccount-orders-col-date">DATE</th>
+                                                <th class="tm-myaccount-orders-col-date">PRODUCT</th>
                                                 <th class="tm-myaccount-orders-col-status">STATUS</th>
-                                                <th class="tm-myaccount-orders-col-total">TOTAL</th>
+                                                <th class="tm-myaccount-orders-col-total">AMOUNT</th>
                                                 <th class="tm-myaccount-orders-col-view">VIEW</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>#12345</td>
-                                                <td>30 December 2018</td>
+                                                <td>Bycycle</td>
                                                 <td>On Hold</td>
-                                                <td>$132.00 for 2 items</td>
+                                                <td>132.00 KD</td>
                                                 <td><a href="checkout.html" class="tm-button tm-button-sm">View
                                                         <b></b></a></td>
                                             </tr>
                                             <tr>
                                                 <td>#12346</td>
-                                                <td>30 December 2018</td>
+                                                <td>Bycycle</td>
+
                                                 <td>On Hold</td>
-                                                <td>$220.00 for 3 items</td>
+                                                <td>132.00 KD</td>
                                                 <td><a href="checkout.html" class="tm-button tm-button-sm">View
                                                         <b></b></a></td>
                                             </tr>
@@ -1229,7 +1666,6 @@
                                 <div class="col-12">
                                     <div class="tm-myaccount-acdetails">
                                         <form action="#" class="tm-form tm-form-bordered">
-                                            <!-- <h4>Account Details</h4> -->
                                             <div class="tm-form-inner">
                                                 <div class="tm-form-field tm-form-fieldhalf">
                                                     <label for="acdetails-firstname">First name</label>
@@ -1243,17 +1679,36 @@
                                                     <label for="acdetails-email">Email address</label>
                                                     <input type="email" id="acdetails-email">
                                                 </div>
-                                                <div class="tm-form-field tm-form-fieldhalf">
+
+
+                                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
                                                     <label for="acdetails-password">Mobile Number</label>
-                                                    <input type="number" id="acdetails-password">
+                                                    <div style="display: flex">
+                                                        <div
+                                                            style="display: flex;border: 1px solid rgb(211, 209, 209);width: 110px ; margin-right: 10px;padding-left: 5px; padding-right: 5px; padding-top: 15px; column-gap: 4px;">
+                                                            <img src="img/Frame.png" alt=""
+                                                                style="width: 30px; height: 20px; margin-right: 5px;">
+                                                            <span style="font-size: 13px">+965</span>
+                                                        </div>
+                                                        <input type="number" onchange="" id="acdetails-password"
+                                                            required="required" maxlength="8">
+                                                    </div>
+
                                                 </div>
+
+
                                                 <div class="tm-form-field tm-form-fieldhalf">
                                                     <label for="acdetails-displayname">Date of Birth</label>
-                                                    <input type="date" id="acdetails-displayname">
+                                                    <input type="date" id="acdetails-displayname"
+                                                        onchange="acdetailsDisplayDob(event)">
+
+                                                    <div>
+                                                        <p id="acdetailsDisplayDobErr" style="color: red;"></p>
+                                                    </div>
                                                 </div>
                                                 <div class="tm-form-field tm-form-fieldhalf">
                                                     <label for="acdetails-gender">Gender</label>
-                                                    <select name="Gender" id="acdetails-gender"
+                                                    <select class="dropdown-toggle" name="Gender" id="acdetails-gender"
                                                         style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
                                                         <option>Select gender</option>
                                                         <option value="Male">Male</option>
@@ -1261,19 +1716,20 @@
                                                     </select>
                                                 </div>
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
-                                                    <!-- <div> -->
                                                     <h6>Please select 5 Interests</h6>
                                                     <div id="fraction-component"></div>
-                                                    <!-- </div> -->
                                                     <div class="check-box_flex" id="container">
+
                                                     </div>
                                                 </div>
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
                                                     <h6>Please select Sub-Interests</h6>
                                                     <div class="check-box_flex" id="sub_container">
 
+
                                                     </div>
                                                 </div>
+
                                                 <div class="tm-form-field tm-form-fieldhalf">
                                                     <button type="button" onclick="openAddAddressModal()"
                                                         style="height: 40px; font-weight: bold; background-color: rgb(177,43,82); border-radius:10px; color: white;">
@@ -1329,6 +1785,10 @@
                                                             <label for="area">Area</label>
                                                             <select id="area">
                                                                 <option value="">Select Area</option>
+
+
+
+
                                                             </select>
                                                         </div>
                                                     </div>
@@ -1457,12 +1917,15 @@
                                                         <label for="editAddressDirection">Direction</label><br />
                                                         <input type="text" id="editAddressDirection" value="" />
                                                     </div>
-                                                    <div class="tm-form-field" style="margin-top: 100px;">
+                                                    <div class="tm-form-field" style="margin-top: 30px;">
                                                         <button type="button" class="tm-button"
-                                                            onclick="updateAddress()">Add Address</button>
+                                                            style=" padding-bottom: 10px; 
+                                                          height: 40px; font-weight: bold; background-color: #b12b52; border: none;"
+                                                            onclick="updateAddress()">Update</button>
                                                         <button type="button" class="tm-button"
                                                             onclick="closeEditAddressModal()"
-                                                            style="background-color: #ccc; border: none;">Cancel</button>
+                                                            style="
+                                                            height: 40px; font-weight: bold; background-color: #b12b52; border: none;">Cancel</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -1477,93 +1940,305 @@
                         </div>
                         <div class="tab-pane fade" id="account-wishlist" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
-                            <h1>Wishlist</h1>
+                            <div
+                                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 30%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">Wishlist
+                                </h4>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="account-box" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
                             <div
-                                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 15%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                style=" font-family: Nunito Sans, sans-serif; margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 15%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                                 <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">Gift
                                     a box</h4>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="tm-myaccount-acdetails">
-                                        <form action="#" class="tm-form tm-form-bordered">
-                                            <h4>Account Details</h4>
+                                        <form id="gift-box-register" action="#" class="tm-form tm-form-bordered">
                                             <div class="tm-form-inner">
                                                 <div class="tm-form-field tm-form-fieldhalf">
-                                                    <label for="acdetails-firstname">First name</label>
-                                                    <input type="text" id="acdetails-firstname">
+                                                    <label for="gift-acdetails-firstname">First name</label>
+                                                    <input type="text" id="gift-acdetails-firstname"
+                                                        onchange="giftFirstNameValidation(event)" required="required">
+                                                    <div>
+                                                        <p id="first-name-err" style="color: red;"></p>
+                                                    </div>
                                                 </div>
                                                 <div class="tm-form-field tm-form-fieldhalf">
-                                                    <label for="acdetails-lastname">Last name</label>
-                                                    <input type="text" id="acdetails-lastname">
+                                                    <label for="gift-acdetails-lastname">Last name</label>
+                                                    <input type="text" onchange="giftLastNameValidation(event)"
+                                                        id="gift-acdetails-lastname" required="required">
+                                                    <div>
+                                                        <p id="last-name-err" style="color: red;"></p>
+                                                    </div>
                                                 </div>
                                                 <div class="tm-form-field tm-form-fieldhalf">
-                                                    <label for="acdetails-email">Email address</label>
-                                                    <input type="email" id="acdetails-email">
+                                                    <label for="gift-acdetails-email">Email address</label>
+                                                    <input type="email" onchange="giftEmailValidation(event)"
+                                                        id="gift-acdetails-email" required="required">
+                                                    <div>
+                                                        <p id="email-err" style="color: red;"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                                    <label for="gift-acdetails-mobile">Phone Number</label>
+                                                    <div style="display: flex">
+                                                        <div
+                                                            style="display: flex;border: 1px solid rgb(211, 209, 209);width: 110px ; margin-right: 10px;padding-left: 5px; padding-right: 5px; padding-top: 15px; column-gap: 4px;">
+                                                            <img src="img/Frame.png" alt=""
+                                                                style="width: 30px; height: 20px; margin-right: 5px;">
+                                                            <span style="font-size: 13px">+965</span>
+                                                        </div>
+                                                        <input type="number" id="gift-acdetails-mobile"
+                                                            onchange="giftPhoneNumberValidation(event)"
+                                                            required="required" maxlength="8">
+                                                    </div>
+                                                    <div>
+                                                        <p id="mobile-number-err" style="color: red;"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf ">
+                                                    <label for="gift-box-gender">Gender</label>
+                                                    <select class="dropdown-toggle" id="gift-box-gender" onchange=""
+                                                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
+                                                        <option value="">Gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
                                                 </div>
                                                 <div class="tm-form-field tm-form-fieldhalf">
-                                                    <label for="acdetails-password">Mobile Number</label>
-                                                    <input type="number" id="acdetails-password">
-                                                </div>
-                                                <div class="tm-form-field tm-form-fieldhalf">
-                                                    <label for="acdetails-note">Note</label>
-                                                    <textarea type="text" id="acdetails-note"></textarea>
+                                                    <label for="gift-acdetails-note">Note</label>
+                                                    <textarea type="text" id="gift-acdetails-note"></textarea>
                                                 </div>
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
                                                     <h6>Please select 5 Interests</h6>
-                                                    <div id="fraction-component"></div>
-                                                    <div class="check-box_flex" id="container">
+                                                    <div id="box-container">
                                                     </div>
                                                 </div>
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
                                                     <h6>Please select Sub-Interests</h6>
-                                                    <div class="check-box_flex" id="sub_container">
-
-                                                    </div>
+                                                    <div id="sub-box-container"></div>
                                                 </div>
                                                 <div class="tm-form-field tm-form-fieldhalf">
-                                                    <button type="button" class="tm-button"
+                                                    <button style="font-size: 15px;" type="button" class="tm-button"
                                                         onclick="openAddAddressModal()"> <i class="fas fa-plus"
-                                                            style="margin-right: 15px;height: 22px;"></i>Add
-                                                        Address</button>
+                                                            style="margin-right: 15px;height: 15px;"></i>
+                                                        Add Address
+                                                    </button>
                                                 </div>
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
                                                     <div class="address_container" id="address_container">
-
                                                     </div>
                                                 </div>
-
+                                                <div clsas="tm-form-field tm-form-fieldhalf">
+                                                    <label for="editMonthPakage">Months</label>
+                                                    <select id="editMonthPakage" class="dropdown-toggle" onchange=""
+                                                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
+                                                        <option value="">Plans</option>
+                                                        <option value="Month1">1 Month 15 KD</option>
+                                                        <option value="Month3">3 Month 45 KD </option>
+                                                        <option value="Month6">6 Month 75 KD</option>
+                                                    </select>
+                                                </div>
+                                                <div class="tm-form-field term-condition">
+                                                    <input type="checkbox" name="gift-hide-details"
+                                                        id="gift-hide-details">
+                                                    <label class="lbl-cus" for="gift-hide-details"> Hide my details
+                                                    </label>
+                                                </div>
+                                                <div class="tm-form-field term-condition">
+                                                    <input type="checkbox" name="gift-box-terms" id="gift-box-terms">
+                                                    <label class="lbl-cus" for="gift-box-terms"> By clicking on proceed,
+                                                        I agree to the
+                                                        <a href="terms-and-conditions.html " class="text-primary"
+                                                            target="_blank">Terms
+                                                            and Conditions</a>
+                                                        and
+                                                        <a href="privacy-statement.html" class="text-primary"
+                                                            target="_blank">Privacy
+                                                            Policy</a>
+                                                        <br>
+                                                    </label>
+                                                    <div>
+                                                        <p id="terms-err" style="color: red;"></p>
+                                                    </div>
+                                                </div>
                                                 <div class="tm-form-field tm-form-fieldhalf">
-                                                    <button type="submit" class="tm-button">Save Changes
+                                                    <button id="gift-box-pay" type="submit" class="tm-button"
+                                                        style="border: none; outline: none;  background-color: #b12b52;">Pay
                                                         <b></b></button>
                                                 </div>
                                             </div>
                                         </form>
-
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="tab-pane fade" id="gift-History" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
                             <div
-                                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 15%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 30%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                                 <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">Gift
                                     history</h4>
+                            </div>
+                            <div class="container gift-cards-history">
+                                <div class="gift-card">
+                                    <div class="gift-card-top">
+                                        <div class="gift-card-top-left">
+                                            <p style="margin-bottom: 8px;">ORDER# </p>
+                                            <div class="gift-card-top-left-right" style="width: fit-content;">
+                                                <marquee width="100%" scrolldelay="200">
+                                                    <p style="margin-bottom: 0px;">64ca2364532686s7</p>
+                                                </marquee>
+                                            </div>
+                                        </div>
+                                        <p style="margin-bottom: 0px;">2th August</p>
+                                    </div>
+                                    <div class="gift-card-bottom">
+                                        <div class="gift-card-bottom-left">
+                                            <div class="gift-card-bottom-left-left">
+                                                <p>Name: </p>
+                                                <p>Number:</p>
+                                                <p>Price: </p>
+                                            </div>
+                                            <div class="gift-card-bottom-left-right">
+                                                <p>shjs Dhdj</p>
+                                                <p>+965 86665585</p>
+                                                <p>One Month 15KD</p>
+                                            </div>
+                                        </div>
+                                        <div class="gift-card-bottom-right">
+                                            <button>Subscribed</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="account-Subscription" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
-                            <h1>Gift a Subscription</h1>
+                            <div
+                                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 30%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                <h4 style=" color: white; font-weight: 600; margin: auto; text-align: center; ">
+                                    Gift a Subscription</h4>
+                            </div>
+                            <form action="#" id="subscription-register" class="tm-form tm-form-bordered">
+                                <!-- <h4>Account Details</h4> -->
+                                <div class="tm-form-inner">
+                                    <div class="tm-form-field tm-form-fieldhalf">
+                                        <label for="subcription-acdetails-firstname">First name</label>
+                                        <input type="text" onchange="subscriptionFirstNameValidation(event)"
+                                            id="subcription-acdetails-firstname" required="required">
+                                        <div>
+                                            <p id="subscription-first-name-err" style="color: red;"></p>
+                                        </div>
+                                    </div>
+                                    <div class="tm-form-field tm-form-fieldhalf">
+                                        <label for="subcription-acdetails-lastname">Last name</label>
+                                        <input type="text" onchange="subscriptionLastNameValidation(event)"
+                                            id="subcription-acdetails-lastname" required="required">
+                                        <div>
+                                            <p id="subscription-last-name-err" style="color: red;"></p>
+                                        </div>
+                                    </div>
+                                    <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                        <label for="subcription-acdetails-mobile">Phone Number</label>
+                                        <div style="display: flex">
+                                            <div
+                                                style="display: flex;border: 1px solid rgb(211, 209, 209);width: 110px ; margin-right: 10px;padding-left: 5px; padding-right: 5px; padding-top: 15px; column-gap: 4px;">
+                                                <img src="img/Frame.png" alt=""
+                                                    style="width: 30px; height: 20px; margin-right: 5px;">
+                                                <span style="font-size: 13px">+965</span>
+                                            </div>
+                                            <input type="number" onchange="subscriptionPhoneNumberValidation(event)"
+                                                id="subcription-acdetails-mobile" required="required" maxlength="8">
+                                        </div>
+                                        <div>
+                                            <p id="subscription-mobile-number-err" style="color: red;"></p>
+                                        </div>
+                                    </div>
+                                    <div class="tm-form-field tm-form-fieldhalf">
+                                        <label for="editMonthPakage">Months</label>
+                                        <select class="dropdown-toggle" id="editMonthPakage" onchange=""
+                                            style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
+                                            <option value="">Plans</option>
+                                            <option value="Month1">1 Month 15 KD</option>
+                                            <option value="Month3">3 Month 45 KD </option>
+                                            <option value="Month6">6 Month 75 KD</option>
+                                        </select>
+                                    </div>
+                                    <div style="margin-top: 50px;" class="tm-form-field term-condition">
+                                        <input type="checkbox" name="subscription-hide-details"
+                                            id="subscription-hide-details">
+                                        <label class="lbl-cus" for="subscription-hide-details"> Hide my details
+
+                                        </label>
+                                    </div>
+                                    <div class="tm-form-field term-condition">
+                                        <input type="checkbox" name="subscription-box-terms"
+                                            id="subscription-box-terms">
+                                        <label class="lbl-cus" for="subscription-box-terms"> By Clicking on
+                                            proceed, I agree to the
+                                            <a href="terms-and-conditions.html" style="color: #b12b52;"
+                                                class="text-primary" target="_blank">Terms
+                                                and Conditions</a>
+                                            and
+                                            <a href="privacy-statement.html" style="color: #b12b52;"
+                                                class="text-primary" target="_blank">Privacy
+                                                Policy</a>
+                                            of
+                                            <br>
+                                        </label>
+                                    </div>
+                                    <div class="tm-form-field tm-form-fieldhalf">
+                                        <button type="submit" class="tm-button" id="subscription-pay"
+                                            style="border: none; outline: none;  background-color: #b12b52;">Pay
+                                            <b></b></button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="tab-pane fade" id="account-Subscription-History" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
-                            <h1>Subscription history</h1>
+                            <div
+                                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 35%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                <h4 style=" color: white; font-weight: 600; margin: auto; text-align: center; ">
+                                    Subscription History
+                                </h4>
+                            </div>
+                            <div class="container subscribe-cards-history">
+                                <div id="subscription-card" class="gift-card">
+                                    <div class="gift-card-top">
+                                        <div class="gift-card-top-left">
+                                            <p style="margin-bottom: 8px;">ORDER# </p>
+                                            <div class="gift-card-top-left-right" style="width: fit-content;">
+                                                <marquee width="100%" scrolldelay="200">
+                                                    <p style="margin-bottom: 0px;">64ca2364532686s7</p>
+                                                </marquee>
+                                            </div>
+                                        </div>
+                                        <p style="margin-bottom: 0px;">2th August</p>
+                                    </div>
+                                    <div class="gift-card-bottom">
+                                        <div class="gift-card-bottom-left">
+                                            <div class="gift-card-bottom-left-left">
+                                                <p>Name: </p>
+                                                <p>Number:</p>
+                                                <p>Price: </p>
+                                            </div>
+                                            <div class="gift-card-bottom-left-right">
+                                                <p>shjs Dhdj</p>
+                                                <p>+965 86665585</p>
+                                                <p>One Month 15KD</p>
+                                            </div>
+                                        </div>
+                                        <div class="gift-card-bottom-right">
+                                            <button>Subscribed</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1572,9 +2247,7 @@
         <!--// My Account Area -->
 
     </main>
-    <!--// Main Content -->
-    <!--// Main Content -->
-    <!-- Footer Section Begin -->
+
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -1780,6 +2453,7 @@
             // logoutLink.addEventListener("click", handleLogout);
         });
 
+
         function fetchData() {
             fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
                 .then(response => response.json())
@@ -1850,12 +2524,15 @@
                     subinterests.forEach(subInterest => {
                         const subInterestCheckbox = document.createElement('input');
                         subInterestCheckbox.addEventListener('change', function () {
+                            // Check if the subinterest is present in userSubInterests
                             const isChecked = userSubInterests.includes(subInterest.id);
 
+                            // If the checkbox is checked and the subinterest is not in userSubInterests, add it
                             if (this.checked && !isChecked) {
                                 userSubInterests.push(subInterest.id);
                             }
 
+                            // If the checkbox is unchecked and the subinterest is in userSubInterests, remove it
                             if (!this.checked && isChecked) {
                                 const index = userSubInterests.indexOf(subInterest.id);
                                 if (index !== -1) {
@@ -1863,6 +2540,7 @@
                                 }
                             }
                         });
+
 
                         subInterestCheckbox.type = 'checkbox';
                         subInterestCheckbox.name = 'subitem-checkbox';
@@ -1875,6 +2553,7 @@
                         subinterestContainer.appendChild(subInterestLabel);
                     });
 
+                    // Append the subinterest container to the main container
                     subinterestsContainer.appendChild(subinterestContainer);
                 })
                 .catch(error => {
@@ -1883,6 +2562,7 @@
         }
 
         function removeSubinterests(interestId) {
+
             const subContainer = document.getElementById('sub_container');
             const interestContainer = document.getElementById(`interest_${interestId}`);
             subContainer.removeChild(interestContainer);
@@ -1953,6 +2633,8 @@
                     console.error("Error fetching user data:", error);
                 });
         }
+
+
 
         const userId = localStorage.getItem("loginId");
         if (userId) {
@@ -2208,6 +2890,134 @@
         }
 	// ]]>
     </script>
+
+    <!--Gift script-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectedInterests = new Set();
+            const subinterestContainers = {};
+
+            function fetchInterests() {
+                fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
+                    .then(response => response.json())
+                    .then(data => {
+                        const interests = data.results;
+                        const container = document.getElementById('box-container');
+
+                        interests.forEach(interest => {
+                            const checkbox = document.createElement('input');
+                            checkbox.className = 'box-form-check-input';
+                            checkbox.id = `box-${interest.id}`;
+                            checkbox.type = 'checkbox';
+                            checkbox.name = 'box-item-checkbox';
+                            checkbox.value = interest.name;
+
+                            const label = document.createElement('label');
+                            label.className = 'box-form-check-label';
+                            label.htmlFor = checkbox.id;
+                            label.textContent = interest.name;
+
+                            const div = document.createElement('div');
+                            div.className = 'box-form-check';
+                            div.appendChild(checkbox);
+                            div.appendChild(label);
+
+                            container.appendChild(div);
+
+                            checkbox.addEventListener('change', function () {
+                                if (this.checked) {
+                                    if (selectedInterests.size < 5) {
+                                        selectedInterests.add(interest.id);
+                                        fetchSubinterests(interest.id);
+                                    } else {
+                                        this.checked = false;
+                                        alert('Only 5 interests can be selected!!');
+                                    }
+                                } else {
+                                    selectedInterests.delete(interest.id);
+                                    removeSubinterests(interest.id);
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching interests:', error);
+                    });
+            }
+
+            function fetchSubinterests(interestId) {
+                fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interestId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const subinterests = data.data;
+                        const container = document.getElementById('sub-box-container');
+                        container.style.display = "flex";
+                        container.style.columnGap = "20px"
+                        const selectedInterest = document.getElementById(`box-${interestId}`);
+
+                        const subinterestContainer = document.createElement('div');
+                        subinterestContainer.className = 'subinterest-container'; // Add a class for flex styling
+
+                        const interestHeading = document.createElement('h6');
+                        interestHeading.textContent = selectedInterest.value;
+
+                        subinterestContainer.appendChild(interestHeading);
+
+                        subinterests.forEach(subinterest => {
+                            const checkbox = document.createElement('input');
+                            checkbox.className = 'box-form-check-input';
+                            checkbox.id = `box-sub-${subinterest.id}`;
+                            checkbox.type = 'checkbox';
+                            checkbox.name = 'box-subitem-checkbox';
+                            checkbox.value = subinterest.name;
+
+                            const label = document.createElement('label');
+                            label.className = 'box-form-check-label';
+                            label.htmlFor = checkbox.id;
+                            label.textContent = subinterest.name;
+
+                            const div = document.createElement('div');
+                            div.className = 'box-form-check';
+                            div.appendChild(checkbox);
+                            div.appendChild(label);
+
+                            subinterestContainer.appendChild(div);
+
+                            checkbox.addEventListener('change', function () {
+                                if (this.checked) {
+                                    if (!selectedInterests.has(interestId)) {
+                                        selectedInterests.add(interestId);
+                                    }
+                                } else {
+                                    selectedInterests.delete(interestId);
+                                }
+                            });
+                        });
+
+                        container.appendChild(subinterestContainer);
+                        subinterestContainers[interestId] = subinterestContainer;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching subinterests:', error);
+                    });
+            }
+
+            function removeSubinterests(interestId) {
+                const container = document.getElementById('sub-box-container');
+                const interestContainer = subinterestContainers[interestId];
+
+                if (interestContainer) {
+                    container.removeChild(interestContainer);
+                    delete subinterestContainers[interestId];
+                }
+            }
+
+            fetchInterests();
+        });
+
+    </script>
+
+
 </body>
 
 </html>
