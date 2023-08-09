@@ -169,7 +169,6 @@
     function removeSubinterests(interestId) {
         const subContainer = document.getElementById('sub_container');
         const interestContainer = document.getElementById(`interest_${interestId}`);
-
         subContainer.removeChild(interestContainer);
     }
 
@@ -276,6 +275,8 @@
         });
     });
 
+
+    
     async function fetchSubinterestsById(interestId) {
         try {
             const response = await fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interestId}`);
