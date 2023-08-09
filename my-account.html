@@ -16,10 +16,6 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/main.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-..." crossorigin="anonymous" />
@@ -1440,6 +1436,7 @@
     <!-- Main Content -->
     <!-- Main Content -->
     <main class="main-content" style="margin-top: 10px;">
+
         <!-- My Account Area -->
         <div class="tm-section tm-my-account-area bg-white tm-padding-section">
             <div class="container">
@@ -1489,7 +1486,9 @@
                             </div>
                         </div>
                     </ul>
+
                     <div class="tab-content" id="account-ontent">
+
                         <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
                             aria-labelledby="account-dashboard-tab">
                             <div style=" display: flex; justify-content: space-between; flex-direction: column;">
@@ -1601,6 +1600,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="account-orders" role="tabpanel"
                             aria-labelledby="account-orders-tab">
 
@@ -1769,14 +1769,11 @@
 
                                                     <div class="address_container" id="address_container">
                                                         <h6>Shipping Address</h6>
-
                                                         <h6 id="current_shipping_address_container">
 
 
 
                                                         </h6>
-                                                        <h6 id="current_shipping_address_container"></h6>
-
 
                                                     </div>
                                                 </div>
@@ -1799,6 +1796,7 @@
 
                                                 <form action="#" id="editProfileForm" class="tm-form tm-form-bordered">
 
+
                                                     <div class="tm-form-inner">
                                                         <div class="tm-form-field tm-form-fieldhalf">
                                                             <label for="editable-acdetails-firstname">First name</label>
@@ -1812,6 +1810,7 @@
                                                             <label for="editable-acdetails-email">Email address</label>
                                                             <input type="email" id="editable-acdetails-email" readonly>
                                                         </div>
+
 
                                                         <div class="tm-form-field col-lg-6 col-md-6 col-12">
                                                             <label for="editable-acdetails-password">Mobile
@@ -1902,7 +1901,6 @@
                                                             </button>
 
 
-
                                                         </div>
 
 
@@ -1914,625 +1912,651 @@
                                         </div>
 
 
-                                    </div>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
+                                        <div id="addAddressModal" class="modal"
+                                            style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
+                                            <div class="modal-content" style="padding: 20px;">
+                                                <div style="display: flex; justify-content: space-between;">
+                                                    <h2>Add New Address</h2>
+                                                    <span class="close" onclick="closeAddAddressModal()">&times;</span>
+                                                </div>
+                                                <form id="addAddressForm">
+                                                    <!-- Add address form fields -->
+                                                    <div>
+                                                        <div class="tm-form-fieldhalf" style="width: 45%;">
+                                                            <label for="addressName">Address Name <span
+                                                                    style="color:red">*</span></label><br />
+                                                            <input type="text" id="addressName" value="" required />
+                                                        </div>
+                                                        <div class="tm-form-fieldhalf" style="width: 45%;">
+                                                            <label for="country">Country <span
+                                                                    style="color:red">*</span></label><br />
+                                                            <input type="text" id="country" value="Kuwait" disabled />
+                                                        </div>
 
-                        <div id="addAddressModal" class="modal"
-                            style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
-                            <div class="modal-content" style="padding: 20px;">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <h2>Add New Address</h2>
-                                    <span class="close" onclick="closeAddAddressModal()">&times;</span>
-                                </div>
-                                <form id="addAddressForm">
-                                    <!-- Add address form fields -->
-                                    <div>
-                                        <div class="tm-form-fieldhalf" style="width: 45%;">
-                                            <label for="addressName">Address Name <span
-                                                    style="color:red">*</span></label><br />
-                                            <input type="text" id="addressName" value="" required />
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field" style="width: 45%;">
+                                                            <label for="state">State <span
+                                                                    style="color:red">*</span></label>
+                                                            <select id="state" onchange="populateAreas2(event)"
+                                                                required>
+                                                                <option value="">Select State </option>
+                                                                <option value="Al Asimah">Al Asimah</option>
+                                                                <option value="Farwaniya">Farwaniya</option>
+                                                                <option value="Hawalli">Hawalli</option>
+                                                                <option value="Ahmadi">Ahmadi</option>
+                                                                <option value="Mubarak Alkabeer">Mubarak Alkabeer
+                                                                </option>
+                                                                <option value="Jahra">Jahra</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="tm-form-field" style="width: 45%;">
+                                                            <label for="area">Area <span
+                                                                    style="color:red">*</span></label>
+                                                            <select id="area" required>
+                                                                <option value="">Select Area</option>
+
+
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="block">Block <span
+                                                                    style="color:red">*</span></label><br />
+                                                            <input type="text" id="block" value="" required />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="street">Street <span
+                                                                    style="color:red">*</span></label><br />
+                                                            <input type="text" id="street" value="" required />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="houseNo">House No <span
+                                                                    style="color:red">*</span></label><br />
+                                                            <input type="text" id="houseNo" value="" required />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="apartment">Apartment</label><br />
+                                                            <input type="text" id="apartment" value="" />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="floor">Floor</label><br />
+                                                            <input type="text" id="floor" value="" />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="avenue">Avenue</label><br />
+                                                            <input type="text" id="avenue" value="" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="tm-form-field" style="width: 45%;">
+                                                        <label for="direction">Direction</label><br />
+                                                        <input type="text" id="direction" value="" />
+                                                    </div>
+
+                                                    <div class="tm-form-field" style="margin-top: 80px;">
+
+
+
+
+                                                        <button id="addNewAddressSubmit" type="submit" class="tm-button"
+                                                            style=" border: none; padding:0px 20px; height: 40px; font-weight: bold; background-color: rgb(177,43,82);  font-size: 15px; border-radius:10px; color: white;">
+                                                            <i class="fas fa-plus" style="margin-right: 7px;"></i> <span
+                                                                style="text-align: center; ">Add Address</span>
+                                                        </button>
+
+
+                                                        <button type="button" class="tm-button"
+                                                            onclick="closeAddAddressModal()"
+                                                            style=" margin-left: 10px; border: none; padding:0px 30px; height: 40px; font-weight: bold; background-color: rgb(177,43,82);  font-size: 15px; border-radius:10px; color: white;">
+                                                            <span style="text-align: center; ">Cancel</span>
+                                                        </button>
+
+
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <div class="tm-form-fieldhalf" style="width: 45%;">
-                                            <label for="country">Country <span style="color:red">*</span></label><br />
-                                            <input type="text" id="country" value="Kuwait" disabled />
-                                        </div>
-
-                                    </div>
-                                    <div
-                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                        <div class="tm-form-field" style="width: 45%;">
-                                            <label for="state">State <span style="color:red">*</span></label>
-                                            <select id="state" onchange="populateAreas2(event)" required>
-                                                <option value="">Select State </option>
-                                                <option value="Al Asimah">Al Asimah</option>
-                                                <option value="Farwaniya">Farwaniya</option>
-                                                <option value="Hawalli">Hawalli</option>
-                                                <option value="Ahmadi">Ahmadi</option>
-                                                <option value="Mubarak Alkabeer">Mubarak Alkabeer
-                                                </option>
-                                                <option value="Jahra">Jahra</option>
-                                            </select>
-                                        </div>
-                                        <div class="tm-form-field" style="width: 45%;">
-                                            <label for="area">Area <span style="color:red">*</span></label>
-                                            <select id="area" required>
-                                                <option value="">Select Area</option>
 
 
+                                        <div id="editAddressModal" class="modal"
+                                            style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
+                                            <div class="modal-content" style="padding: 20px;">
+                                                <div style="display: flex; justify-content: space-between;">
+                                                    <h2>Edit Address</h2>
+                                                    <span class="close" onclick="closeEditAddressModal()">&times;</span>
+                                                </div>
+                                                <form id="editAddressForm">
+                                                    <!-- Add address form fields -->
+
+                                                    <div class="tm-form-field" style="width: 45%;">
+                                                        <label for="editAddressName">Address Name <span
+                                                                style="color:red">*</span></label><br />
+                                                        <input type="text" id="editAddressName" value="" required />
+                                                    </div>
+                                                    <div class="tm-form-field" style="width: 45%;">
+                                                        <label for="editAddressCountry">Country <span
+                                                                style="color:red">*</span></label><br />
+                                                        <input type="text" id="editAddressCountry" value="Kuwait"
+                                                            disabled />
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field" style="width: 45%;">
+                                                            <label for="editAddressState">State <span
+                                                                    style="color:red">*</span></label>
+
+                                                            <select id="editAddressState"
+                                                                onchange="populateAreas(event)" required>
+                                                                <option value="">Select State</option>
+                                                                <option value="Al Asimah">Al Asimah</option>
+                                                                <option value="Farwaniya">Farwaniya</option>
+                                                                <option value="Hawalli">Hawalli</option>
+                                                                <option value="Ahmadi">Ahmadi</option>
+                                                                <option value="Mubarak Alkabeer">Mubarak Alkabeer
+                                                                </option>
+                                                                <option value="Jahra">Jahra</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="tm-form-field" style="width: 45%;">
+                                                            <label for="editAddressArea">Area <span
+                                                                    style="color:red">*</span></label>
+                                                            <select id="editAddressArea" required>
+                                                                <option value="">Select Area</option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
 
 
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                        <div class="tm-form-field">
-                                            <label for="block">Block <span style="color:red">*</span></label><br />
-                                            <input type="text" id="block" value="" required />
-                                        </div>
-                                        <div class="tm-form-field">
-                                            <label for="street">Street <span style="color:red">*</span></label><br />
-                                            <input type="text" id="street" value="" required />
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                        <div class="tm-form-field">
-                                            <label for="houseNo">House No <span style="color:red">*</span></label><br />
-                                            <input type="text" id="houseNo" value="" required />
-                                        </div>
-                                        <div class="tm-form-field">
-                                            <label for="apartment">Apartment</label><br />
-                                            <input type="text" id="apartment" value="" />
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                        <div class="tm-form-field">
-                                            <label for="floor">Floor</label><br />
-                                            <input type="text" id="floor" value="" />
-                                        </div>
-                                        <div class="tm-form-field">
-                                            <label for="avenue">Avenue</label><br />
-                                            <input type="text" id="avenue" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="tm-form-field" style="width: 45%;">
-                                        <label for="direction">Direction</label><br />
-                                        <input type="text" id="direction" value="" />
-                                    </div>
-
-                                    <div class="tm-form-field" style="margin-top: 80px;">
-
-
-
-
-                                        <button id="addNewAddressSubmit" type="submit" class="tm-button"
-                                            style=" border: none; padding:0px 20px; height: 40px; font-weight: bold; background-color: rgb(177,43,82);  font-size: 15px; border-radius:10px; color: white;">
-                                            <i class="fas fa-plus" style="margin-right: 7px;"></i> <span
-                                                style="text-align: center; ">Add Address</span>
-                                        </button>
-
-
-                                        <button type="button" class="tm-button" onclick="closeAddAddressModal()"
-                                            style=" margin-left: 10px; border: none; padding:0px 30px; height: 40px; font-weight: bold; background-color: rgb(177,43,82);  font-size: 15px; border-radius:10px; color: white;">
-                                            <span style="text-align: center; ">Cancel</span>
-                                        </button>
-
-
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div id="editAddressModal" class="modal"
-                            style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
-                            <div class="modal-content" style="padding: 20px;">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <h2>Edit Address</h2>
-                                    <span class="close" onclick="closeEditAddressModal()">&times;</span>
-                                </div>
-                                <form id="editAddressForm">
-                                    <!-- Add address form fields -->
-
-                                    <div class="tm-form-field" style="width: 45%;">
-                                        <label for="editAddressName">Address Name <span
-                                                style="color:red">*</span></label><br />
-                                        <input type="text" id="editAddressName" value="" required />
-                                    </div>
-                                    <div class="tm-form-field" style="width: 45%;">
-                                        <label for="editAddressCountry">Country <span
-                                                style="color:red">*</span></label><br />
-                                        <input type="text" id="editAddressCountry" value="Kuwait" disabled />
-                                    </div>
-                                    <div
-                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                        <div class="tm-form-field" style="width: 45%;">
-                                            <label for="editAddressState">State <span style="color:red">*</span></label>
-
-                                            <select id="editAddressState" onchange="populateAreas(event)" required>
-                                                <option value="">Select State</option>
-                                                <option value="Al Asimah">Al Asimah</option>
-                                                <option value="Farwaniya">Farwaniya</option>
-                                                <option value="Hawalli">Hawalli</option>
-                                                <option value="Ahmadi">Ahmadi</option>
-                                                <option value="Mubarak Alkabeer">Mubarak Alkabeer
-                                                </option>
-                                                <option value="Jahra">Jahra</option>
-                                            </select>
-                                        </div>
-                                        <div class="tm-form-field" style="width: 45%;">
-                                            <label for="editAddressArea">Area <span style="color:red">*</span></label>
-                                            <select id="editAddressArea" required>
-                                                <option value="">Select Area</option>
-                                            </select>
-
-                                        </div>
-                                    </div>
-
-
-                                    <div
-                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                        <div class="tm-form-field">
-                                            <label for="editAddressBlock">Block <span
-                                                    style="color:red">*</span></label><br />
-                                            <input type="text" id="editAddressBlock" value="" required />
-                                        </div>
-                                        <div class="tm-form-field">
-                                            <label for="editAddressStreet">Street <span
-                                                    style="color:red">*</span></label><br />
-                                            <input type="text" id="editAddressStreet" value="" required />
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                        <div class="tm-form-field">
-                                            <label for="country">House No <span style="color:red">*</span></label><br />
-                                            <input type="text" id="editAddressHouseNo" value="" required />
-                                        </div>
-                                        <div class="tm-form-field">
-                                            <label for="editAddressApartment">Apartment</label><br />
-                                            <input type="text" id="editAddressApartment" value="" />
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
-                                        <div class="tm-form-field">
-                                            <label for="editAddressFloor">Floor</label><br />
-                                            <input type="text" id="editAddressFloor" value="" />
-                                        </div>
-                                        <div class="tm-form-field">
-                                            <label for="editAddressAvenue">Avenue</label><br />
-                                            <input type="text" id="editAddressAvenue" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="tm-form-field" style="width: 45%;">
-                                        <label for="editAddressDirection">Direction</label><br />
-                                        <input type="text" id="editAddressDirection" value="" />
-                                    </div>
-                                    <div class="tm-form-field" style="margin-top: 30px;">
-                                        <button id="editNewAddressSubmit" type="submit" class="tm-button"
-                                            style=" padding-bottom: 10px; 
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="editAddressBlock">Block <span
+                                                                    style="color:red">*</span></label><br />
+                                                            <input type="text" id="editAddressBlock" value=""
+                                                                required />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="editAddressStreet">Street <span
+                                                                    style="color:red">*</span></label><br />
+                                                            <input type="text" id="editAddressStreet" value=""
+                                                                required />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="country">House No <span
+                                                                    style="color:red">*</span></label><br />
+                                                            <input type="text" id="editAddressHouseNo" value=""
+                                                                required />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="editAddressApartment">Apartment</label><br />
+                                                            <input type="text" id="editAddressApartment" value="" />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
+                                                        <div class="tm-form-field">
+                                                            <label for="editAddressFloor">Floor</label><br />
+                                                            <input type="text" id="editAddressFloor" value="" />
+                                                        </div>
+                                                        <div class="tm-form-field">
+                                                            <label for="editAddressAvenue">Avenue</label><br />
+                                                            <input type="text" id="editAddressAvenue" value="" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="tm-form-field" style="width: 45%;">
+                                                        <label for="editAddressDirection">Direction</label><br />
+                                                        <input type="text" id="editAddressDirection" value="" />
+                                                    </div>
+                                                    <div class="tm-form-field" style="margin-top: 30px;">
+                                                        <button id="editNewAddressSubmit" type="submit"
+                                                            class="tm-button"
+                                                            style=" padding-bottom: 10px; 
                                                           height: 40px; font-weight: bold; background-color: #b12b52; border: none;">Update</button>
-                                        <button type="button" class="tm-button" onclick="closeEditAddressModal()"
-                                            style="
+                                                        <button type="button" class="tm-button"
+                                                            onclick="closeEditAddressModal()"
+                                                            style="
                                                             height: 40px; font-weight: bold; background-color: #b12b52; border: none;">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="tab-pane fade" id="gift-acdetails" role="tabpanel" aria-labelledby="account-acdetails-tab">
-            <h1>Gift</h1>
-        </div>
-
-        <div class="tab-pane fade" id="account-wishlist" role="tabpanel" aria-labelledby="account-acdetails-tab">
-            <div
-                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 30%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-                <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">Wishlist
-                </h4>
-            </div>
-        </div>
-
-        <div class="tab-pane fade" id="account-box" role="tabpanel" aria-labelledby="account-acdetails-tab">
-            <div
-                style=" font-family: Nunito Sans, sans-serif; margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 15%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-                <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">Gift
-                    a box</h4>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="tm-myaccount-acdetails">
-                        <form id="gift-box-register" action="#" class="tm-form tm-form-bordered">
-                            <div class="tm-form-inner">
-                                <div class="tm-form-field tm-form-fieldhalf">
-                                    <label for="gift-acdetails-firstname">First name</label>
-                                    <input type="text" id="gift-acdetails-firstname"
-                                        onchange="giftFirstNameValidation(event)" required="required">
-                                    <div>
-                                        <p id="first-name-err" style="color: red;"></p>
-                                    </div>
-                                </div>
-                                <div class="tm-form-field tm-form-fieldhalf">
-                                    <label for="gift-acdetails-lastname">Last name</label>
-                                    <input type="text" onchange="giftLastNameValidation(event)"
-                                        id="gift-acdetails-lastname" required="required">
-                                    <div>
-                                        <p id="last-name-err" style="color: red;"></p>
-                                    </div>
-                                </div>
-                                <div class="tm-form-field tm-form-fieldhalf">
-                                    <label for="gift-acdetails-email">Email address</label>
-                                    <input type="email" onchange="giftEmailValidation(event)" id="gift-acdetails-email"
-                                        required="required">
-
-                                    <div>
-                                        <p id="email-err" style="color: red;"></p>
-                                    </div>
-                                </div>
-                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
-                                    <label for="gift-acdetails-mobile">Phone Number</label>
-                                    <div style="display: flex">
-                                        <div
-                                            style="display: flex;border: 1px solid rgb(211, 209, 209);width: 110px ; margin-right: 10px;padding-left: 5px; padding-right: 5px; padding-top: 15px; column-gap: 4px;">
-                                            <img src="img/Frame.png" alt=""
-                                                style="width: 30px; height: 20px; margin-right: 5px;">
-                                            <span style="font-size: 13px">+965</span>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <input type="number" id="gift-acdetails-mobile"
-                                            onchange="giftPhoneNumberValidation(event)" required="required"
-                                            maxlength="8">
-                                    </div>
-                                    <div>
-                                        <p id="mobile-number-err" style="color: red;"></p>
                                     </div>
                                 </div>
-
-
-
-                                <div class="tm-form-field tm-form-fieldhalf ">
-
-                                    <label for="gift-box-gender">Gender</label>
-                                    <select class="dropdown-toggle" id="gift-box-gender" onchange=""
-                                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
-                                        <option value="">Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-
-                                    </select>
-
-                                </div>
-
-                                <div class="tm-form-field tm-form-fieldhalf">
-                                    <label for="gift-acdetails-note">Note</label>
-                                    <textarea type="text" id="gift-acdetails-note"></textarea>
-                                </div>
-
-                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
-                                    <h6>Please select 5 Interests</h6>
-                                    <div id="fraction-component"></div>
-                                    <div class="check-box_flex" id="container">
-                                    </div>
-                                </div>
-                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
-                                    <h6>Please select Sub-Interests</h6>
-                                    <div class="check-box_flex" id="sub_container">
-
-                                    </div>
-                                </div>
-                                <div class="tm-form-field tm-form-fieldhalf">
-                                    <button style="font-size: 15px;" type="button" class="tm-button"
-                                        onclick="openAddAddressModal()"> <i class="fas fa-plus"
-                                            style="margin-right: 15px;height: 15px;"></i>
-                                        Add Address
-                                    </button>
-                                </div>
-                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
-                                    <div class="address_container" id="address_container">
-
-                                    </div>
-                                </div>
-
-                                <div clsas="tm-form-field tm-form-fieldhalf">
-
-                                    <label for="editMonthPakage">Months</label>
-                                    <select id="editMonthPakage" class="dropdown-toggle" onchange=""
-                                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
-                                        <option value="">Plans</option>
-                                        <option value="Month1">1 Month 15 KD</option>
-                                        <option value="Month3">3 Month 45 KD </option>
-                                        <option value="Month6">6 Month 75 KD</option>
-
-                                    </select>
-
-                                </div>
-
-
-                                <div class="tm-form-field term-condition">
-                                    <input type="checkbox" name="gift-hide-details" id="gift-hide-details">
-                                    <label class="lbl-cus" for="gift-hide-details"> Hide my details
-
-                                    </label>
-                                </div>
-
-
-
-                                <div class="tm-form-field term-condition">
-                                    <input type="checkbox" name="gift-box-terms" id="gift-box-terms">
-                                    <label class="lbl-cus" for="gift-box-terms"> By clicking on proceed,
-                                        I agree to the
-                                        <a href="terms-and-conditions.html " class="text-primary" target="_blank">Terms
-                                            and Conditions</a>
-                                        and
-                                        <a href="privacy-statement.html" class="text-primary" target="_blank">Privacy
-                                            Policy</a>
-
-                                        <br>
-                                    </label>
-
-                                    <div>
-                                        <p id="terms-err" style="color: red;"></p>
-                                    </div>
-                                </div>
-
-
-                                <div class="tm-form-field tm-form-fieldhalf">
-                                    <button id="gift-box-pay" type="submit" class="tm-button"
-                                        style="border: none; outline: none;  background-color: #b12b52;">Pay
-                                        <b></b></button>
-                                </div>
-
-
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-
-        <div class="tab-pane fade" id="gift-History" role="tabpanel" aria-labelledby="account-acdetails-tab">
-            <div
-                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 30%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-                <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">Gift
-                    history</h4>
-            </div>
-
-
-
-            <div class="container gift-cards-history">
-
-                <div class="gift-card">
-
-                    <div class="gift-card-top">
-
-                        <div class="gift-card-top-left">
-                            <p style="margin-bottom: 8px;">ORDER# </p>
-                            <div class="gift-card-top-left-right" style="width: fit-content;">
-                                <marquee width="100%" scrolldelay="200">
-                                    <p style="margin-bottom: 0px;">64ca2364532686s7</p>
-                                </marquee>
-
                             </div>
                         </div>
 
 
-
-
-                        <p style="margin-bottom: 0px;">2th August</p>
-                    </div>
-
-                    <div class="gift-card-bottom">
-
-                        <div class="gift-card-bottom-left">
-
-                            <div class="gift-card-bottom-left-left">
-                                <p>Name: </p>
-                                <p>Number:</p>
-                                <p>Price: </p>
-                            </div>
-                            <div class="gift-card-bottom-left-right">
-                                <p>shjs Dhdj</p>
-                                <p>+965 86665585</p>
-                                <p>One Month 15KD</p>
-                            </div>
-
+                        <div class="tab-pane fade" id="gift-acdetails" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+                            <h1>Gift</h1>
                         </div>
 
-                        <div class="gift-card-bottom-right">
-                            <button>Subscribed</button>
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="tab-pane fade" id="account-Subscription" role="tabpanel" aria-labelledby="account-acdetails-tab">
-            <div
-                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 30%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-                <h4 style=" color: white; font-weight: 600; margin: auto; text-align: center; ">
-                    Gift a Subscription</h4>
-            </div>
-            <form action="#" id="subscription-register" class="tm-form tm-form-bordered">
-                <!-- <h4>Account Details</h4> -->
-                <div class="tm-form-inner">
-                    <div class="tm-form-field tm-form-fieldhalf">
-                        <label for="subcription-acdetails-firstname">First name</label>
-                        <input type="text" onchange="subscriptionFirstNameValidation(event)"
-                            id="subcription-acdetails-firstname" required="required">
-                        <div>
-                            <p id="subscription-first-name-err" style="color: red;"></p>
-                        </div>
-                    </div>
-                    <div class="tm-form-field tm-form-fieldhalf">
-                        <label for="subcription-acdetails-lastname">Last name</label>
-                        <input type="text" onchange="subscriptionLastNameValidation(event)"
-                            id="subcription-acdetails-lastname" required="required">
-                        <div>
-                            <p id="subscription-last-name-err" style="color: red;"></p>
-                        </div>
-                    </div>
-
-
-                    <div class="tm-form-field col-lg-6 col-md-6 col-12">
-                        <label for="subcription-acdetails-mobile">Phone Number</label>
-                        <div style="display: flex">
+                        <div class="tab-pane fade" id="account-wishlist" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
                             <div
-                                style="display: flex;border: 1px solid rgb(211, 209, 209);width: 110px ; margin-right: 10px;padding-left: 5px; padding-right: 5px; padding-top: 15px; column-gap: 4px;">
-                                <img src="img/Frame.png" alt="" style="width: 30px; height: 20px; margin-right: 5px;">
-                                <span style="font-size: 13px">+965</span>
+                                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 30%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">Wishlist
+                                </h4>
                             </div>
-                            <input type="number" onchange="subscriptionPhoneNumberValidation(event)"
-                                id="subcription-acdetails-mobile" required="required" maxlength="8">
                         </div>
-                        <div>
-                            <p id="subscription-mobile-number-err" style="color: red;"></p>
+
+                        <div class="tab-pane fade" id="account-box" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+                            <div
+                                style=" font-family: Nunito Sans, sans-serif; margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 15%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">Gift
+                                    a box</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="tm-myaccount-acdetails">
+                                        <form id="gift-box-register" action="#" class="tm-form tm-form-bordered">
+                                            <div class="tm-form-inner">
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="gift-acdetails-firstname">First name</label>
+                                                    <input type="text" id="gift-acdetails-firstname"
+                                                        onchange="giftFirstNameValidation(event)" required="required">
+                                                    <div>
+                                                        <p id="first-name-err" style="color: red;"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="gift-acdetails-lastname">Last name</label>
+                                                    <input type="text" onchange="giftLastNameValidation(event)"
+                                                        id="gift-acdetails-lastname" required="required">
+                                                    <div>
+                                                        <p id="last-name-err" style="color: red;"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="gift-acdetails-email">Email address</label>
+                                                    <input type="email" onchange="giftEmailValidation(event)"
+                                                        id="gift-acdetails-email" required="required">
+
+                                                    <div>
+                                                        <p id="email-err" style="color: red;"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                                    <label for="gift-acdetails-mobile">Phone Number</label>
+                                                    <div style="display: flex">
+                                                        <div
+                                                            style="display: flex;border: 1px solid rgb(211, 209, 209);width: 110px ; margin-right: 10px;padding-left: 5px; padding-right: 5px; padding-top: 15px; column-gap: 4px;">
+                                                            <img src="img/Frame.png" alt=""
+                                                                style="width: 30px; height: 20px; margin-right: 5px;">
+                                                            <span style="font-size: 13px">+965</span>
+                                                        </div>
+                                                        <input type="number" id="gift-acdetails-mobile"
+                                                            onchange="giftPhoneNumberValidation(event)"
+                                                            required="required" maxlength="8">
+                                                    </div>
+                                                    <div>
+                                                        <p id="mobile-number-err" style="color: red;"></p>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="tm-form-field tm-form-fieldhalf ">
+
+                                                    <label for="gift-box-gender">Gender</label>
+                                                    <select class="dropdown-toggle" id="gift-box-gender" onchange=""
+                                                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
+                                                        <option value="">Gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+
+                                                    </select>
+
+                                                </div>
+
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <label for="gift-acdetails-note">Note</label>
+                                                    <textarea type="text" id="gift-acdetails-note"></textarea>
+                                                </div>
+
+                                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                                    <h6>Please select 5 Interests</h6>
+                                                    <div id="fraction-component"></div>
+                                                    <div class="check-box_flex" id="container">
+                                                    </div>
+                                                </div>
+                                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                                    <h6>Please select Sub-Interests</h6>
+                                                    <div class="check-box_flex" id="sub_container">
+
+                                                    </div>
+                                                </div>
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <button style="font-size: 15px;" type="button" class="tm-button"
+                                                        onclick="openAddAddressModal()"> <i class="fas fa-plus"
+                                                            style="margin-right: 15px;height: 15px;"></i>
+                                                        Add Address
+                                                    </button>
+                                                </div>
+                                                <div class="tm-form-field col-lg-12 col-md-12 col-12">
+                                                    <div class="address_container" id="address_container">
+
+                                                    </div>
+                                                </div>
+
+                                                <div clsas="tm-form-field tm-form-fieldhalf">
+
+                                                    <label for="editMonthPakage">Months</label>
+                                                    <select id="editMonthPakage" class="dropdown-toggle" onchange=""
+                                                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
+                                                        <option value="">Plans</option>
+                                                        <option value="Month1">1 Month 15 KD</option>
+                                                        <option value="Month3">3 Month 45 KD </option>
+                                                        <option value="Month6">6 Month 75 KD</option>
+
+                                                    </select>
+
+                                                </div>
+
+
+                                                <div class="tm-form-field term-condition">
+                                                    <input type="checkbox" name="gift-hide-details"
+                                                        id="gift-hide-details">
+                                                    <label class="lbl-cus" for="gift-hide-details"> Hide my details
+
+                                                    </label>
+                                                </div>
+
+
+
+                                                <div class="tm-form-field term-condition">
+                                                    <input type="checkbox" name="gift-box-terms" id="gift-box-terms">
+                                                    <label class="lbl-cus" for="gift-box-terms"> By clicking on proceed,
+                                                        I agree to the
+                                                        <a href="terms-and-conditions.html " class="text-primary"
+                                                            target="_blank">Terms
+                                                            and Conditions</a>
+                                                        and
+                                                        <a href="privacy-statement.html" class="text-primary"
+                                                            target="_blank">Privacy
+                                                            Policy</a>
+
+                                                        <br>
+                                                    </label>
+
+                                                    <div>
+                                                        <p id="terms-err" style="color: red;"></p>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="tm-form-field tm-form-fieldhalf">
+                                                    <button id="gift-box-pay" type="submit" class="tm-button"
+                                                        style="border: none; outline: none;  background-color: #b12b52;">Pay
+                                                        <b></b></button>
+                                                </div>
+
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
+
+
+                        <div class="tab-pane fade" id="gift-History" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+                            <div
+                                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 30%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                <h4 style="color: white; font-weight: 600; margin: auto; text-align: center; ">Gift
+                                    history</h4>
+                            </div>
+
+
+
+                            <div class="container gift-cards-history">
+
+                                <div class="gift-card">
+
+                                    <div class="gift-card-top">
+
+                                        <div class="gift-card-top-left">
+                                            <p style="margin-bottom: 8px;">ORDER# </p>
+                                            <div class="gift-card-top-left-right" style="width: fit-content;">
+                                                <marquee width="100%" scrolldelay="200">
+                                                    <p style="margin-bottom: 0px;">64ca2364532686s7</p>
+                                                </marquee>
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <p style="margin-bottom: 0px;">2th August</p>
+                                    </div>
+
+                                    <div class="gift-card-bottom">
+
+                                        <div class="gift-card-bottom-left">
+
+                                            <div class="gift-card-bottom-left-left">
+                                                <p>Name: </p>
+                                                <p>Number:</p>
+                                                <p>Price: </p>
+                                            </div>
+                                            <div class="gift-card-bottom-left-right">
+                                                <p>shjs Dhdj</p>
+                                                <p>+965 86665585</p>
+                                                <p>One Month 15KD</p>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="gift-card-bottom-right">
+                                            <button>Subscribed</button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="tab-pane fade" id="account-Subscription" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+                            <div
+                                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 30%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                <h4 style=" color: white; font-weight: 600; margin: auto; text-align: center; ">
+                                    Gift a Subscription</h4>
+                            </div>
+                            <form action="#" id="subscription-register" class="tm-form tm-form-bordered">
+                                <!-- <h4>Account Details</h4> -->
+                                <div class="tm-form-inner">
+                                    <div class="tm-form-field tm-form-fieldhalf">
+                                        <label for="subcription-acdetails-firstname">First name</label>
+                                        <input type="text" onchange="subscriptionFirstNameValidation(event)"
+                                            id="subcription-acdetails-firstname" required="required">
+                                        <div>
+                                            <p id="subscription-first-name-err" style="color: red;"></p>
+                                        </div>
+                                    </div>
+                                    <div class="tm-form-field tm-form-fieldhalf">
+                                        <label for="subcription-acdetails-lastname">Last name</label>
+                                        <input type="text" onchange="subscriptionLastNameValidation(event)"
+                                            id="subcription-acdetails-lastname" required="required">
+                                        <div>
+                                            <p id="subscription-last-name-err" style="color: red;"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="tm-form-field col-lg-6 col-md-6 col-12">
+                                        <label for="subcription-acdetails-mobile">Phone Number</label>
+                                        <div style="display: flex">
+                                            <div
+                                                style="display: flex;border: 1px solid rgb(211, 209, 209);width: 110px ; margin-right: 10px;padding-left: 5px; padding-right: 5px; padding-top: 15px; column-gap: 4px;">
+                                                <img src="img/Frame.png" alt=""
+                                                    style="width: 30px; height: 20px; margin-right: 5px;">
+                                                <span style="font-size: 13px">+965</span>
+                                            </div>
+                                            <input type="number" onchange="subscriptionPhoneNumberValidation(event)"
+                                                id="subcription-acdetails-mobile" required="required" maxlength="8">
+                                        </div>
+                                        <div>
+                                            <p id="subscription-mobile-number-err" style="color: red;"></p>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="tm-form-field tm-form-fieldhalf">
+
+                                        <label for="editMonthPakage">Months</label>
+                                        <select class="dropdown-toggle" id="editMonthPakage" onchange=""
+                                            style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
+                                            <option value="">Plans</option>
+                                            <option value="Month1">1 Month 15 KD</option>
+                                            <option value="Month3">3 Month 45 KD </option>
+                                            <option value="Month6">6 Month 75 KD</option>
+
+                                        </select>
+
+                                    </div>
+
+                                    <div style="margin-top: 50px;" class="tm-form-field term-condition">
+                                        <input type="checkbox" name="subscription-hide-details"
+                                            id="subscription-hide-details">
+                                        <label class="lbl-cus" for="subscription-hide-details"> Hide my details
+
+                                        </label>
+                                    </div>
+
+
+
+                                    <div class="tm-form-field term-condition">
+                                        <input type="checkbox" name="subscription-box-terms"
+                                            id="subscription-box-terms">
+                                        <label class="lbl-cus" for="subscription-box-terms"> By Clicking on
+                                            proceed, I agree to the
+                                            <a href="terms-and-conditions.html" style="color: #b12b52;"
+                                                class="text-primary" target="_blank">Terms
+                                                and Conditions</a>
+                                            and
+                                            <a href="privacy-statement.html" style="color: #b12b52;"
+                                                class="text-primary" target="_blank">Privacy
+                                                Policy</a>
+                                            of
+                                            <br>
+                                        </label>
+                                    </div>
+
+
+                                    <div class="tm-form-field tm-form-fieldhalf">
+                                        <button type="submit" class="tm-button" id="subscription-pay"
+                                            style="border: none; outline: none;  background-color: #b12b52;">Pay
+                                            <b></b></button>
+                                    </div>
+
+
+
+
+                                </div>
+                            </form>
+
+
+
+
+                        </div>
+
+
+
+                        <div class="tab-pane fade" id="account-Subscription-History" role="tabpanel"
+                            aria-labelledby="account-acdetails-tab">
+
+                            <div
+                                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 35%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                                <h4 style=" color: white; font-weight: 600; margin: auto; text-align: center; ">
+                                    Subscription History
+                                </h4>
+
+
+                            </div>
+
+
+                            <div class="container subscribe-cards-history">
+
+                                <div id="subscription-card" class="gift-card">
+                                    <div class="gift-card-top">
+
+                                        <div class="gift-card-top-left">
+                                            <p style="margin-bottom: 8px;">ORDER# </p>
+                                            <div class="gift-card-top-left-right" style="width: fit-content;">
+                                                <marquee width="100%" scrolldelay="200">
+                                                    <p style="margin-bottom: 0px;">64ca2364532686s7</p>
+                                                </marquee>
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <p style="margin-bottom: 0px;">2th August</p>
+                                    </div>
+
+                                    <div class="gift-card-bottom">
+
+                                        <div class="gift-card-bottom-left">
+
+                                            <div class="gift-card-bottom-left-left">
+                                                <p>Name: </p>
+                                                <p>Number:</p>
+                                                <p>Price: </p>
+                                            </div>
+                                            <div class="gift-card-bottom-left-right">
+                                                <p>shjs Dhdj</p>
+                                                <p>+965 86665585</p>
+                                                <p>One Month 15KD</p>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="gift-card-bottom-right">
+                                            <button>Subscribed</button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
                     </div>
-
-
-
-                    <div class="tm-form-field tm-form-fieldhalf">
-
-                        <label for="editMonthPakage">Months</label>
-                        <select class="dropdown-toggle" id="editMonthPakage" onchange=""
-                            style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
-                            <option value="">Plans</option>
-                            <option value="Month1">1 Month 15 KD</option>
-                            <option value="Month3">3 Month 45 KD </option>
-                            <option value="Month6">6 Month 75 KD</option>
-
-                        </select>
-
-                    </div>
-
-                    <div style="margin-top: 50px;" class="tm-form-field term-condition">
-                        <input type="checkbox" name="subscription-hide-details" id="subscription-hide-details">
-                        <label class="lbl-cus" for="subscription-hide-details"> Hide my details
-                        </label>
-                    </div>
-
-
-
-                    <div class="tm-form-field term-condition">
-                        <input type="checkbox" name="subscription-box-terms" id="subscription-box-terms">
-                        <label class="lbl-cus" for="subscription-box-terms"> By Clicking on
-                            proceed, I agree to the
-                            <a href="terms-and-conditions.html" style="color: #b12b52;" class="text-primary"
-                                target="_blank">Terms
-                                and Conditions</a>
-                            and
-                            <a href="privacy-statement.html" style="color: #b12b52;" class="text-primary"
-                                target="_blank">Privacy
-                                Policy</a>
-                            of
-                            <br>
-                        </label>
-                    </div>
-
-
-                    <div class="tm-form-field tm-form-fieldhalf">
-                        <button type="submit" class="tm-button" id="subscription-pay"
-                            style="border: none; outline: none;  background-color: #b12b52;">Pay
-                            <b></b></button>
-                    </div>
-
-
-
-
                 </div>
-            </form>
-
-
-
-
-        </div>
-
-
-
-        <div class="tab-pane fade" id="account-Subscription-History" role="tabpanel"
-            aria-labelledby="account-acdetails-tab">
-
-            <div
-                style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 35%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-                <h4 style=" color: white; font-weight: 600; margin: auto; text-align: center; ">
-                    Subscription History
-                </h4>
-
-
             </div>
-
-
-            <div class="container subscribe-cards-history">
-
-                <div id="subscription-card" class="gift-card">
-                    <div class="gift-card-top">
-
-                        <div class="gift-card-top-left">
-                            <p style="margin-bottom: 8px;">ORDER# </p>
-                            <div class="gift-card-top-left-right" style="width: fit-content;">
-                                <marquee width="100%" scrolldelay="200">
-                                    <p style="margin-bottom: 0px;">64ca2364532686s7</p>
-                                </marquee>
-
-                            </div>
-                        </div>
-
-
-
-
-                        <p style="margin-bottom: 0px;">2th August</p>
-                    </div>
-
-                    <div class="gift-card-bottom">
-
-                        <div class="gift-card-bottom-left">
-
-                            <div class="gift-card-bottom-left-left">
-                                <p>Name: </p>
-                                <p>Number:</p>
-                                <p>Price: </p>
-                            </div>
-                            <div class="gift-card-bottom-left-right">
-                                <p>shjs Dhdj</p>
-                                <p>+965 86665585</p>
-                                <p>One Month 15KD</p>
-                            </div>
-
-                        </div>
-
-                        <div class="gift-card-bottom-right">
-                            <button>Subscribed</button>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-
-
-        </div>
-
-
-        </div>
-        </div>
-        </div>
         </div>
         <!--// My Account Area -->
 
@@ -2698,13 +2722,10 @@
 
 
 
-
     <script>
 
         const userId = localStorage.getItem("loginId");
         const shippingId = localStorage.getItem("shippingId");
-
-
 
 
 
@@ -2741,7 +2762,10 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             var name = localStorage.getItem("first_name");
+
             var accountName = document.getElementById("accountname");
+            // var logoutLink = document.getElementById("logout");
+
             if (!isLoggedIn()) {
                 window.location.href = 'login.html';
                 return;
@@ -2750,8 +2774,11 @@
             var welcomeText = document.createElement("a");
             welcomeText.textContent = `Welcome, ${name}!`;
             welcomeText.style.fontWeight = "200"
+
             accountName.appendChild(welcomeText);
+            // logoutLink.addEventListener("click", handleLogout);
         });
+
 
         function fetchData() {
             fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
@@ -2761,7 +2788,9 @@
 
                     const interests = data.results;
 
+
                     const container = document.getElementById('container');
+
                     container.innerHTML = '';
 
                     interests.forEach(interest => {
@@ -2793,13 +2822,11 @@
 
                                 console.log("dischecked i removed in fetch data");
 
-                                console.log("dischecked i removed in fetch data");
-
                                 removeSubinterests(interest.id);
                             }
                         });
-                        container.appendChild(div);
 
+                        container.appendChild(div);
 
 
                         // Check the checkbox for interest if it is present in userInterests
@@ -2809,7 +2836,6 @@
                         //     checkbox.checked = true;
                         //     fetchSubinterests(interest); // Fetch subinterests for checked interest
                         // }
-
                     });
 
 
@@ -2837,6 +2863,7 @@
 
                     subinterests.forEach(subInterest => {
 
+
                         const subInterestCheckbox = document.createElement('input');
                         subInterestCheckbox.checked = isSubinterestChecked(subInterest.id, userSubInterests);
 
@@ -2851,21 +2878,23 @@
                         subInterestLabel.setAttribute('for', `sub${subInterest.id}`);
 
 
-
                         subInterestLabel.textContent = subInterest.name;
                         subinterestContainer.appendChild(subInterestLabel);
 
 
 
                         subInterestCheckbox.addEventListener('change', function () {
+                            // Check if the subinterest is present in userSubInterests
                             const isChecked = userSubInterests.includes(subInterest.id);
 
+                            // If the checkbox is checked and the subinterest is not in userSubInterests, add it
                             if (this.checked && !isChecked) {
                                 console.log("beforepushuserInterest", userSubInterests);
 
                                 userSubInterests.push(subInterest.id);
                                 console.log("afterpushuserInterest", userSubInterests);
                             }
+
                             // If the checkbox is unchecked and the subinterest is in userSubInterests, remove it
                             if (!this.checked && isChecked) {
 
@@ -2876,13 +2905,14 @@
                                     console.log("afteremoveInterest", userSubInterests);
 
 
-
                                 }
                             }
                         });
 
+
                     });
 
+                    // Append the subinterest container to the main container
                     subinterestsContainer.appendChild(subinterestContainer);
                 })
                 .catch(error => {
@@ -2891,6 +2921,7 @@
         }
 
         function removeSubinterests(interestId) {
+
             const subContainer = document.getElementById('sub_container');
             const interestContainer = document.getElementById(`interest_${interestId}`);
 
@@ -2933,6 +2964,9 @@
                     document.getElementById("editable-acdetails-email").value = data.email;
                     document.getElementById("editable-acdetails-password").value = data.mobile_number;
                     document.getElementById("editable-acdetails-displayname").value = data.date_of_birth;
+                    // localStorage.setItem("shippingId", data.shippin)
+
+
 
 
                     const genderSelect = document.getElementById("acdetails-gender");
@@ -2943,13 +2977,16 @@
                             break;
                         }
                     }
+
                     const userInterests = data.interests.map(interest => interest.id);
 
                     const userSubInterests = data.subInterests.map(subinterest => subinterest.id);
+
                     const interestsCheckboxes = document.querySelectorAll('#container input[name="item-checkbox"]');
                     let checkedInterestsCount = 0;
                     interestsCheckboxes.forEach(checkbox => {
                         checkbox.checked = userInterests.includes(checkbox.id);
+
                         if (checkbox.checked) {
                             checkedInterestsCount++;
 
@@ -2970,6 +3007,7 @@
                                 }
                             } else {
 
+
                                 console.log("dischecked");
                                 checkedInterestsCount--;
 
@@ -2987,6 +3025,7 @@
                     console.error("Error fetching user data:", error);
                 });
         }
+
 
 
         if (userId) {
@@ -3012,7 +3051,6 @@
 
 
         function openEditAddressModal(address) {
-
 
             latestShippingIdForEdit = address;
 
@@ -3043,12 +3081,12 @@
                 if (!response.ok) {
                     throw new Error('Failed to fetch addresses.');
                 }
+
                 const addresses = await response.json();
 
                 const addresse = addresses.data;
 
-                // const subContainer = document.getElementById('address_container');
-                // editable-address-container Inside Edit ProfileModal
+
 
                 const editableSubContainer = document.getElementById('editable_address_container');
 
@@ -3060,9 +3098,7 @@
 
                     addressDiv.innerHTML = `
                      <div>
-
-                        <input type="radio" id="address-toggle-btn${index}"  class="class-button" name="address-radio-group" check-address-id="${address.id}" value="${address.state}-${address.country}"  onclick="editAddress(event)" />
-
+                        <input type="radio" id="address-toggle-btn${index}"  class="class-button" name="address-radio-group" check-address-id="${address.id}" value="${address.state}-${address.country}"/>
                         <label for="address-toggle-btn${index}" >
                         ${address.country}${address.state ? ', ' + address.state : ''}${address.city ? ', ' + address.city : ''}${address.street2 ? ', ' + address.street2 : ''}${address.street1 ? ', ' + address.street1 : ''}${address.direction ? ', ' + address.direction : ''}${address.avenue ? ', ' + address.avenue : ''}${address.floor ? ', ' + address.floor : ''}${address.apartment ? ', ' + address.apartment : ''}${address.houseNo ? ', ' + address.houseNo : ''}.
                     </label>
@@ -3082,6 +3118,9 @@
                 });
 
 
+
+
+
                 editableSubContainer.addEventListener('click', function (event) {
                     const target = event.target;
                     if (target.classList.contains('delete-button')) {
@@ -3095,7 +3134,6 @@
                     } else if (target.classList.contains('class-button')) {
 
                         const addressId = target.getAttribute('check-address-id');
-
                         editAddress(addressId);
 
                     }
@@ -3112,6 +3150,7 @@
 
         function deleteAddress(addressId) {
             const buttonElement = event.target;
+
             const shippingId = addressId
             console.log("shippingId", shippingId)
             const addressDiv = buttonElement.parentElement.parentElement;
@@ -3186,10 +3225,13 @@
 
 
         function populateAreas(event) {
+
+
             const selectedState = event.target.value;
             const areaDropdown = document.getElementById('editAddressArea');
             areaDropdown.innerHTML = '';
 
+
             const selectAreaOption = document.createElement('option');
             selectAreaOption.value = '';
             selectAreaOption.textContent = 'Select Area';
@@ -3207,7 +3249,6 @@
                     areaDropdown.appendChild(option);
                     // console.log("areaDropdown", areaDropdown);
                 });
-
 
                 areaDropdown.style.display = 'Initial';
 
@@ -3255,359 +3296,6 @@
 
             const address = JSON.parse(addressString);
             openEditAddressModal(address);
-
-            areaDropdown.style.display = 'Initial';
-        }
-
-
-        function populateAreas2(event) {
-            const selectedState = event.target.value;
-            const areaDropdown = document.getElementById('area');
-            areaDropdown.innerHTML = '';
-            const selectAreaOption = document.createElement('option');
-            selectAreaOption.value = '';
-            selectAreaOption.textContent = 'Select Area';
-            areaDropdown.appendChild(selectAreaOption);
-            const selectedStateAreas = areasByState[selectedState];
-            if (selectedStateAreas) {
-                let clutter3 = ''
-                selectedStateAreas.forEach(area => {
-                    const option = document.createElement('option');
-                    option.value = area;
-                    option.textContent = area;
-                    areaDropdown.appendChild(option);
-                    // console.log("areaDropdown", areaDropdown);
-                });
-                areaDropdown.style.display = 'Initial';
-            }
-        }
-
-        function handleEditButtonClick(addressString) {
-            const address = JSON.parse(addressString);
-            openEditAddressModal(address);
-        }
-
-        // Add new Address function
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('addAddressForm');
-            const submitButton = document.getElementById('addNewAddressSubmit');
-            const currentUserId = localStorage.getItem("loginId");
-            const token = localStorage.getItem("access_token");
-            form.addEventListener('submit', async function (event) {
-                event.preventDefault();
-                // Handle form submission logic here
-                const addressName = document.getElementById('addressName').value;
-                const country = document.getElementById('country').value;
-                const state = document.getElementById('state').value;
-                const area = document.getElementById('area').value;
-                const block = document.getElementById('block').value;
-                const houseNo = document.getElementById('houseNo').value;
-                const street = document.getElementById('street').value;
-                const apartment = document.getElementById('apartment').value;
-                const floor = document.getElementById('floor').value;
-                const avenue = document.getElementById('avenue').value;
-
-                const data = {
-                    userId: currentUserId,
-                    state: state,
-                    street1: street,
-                    city: area,
-                    pinCode: block,
-                    country: country,
-                    houseNo: houseNo,
-                    apartment: apartment,
-                    floor: floor,
-                    avenue: avenue,
-                    direction: direction,
-                    addressName: addressName,
-                    country_code: '+91',
-                };
-
-                fetch('https://15.185.57.60/api/v1/users/create-user-shipping-address', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(data),
-                })
-                    .then(response => response.json())
-                    .then(result => {
-                        console.log(result);
-                        if (result.tokens) {
-                            form.reset();
-                            alert('Adresss add Successful!!');
-                        } else {
-                            alert(result.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error submitting form:', error);
-                    });
-            });
-        });
-
-        // updateAddress  function 
-        document.addEventListener('DOMContentLoaded', function () {
-
-            const form = document.getElementById('editAddressForm');
-            const submitButton = document.getElementById('editNewAddressSubmit');
-            const currentUserId = localStorage.getItem("loginId");
-            const token = localStorage.getItem("access_token");
-
-            form.addEventListener('submit', async function (event) {
-                event.preventDefault();
-                // Handle form submission logic here
-                const shippingId = latestShippingIdForEdit;
-                const addressName = document.getElementById('editAddressName').value;
-                const country = document.getElementById('editAddressCountry').value;
-                const state = document.getElementById('editAddressState').value;
-                const area = document.getElementById('editAddressArea').value;
-                const block = document.getElementById('editAddressBlock').value;
-                const houseNo = document.getElementById('editAddressHouseNo').value;
-                const street = document.getElementById('editAddressStreet').value;
-                const apartment = document.getElementById('editAddressApartment').value;
-                const floor = document.getElementById('editAddressFloor').value;
-                const avenue = document.getElementById('editAddressAvenue').value;
-                const direction = document.getElementById('editAddressDirection').value;
-
-                const data = {
-                    userId: currentUserId,
-                    state: state,
-                    shippingId: shippingId,
-                    street1: street,
-                    city: area,
-                    pinCode: block,
-                    country: country,
-                    houseNo: houseNo,
-                    apartment: apartment,
-                    floor: floor,
-                    avenue: avenue,
-                    direction: direction,
-                    addressName: addressName,
-                    country_code: '+91',
-                };
-
-                fetch('https://15.185.57.60/api/v1/users/update-shipping-address', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(data),
-                })
-                    .then(response => response.json())
-                    .then(result => {
-                        console.log(result);
-                        if (result.tokens) {
-                            form.reset();
-                            alert('Adresss is updated  Successful!!');
-                        } else {
-                            alert(result.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error submitting form:', error);
-                    });
-            });
-        });
-
-        // Update Profile function
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('editProfileForm');
-            const submitButton = document.getElementById('editProfileSubmit');
-            const currentUserId = localStorage.getItem("loginId");
-            const token = localStorage.getItem("access_token");
-
-            form.addEventListener('submit', async function (event) {
-                closeEditProfileModal();
-                event.preventDefault();
-                // Handle form submission logic here
-                const first_name = document.getElementById("editable-acdetails-firstname").value;
-                const last_name = document.getElementById("editable-acdetails-lastname").value;
-                const email = document.getElementById("editable-acdetails-email").value;
-                const mobile_number = document.getElementById("editable-acdetails-password").value;
-                const date_of_birth = document.getElementById("editable-acdetails-displayname").value;
-                const interest = '643bacaf4d09602aa0916760,643bacaa4d09602aa0916749'
-                const subinterest = '64398733e489923d28d4750e'
-                console.log("form update submit ", currentUserId, first_name, last_name, date_of_birth);
-                const data = {
-                    first_name: first_name,
-                    last_name: last_name,
-                    date_of_birth: date_of_birth,
-                    email: email,
-                    mobile_number: mobile_number,
-                    date_of_birth: date_of_birth,
-                    interests: interest,
-                    subInterests: subinterest,
-
-                };
-                fetch(`https://15.185.57.60/api/v1/users/update-user/${currentUserId}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(data),
-                })
-                    .then(response => response.json())
-                    .then(result => {
-                        console.log("hey", result);
-                        if (result.tokens) {
-                            form.reset();
-                            alert('Profile is Updated Successful!!');
-                        } else {
-                            alert(result.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error submitting form:', error);
-                    });
-            });
-        });
-
-        // open profile edit modal
-        function openEditProfileModal() {
-            disableScroll();
-            const modal = document.getElementById('editProfileModal');
-            modal.style.display = 'block';
-        }
-
-        // Close profile edit modal
-        function closeEditProfileModal() {
-            enableScroll();
-            const modal = document.getElementById('editProfileModal');
-            modal.style.display = 'none';
-        }
-
-        // Enable or Disable scrolling at opening modal
-        function disableScroll() {
-            // Get the current page scroll position
-            scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-                // if any scroll is attempted, set this to the previous value
-                window.onscroll = function () {
-                    window.scrollTo(scrollLeft, scrollTop);
-                };
-        }
-
-        function enableScroll() {
-            window.onscroll = function () { };
-        }
-
-        // Not Editable fetch interest for profile  
-        function popluateInterestDataForProfile() {
-            const token = localStorage.getItem("access_token");
-            fetch(`https://15.185.57.60/api/v1/users/${userId}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    const userInterests = data.interests.map(interest => interest);
-                    const userInterestsId = data.interests.map(interest => interest.id);
-
-                    const userSubInterests = data.subInterests.map(subinterest => subinterest);
-                    const userSubInterestsId = data.subInterests.map(subinterest => subinterest.id);
-                    const notEditableContainer = document.getElementById('notEditableContainer');
-                    notEditableContainer.innerHTML = '';
-
-                    userInterests.forEach(interest => {
-                        const checkbox = document.createElement('input');
-                        checkbox.className = 'form-check-input-not-edit';
-                        checkbox.checked = true;
-                        checkbox.id = `P${interest.id}`;
-                        checkbox.type = 'checkbox';
-                        checkbox.name = 'not-edit-item-checkbox';
-                        checkbox.disabled = true;
-                        checkbox.value = interest.name;
-
-                        checkbox.checked = true;
-
-                        const label = document.createElement('label');
-                        label.className = 'form-check-label';
-                        label.htmlFor = `P${interest}`;
-                        label.textContent = interest.name;
-
-                        const div = document.createElement('div');
-                        div.className = 'form-check';
-                        div.appendChild(checkbox);
-                        div.appendChild(label);
-                        notEditableContainer.appendChild(div);
-
-                    });
-                    // userSubInterests.forEach(subInterest=>{
-
-                    //     console.log(subInterest.name)
-                    // })
-
-                    const interestsCheckboxes = document.querySelectorAll('#notEditableContainer input[name="not-edit-item-checkbox"]');
-
-                    let checkedInterestsCount = 0;
-                    interestsCheckboxes.forEach(checkbox => {
-                        let checkboxId = checkbox.id.slice(1);
-                        checkedInterestsCount++;
-                        popluateSubInterestDataForProfile({ id: checkboxId, name: checkbox.value }, userSubInterestsId);
-                    });
-                })
-                .catch(function (error) {
-                    console.error("Error fetching user data:", error);
-                });
-        }
-
-        // Not Editable fetch sub interest for profile  
-        function popluateSubInterestDataForProfile(interest, userSubInterests) {
-            fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interest.id}`)
-                .then(response => response.json())
-                .then(subInterestsData => {
-                    const subinterests = subInterestsData.data;
-                    const subinterestContainer = document.createElement('div');
-                    subinterestContainer.className = 'interest-container';
-                    subinterestContainer.id = `sub-interest_${interest.id}`;
-                    subinterestContainer.style.marginRight = '20px';
-                    const interestHeading = document.createElement('h6');
-                    interestHeading.textContent = `${interest.name}`;
-                    subinterestContainer.appendChild(interestHeading);
-
-                    const subinterestsContainer = document.getElementById('notEditableSubContainer');
-
-                    const updatedSubinterest = subinterests.filter((subinterest) => {
-                        return isSubinterestChecked(subinterest.id, userSubInterests);
-                    });
-                    updatedSubinterest.forEach(subInterest => {
-                        const subInterestCheckbox = document.createElement('input');
-                        subInterestCheckbox.checked = true;
-                        subInterestCheckbox.disabled = true;
-                        // subInterestCheckbox.checked = isSubinterestChecked(subInterest.id, userSubInterests);
-
-                        subInterestCheckbox.type = 'checkbox';
-                        subInterestCheckbox.name = 'not-edit-subitem-checkbox';
-                        subInterestCheckbox.id = `not_Edit_sub${subInterest.id}`;
-                        subInterestCheckbox.value = subInterest.id;
-                        subinterestContainer.appendChild(subInterestCheckbox);
-
-                        const subInterestLabel = document.createElement('label');
-                        subInterestLabel.setAttribute('for', `not_Edit_sub${subInterest.id}`);
-
-                        subInterestLabel.textContent = subInterest.name;
-                        subinterestContainer.appendChild(subInterestLabel);
-
-                    });
-
-                    // Append the subinterest container to the main container
-                    subinterestsContainer.appendChild(subinterestContainer);
-                })
-                .catch(error => {
-                    console.error('Error fetching subinterests:', error);
-                });
-        }
-
-        if (userId) {
-            popluateInterestDataForProfile();
         }
 
 
@@ -4109,132 +3797,6 @@
         }
 	// ]]>
     </script>
-
-    <!--Gift script-->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const selectedInterests = new Set();
-            const subinterestContainers = {};
-
-            function fetchInterests() {
-                fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
-                    .then(response => response.json())
-                    .then(data => {
-                        const interests = data.results;
-                        const container = document.getElementById('box-container');
-
-                        interests.forEach(interest => {
-                            const checkbox = document.createElement('input');
-                            checkbox.className = 'box-form-check-input';
-                            checkbox.id = `box-${interest.id}`;
-                            checkbox.type = 'checkbox';
-                            checkbox.name = 'box-item-checkbox';
-                            checkbox.value = interest.name;
-
-                            const label = document.createElement('label');
-                            label.className = 'box-form-check-label';
-                            label.htmlFor = checkbox.id;
-                            label.textContent = interest.name;
-
-                            const div = document.createElement('div');
-                            div.className = 'box-form-check';
-                            div.appendChild(checkbox);
-                            div.appendChild(label);
-
-                            container.appendChild(div);
-
-                            checkbox.addEventListener('change', function () {
-                                if (this.checked) {
-                                    if (selectedInterests.size < 5) {
-                                        selectedInterests.add(interest.id);
-                                        fetchSubinterests(interest.id);
-                                    } else {
-                                        this.checked = false;
-                                        alert('Only 5 interests can be selected!!');
-                                    }
-                                } else {
-                                    selectedInterests.delete(interest.id);
-                                    removeSubinterests(interest.id);
-                                }
-                            });
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error fetching interests:', error);
-                    });
-            }
-
-            function fetchSubinterests(interestId) {
-                fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interestId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const subinterests = data.data;
-                        const container = document.getElementById('sub-box-container');
-                        container.style.display = "flex";
-                        container.style.columnGap = "20px"
-                        const selectedInterest = document.getElementById(`box-${interestId}`);
-
-                        const subinterestContainer = document.createElement('div');
-                        subinterestContainer.className = 'subinterest-container';
-
-                        const interestHeading = document.createElement('h6');
-                        interestHeading.textContent = selectedInterest.value;
-
-                        subinterestContainer.appendChild(interestHeading);
-
-                        subinterests.forEach(subinterest => {
-                            const checkbox = document.createElement('input');
-                            checkbox.className = 'box-form-check-input';
-                            checkbox.id = `box-sub-${subinterest.id}`;
-                            checkbox.type = 'checkbox';
-                            checkbox.name = 'box-subitem-checkbox';
-                            checkbox.value = subinterest.name;
-
-                            const label = document.createElement('label');
-                            label.className = 'box-form-check-label';
-                            label.htmlFor = checkbox.id;
-                            label.textContent = subinterest.name;
-
-                            const div = document.createElement('div');
-                            div.className = 'box-form-check';
-                            div.appendChild(checkbox);
-                            div.appendChild(label);
-
-                            subinterestContainer.appendChild(div);
-
-                            checkbox.addEventListener('change', function () {
-                                if (this.checked) {
-                                    if (!selectedInterests.has(interestId)) {
-                                        selectedInterests.add(interestId);
-                                    }
-                                } else {
-                                    selectedInterests.delete(interestId);
-                                }
-                            });
-                        });
-
-                        container.appendChild(subinterestContainer);
-                        subinterestContainers[interestId] = subinterestContainer;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching subinterests:', error);
-                    });
-            }
-
-            function removeSubinterests(interestId) {
-                const container = document.getElementById('sub-box-container');
-                const interestContainer = subinterestContainers[interestId];
-                if (interestContainer) {
-                    container.removeChild(interestContainer);
-                    delete subinterestContainers[interestId];
-                }
-            }
-            fetchInterests();
-        });
-
-    </script>
-
-
 </body>
 
 </html>
