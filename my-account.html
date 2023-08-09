@@ -1780,7 +1780,6 @@
             // logoutLink.addEventListener("click", handleLogout);
         });
 
-
         function fetchData() {
             fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
                 .then(response => response.json())
@@ -1851,15 +1850,12 @@
                     subinterests.forEach(subInterest => {
                         const subInterestCheckbox = document.createElement('input');
                         subInterestCheckbox.addEventListener('change', function () {
-                            // Check if the subinterest is present in userSubInterests
                             const isChecked = userSubInterests.includes(subInterest.id);
 
-                            // If the checkbox is checked and the subinterest is not in userSubInterests, add it
                             if (this.checked && !isChecked) {
                                 userSubInterests.push(subInterest.id);
                             }
 
-                            // If the checkbox is unchecked and the subinterest is in userSubInterests, remove it
                             if (!this.checked && isChecked) {
                                 const index = userSubInterests.indexOf(subInterest.id);
                                 if (index !== -1) {
@@ -1867,7 +1863,6 @@
                                 }
                             }
                         });
-
 
                         subInterestCheckbox.type = 'checkbox';
                         subInterestCheckbox.name = 'subitem-checkbox';
@@ -1880,7 +1875,6 @@
                         subinterestContainer.appendChild(subInterestLabel);
                     });
 
-                    // Append the subinterest container to the main container
                     subinterestsContainer.appendChild(subinterestContainer);
                 })
                 .catch(error => {
