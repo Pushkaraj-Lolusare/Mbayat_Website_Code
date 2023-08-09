@@ -2648,10 +2648,7 @@
     </script>
 
     <script>
-
-
         var latestShippingIdForEdit;
-
 
         const ALLOWED_PATHS = ['/my-account.html'];
 
@@ -2685,10 +2682,7 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             var name = localStorage.getItem("first_name");
-
             var accountName = document.getElementById("accountname");
-            // var logoutLink = document.getElementById("logout");
-
             if (!isLoggedIn()) {
                 window.location.href = 'login.html';
                 return;
@@ -2697,27 +2691,18 @@
             var welcomeText = document.createElement("a");
             welcomeText.textContent = `Welcome, ${name}!`;
             welcomeText.style.fontWeight = "200"
-
             accountName.appendChild(welcomeText);
-            // logoutLink.addEventListener("click", handleLogout);
         });
-
 
         function fetchData() {
             fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
                 .then(response => response.json())
                 .then(data => {
-
-
                     const interests = data.results;
-
-
                     const container = document.getElementById('container');
-
                     container.innerHTML = '';
 
                     interests.forEach(interest => {
-
                         const checkbox = document.createElement('input');
                         checkbox.className = 'form-check-input';
                         checkbox.id = interest.id;
@@ -2736,32 +2721,15 @@
                         div.appendChild(label);
 
                         checkbox.addEventListener('change', function () {
-
-
-
                             if (this.checked) {
                                 fetchSubinterests(interest);
                             } else {
-
                                 console.log("dischecked i removed in fetch data");
-
                                 removeSubinterests(interest.id);
                             }
                         });
-
                         container.appendChild(div);
-
-
-                        // Check the checkbox for interest if it is present in userInterests
-                        // const userInterests = JSON.parse(localStorage.getItem("userInterests")) || [];
-                        // // console.log("userInterests",userInterests);
-                        // if (userInterests.includes(interest.id)) {
-                        //     checkbox.checked = true;
-                        //     fetchSubinterests(interest); // Fetch subinterests for checked interest
-                        // }
                     });
-
-
                 })
                 .catch(error => {
                     console.error('Error fetching interests:', error);
@@ -2769,7 +2737,6 @@
         }
 
         function fetchSubinterests(interest, userSubInterests) {
-
             fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interest.id}`)
                 .then(response => response.json())
                 .then(subInterestsData => {
@@ -2786,7 +2753,6 @@
 
                     subinterests.forEach(subInterest => {
 
-
                         const subInterestCheckbox = document.createElement('input');
                         subInterestCheckbox.checked = isSubinterestChecked(subInterest.id, userSubInterests);
 
@@ -2800,41 +2766,27 @@
                         const subInterestLabel = document.createElement('label');
                         subInterestLabel.setAttribute('for', `sub${subInterest.id}`);
 
-
                         subInterestLabel.textContent = subInterest.name;
                         subinterestContainer.appendChild(subInterestLabel);
 
-
-
                         subInterestCheckbox.addEventListener('change', function () {
-                            // Check if the subinterest is present in userSubInterests
                             const isChecked = userSubInterests.includes(subInterest.id);
 
-                            // If the checkbox is checked and the subinterest is not in userSubInterests, add it
                             if (this.checked && !isChecked) {
                                 console.log("beforepushuserInterest", userSubInterests);
-
                                 userSubInterests.push(subInterest.id);
                                 console.log("afterpushuserInterest", userSubInterests);
                             }
-
                             // If the checkbox is unchecked and the subinterest is in userSubInterests, remove it
                             if (!this.checked && isChecked) {
-
                                 const index = userSubInterests.indexOf(subInterest.id);
                                 if (index !== -1) {
-
                                     userSubInterests.splice(index, 1);
                                     console.log("afteremoveInterest", userSubInterests);
-
-
                                 }
                             }
                         });
-
-
                     });
-
                     // Append the subinterest container to the main container
                     subinterestsContainer.appendChild(subinterestContainer);
                 })
@@ -2844,16 +2796,9 @@
         }
 
         function removeSubinterests(interestId) {
-
             const subContainer = document.getElementById('sub_container');
             const interestContainer = document.getElementById(`interest_${interestId}`);
-
-
-
             subContainer.removeChild(interestContainer);
-
-
-
         }
 
         fetchData();
@@ -2870,10 +2815,6 @@
                     return response.json();
                 })
                 .then(function (data) {
-
-
-
-
                     document.getElementById("acdetails-firstname").value = data.first_name;
                     document.getElementById("acdetails-lastname").value = data.last_name;
                     document.getElementById("acdetails-email").value = data.email;
@@ -2888,8 +2829,6 @@
                     document.getElementById("editable-acdetails-password").value = data.mobile_number;
                     document.getElementById("editable-acdetails-displayname").value = data.date_of_birth;
 
-
-
                     const genderSelect = document.getElementById("acdetails-gender");
                     const genderOptions = genderSelect.options;
                     for (let i = 0; i < genderOptions.length; i++) {
@@ -2898,25 +2837,18 @@
                             break;
                         }
                     }
-
                     const userInterests = data.interests.map(interest => interest.id);
-
                     const userSubInterests = data.subInterests.map(subinterest => subinterest.id);
-
                     const interestsCheckboxes = document.querySelectorAll('#container input[name="item-checkbox"]');
                     let checkedInterestsCount = 0;
                     interestsCheckboxes.forEach(checkbox => {
                         checkbox.checked = userInterests.includes(checkbox.id);
-
                         if (checkbox.checked) {
                             checkedInterestsCount++;
-
                             fetchSubinterests({ id: checkbox.id, name: checkbox.value }, userSubInterests);
                         }
 
                         checkbox.addEventListener('change', function () {
-
-
                             if (this.checked) {
                                 if (checkedInterestsCount >= 5) {
                                     this.checked = false;
@@ -2924,11 +2856,8 @@
                                 } else {
                                     fetchSubinterests({ id: checkbox.id, name: checkbox.value }, userSubInterests);
                                     checkedInterestsCount++;
-
                                 }
                             } else {
-
-
                                 console.log("dischecked");
                                 checkedInterestsCount--;
 
@@ -2947,17 +2876,12 @@
                 });
         }
 
-
-
         const userId = localStorage.getItem("loginId");
         if (userId) {
             populateAccountDetailsForm(userId);
         }
 
         function isSubinterestChecked(subinterestId, userSubInterests) {
-
-
-
             return userSubInterests.includes(subinterestId);
         }
 
@@ -2971,23 +2895,16 @@
             modal.style.display = 'none';
         }
 
-
         function openEditAddressModal(address) {
-
             latestShippingIdForEdit = address;
-
             const modal = document.getElementById('editAddressModal');
-
             modal.style.display = 'block';
-
         }
-
 
         function closeEditAddressModal() {
             const modal = document.getElementById('editAddressModal');
             modal.style.display = 'none';
         }
-
 
         async function fetchAddresses() {
             const userId = localStorage.getItem("loginId");
@@ -3003,11 +2920,8 @@
                 if (!response.ok) {
                     throw new Error('Failed to fetch addresses.');
                 }
-
                 const addresses = await response.json();
-
                 const addresse = addresses.data;
-
 
                 // const subContainer = document.getElementById('address_container');
                 // editable-address-container Inside Edit ProfileModal
@@ -3016,9 +2930,6 @@
                 addresse.forEach((address, index) => {
                     const addressDiv = document.createElement('div');
                     addressDiv.classList.add('address-div');
-
-
-
                     addressDiv.innerHTML = `
                      <div>
                         <input type="radio" id="address-toggle-btn${index}"  class="class-button" name="address-radio-group" check-address-id="${address.id}" value="${address.state}-${address.country}"  onclick="editAddress(event)" />
@@ -3035,11 +2946,9 @@
                             <i class="fas fa-trash-alt" style="margin-right:10px"></i>Delete
                         </button>
                     </div>`;
-
                     // subContainer.appendChild(addressDiv);
                     editableSubContainer.appendChild(addressDiv);
                 });
-
 
                 // subContainer.addEventListener('click', function (event) {
                 //     const target = event.target;
@@ -3057,8 +2966,6 @@
 
                 //     }
                 // });
-
-
                 // editable-sub-container
                 editableSubContainer.addEventListener('click', function (event) {
                     const target = event.target;
@@ -3073,12 +2980,8 @@
                     } else if (target.classList.contains('class-button')) {
 
                         const addressId = target.getAttribute('check-address-id');
-
                     }
                 });
-
-
-
             } catch (error) {
                 console.error('Error fetching addresses:', error);
             }
@@ -3088,7 +2991,6 @@
 
         function deleteAddress(addressId) {
             const buttonElement = event.target;
-
             const shippingId = addressId
             console.log("shippingId", shippingId)
             const addressDiv = buttonElement.parentElement.parentElement;
@@ -3123,18 +3025,13 @@
 
         function editAddress(event) {
             console.log("edit function run")
-
-
             const target = event.target;
             if (target.type === 'radio') {
                 const selectedValue = target.value;
                 console.log("Selected Value:", selectedValue);
-
                 // const [state, country] = selectedValue.split('-');
-
                 // const selectedAddressDiv = document.getElementById('selectedAddress');
                 // selectedAddressDiv.textContent = `${state}, ${country}`;
-
             }
         }
 
@@ -3172,15 +3069,10 @@
             'Jahra': ['Naseem', 'Al Sulaibikhat', 'Amghara', 'Kabad', 'Jahra Industrial Area', 'Qasr']
         }
 
-
         function populateAreas(event) {
-
-
             const selectedState = event.target.value;
             const areaDropdown = document.getElementById('editAddressArea');
             areaDropdown.innerHTML = '';
-
-
             const selectAreaOption = document.createElement('option');
             selectAreaOption.value = '';
             selectAreaOption.textContent = 'Select Area';
@@ -3191,74 +3083,49 @@
             if (selectedStateAreas) {
                 let clutter3 = ''
                 selectedStateAreas.forEach(area => {
-
                     const option = document.createElement('option');
                     option.value = area;
                     option.textContent = area;
                     areaDropdown.appendChild(option);
                     // console.log("areaDropdown", areaDropdown);
                 });
-
                 areaDropdown.style.display = 'Initial';
-
             }
         }
 
-
         function populateAreas2(event) {
-
-
-
             const selectedState = event.target.value;
             const areaDropdown = document.getElementById('area');
             areaDropdown.innerHTML = '';
-
-
             const selectAreaOption = document.createElement('option');
             selectAreaOption.value = '';
             selectAreaOption.textContent = 'Select Area';
             areaDropdown.appendChild(selectAreaOption);
-
             const selectedStateAreas = areasByState[selectedState];
-
             if (selectedStateAreas) {
                 let clutter3 = ''
                 selectedStateAreas.forEach(area => {
-
                     const option = document.createElement('option');
                     option.value = area;
                     option.textContent = area;
                     areaDropdown.appendChild(option);
                     // console.log("areaDropdown", areaDropdown);
                 });
-
                 areaDropdown.style.display = 'Initial';
-
             }
-
         }
 
-
-
         function handleEditButtonClick(addressString) {
-
-
             const address = JSON.parse(addressString);
             openEditAddressModal(address);
         }
 
-
-
         // Add new Address function
         document.addEventListener('DOMContentLoaded', function () {
-
-
             const form = document.getElementById('addAddressForm');
             const submitButton = document.getElementById('addNewAddressSubmit');
             const currentUserId = localStorage.getItem("loginId");
             const token = localStorage.getItem("access_token");
-
-
             form.addEventListener('submit', async function (event) {
                 event.preventDefault();
                 // Handle form submission logic here
@@ -3272,11 +3139,7 @@
                 const apartment = document.getElementById('apartment').value;
                 const floor = document.getElementById('floor').value;
                 const avenue = document.getElementById('avenue').value;
-                const direction = document.getElementById('direction').value;
-
-
-
-
+    
                 const data = {
                     userId: currentUserId,
                     state: state,
@@ -3790,7 +3653,7 @@
                     const selectedInterest = document.getElementById(`box-${interestId}`);
 
                     const subinterestContainer = document.createElement('div');
-                    subinterestContainer.className = 'subinterest-container'; // Add a class for flex styling
+                    subinterestContainer.className = 'subinterest-container'; 
 
                     const interestHeading = document.createElement('h6');
                     interestHeading.textContent = selectedInterest.value;
@@ -3839,13 +3702,11 @@
         function removeSubinterests(interestId) {
             const container = document.getElementById('sub-box-container');
             const interestContainer = subinterestContainers[interestId];
-
             if (interestContainer) {
                 container.removeChild(interestContainer);
                 delete subinterestContainers[interestId];
             }
         }
-
         fetchInterests();
     });
 
