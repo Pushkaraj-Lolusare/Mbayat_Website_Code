@@ -1832,8 +1832,6 @@
                                                 </div>
 
                                                 <form action="#" id="editProfileForm" class="tm-form tm-form-bordered">
-
-
                                                     <div class="tm-form-inner">
                                                         <div class="tm-form-field tm-form-fieldhalf">
                                                             <label for="editable-acdetails-firstname">First name</label>
@@ -1847,8 +1845,6 @@
                                                             <label for="editable-acdetails-email">Email address</label>
                                                             <input type="email" id="editable-acdetails-email" readonly>
                                                         </div>
-
-
                                                         <div class="tm-form-field col-lg-6 col-md-6 col-12">
                                                             <label for="editable-acdetails-password">Mobile
                                                                 Number</label>
@@ -1936,19 +1932,11 @@
                                                                 style=" margin-left: 10px; border: none; padding:0px 30px; height: 40px; font-weight: bold; background-color: rgb(177,43,82);  font-size: 15px; border-radius:10px; color: white;">
                                                                 <span style="text-align: center; ">Cancel</span>
                                                             </button>
-
-
                                                         </div>
-
-
                                                     </div>
                                                 </form>
-
                                             </div>
-
                                         </div>
-
-
                                         <div id="addAddressModal" class="modal"
                                             style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
                                             <div class="modal-content" style="padding: 20px;">
@@ -2064,7 +2052,6 @@
                                                 </form>
                                             </div>
                                         </div>
-
 
                                         <div id="editAddressModal" class="modal"
                                             style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
@@ -3156,14 +3143,11 @@
                     country_code: '+91',
                 };
 
-
-
                 fetch('https://15.185.57.60/api/v1/users/create-user-shipping-address', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
-
                     },
                     body: JSON.stringify(data),
                 })
@@ -3180,15 +3164,9 @@
                     .catch(error => {
                         console.error('Error submitting form:', error);
                     });
-
-
-
             });
-
-
         });
-
-
+        
         // updateAddress  function 
         document.addEventListener('DOMContentLoaded', function () {
 
@@ -3197,9 +3175,7 @@
             const currentUserId = localStorage.getItem("loginId");
             const token = localStorage.getItem("access_token");
 
-
             form.addEventListener('submit', async function (event) {
-
                 event.preventDefault();
                 // Handle form submission logic here
                 const shippingId = latestShippingIdForEdit;
@@ -3215,14 +3191,9 @@
                 const avenue = document.getElementById('editAddressAvenue').value;
                 const direction = document.getElementById('editAddressDirection').value;
 
-
-
-
-
                 const data = {
                     userId: currentUserId,
                     state: state,
-
                     shippingId: shippingId,
                     street1: street,
                     city: area,
@@ -3237,14 +3208,11 @@
                     country_code: '+91',
                 };
 
-
-
                 fetch('https://15.185.57.60/api/v1/users/update-shipping-address', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
-
                     },
                     body: JSON.stringify(data),
                 })
@@ -3261,27 +3229,18 @@
                     .catch(error => {
                         console.error('Error submitting form:', error);
                     });
-
-
-
             });
-
-
-
         });
 
         // Update Profile function
         document.addEventListener('DOMContentLoaded', function () {
-
             const form = document.getElementById('editProfileForm');
             const submitButton = document.getElementById('editProfileSubmit');
             const currentUserId = localStorage.getItem("loginId");
             const token = localStorage.getItem("access_token");
 
-
             form.addEventListener('submit', async function (event) {
                 closeEditProfileModal();
-
                 event.preventDefault();
                 // Handle form submission logic here
                 const first_name = document.getElementById("editable-acdetails-firstname").value;
@@ -3292,9 +3251,6 @@
                 const interest = '643bacaf4d09602aa0916760,643bacaa4d09602aa0916749'
                 const subinterest = '64398733e489923d28d4750e'
                 console.log("form update submit ", currentUserId, first_name, last_name, date_of_birth);
-
-
-
                 const data = {
                     first_name: first_name,
                     last_name: last_name,
@@ -3306,16 +3262,11 @@
                     subInterests: subinterest,
 
                 };
-
-
-
                 fetch(`https://15.185.57.60/api/v1/users/update-user/${currentUserId}`, {
-
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
-
                     },
                     body: JSON.stringify(data),
                 })
@@ -3332,45 +3283,28 @@
                     .catch(error => {
                         console.error('Error submitting form:', error);
                     });
-
-
-
             });
-
-
-
         });
-
-
-
-
-
+        
         // open profile edit modal
         function openEditProfileModal() {
             disableScroll();
             const modal = document.getElementById('editProfileModal');
             modal.style.display = 'block';
-
         }
+        
         // Close profile edit modal
-
-
         function closeEditProfileModal() {
             enableScroll();
             const modal = document.getElementById('editProfileModal');
             modal.style.display = 'none';
         }
-
-
-
-
+        
         // Enable or Disable scrolling at opening modal
-
         function disableScroll() {
             // Get the current page scroll position
             scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-
                 // if any scroll is attempted, set this to the previous value
                 window.onscroll = function () {
                     window.scrollTo(scrollLeft, scrollTop);
@@ -3381,11 +3315,8 @@
             window.onscroll = function () { };
         }
 
-
         // Not Editable fetch interest for profile  
         function popluateInterestDataForProfile() {
-
-            // firstly fetch data of user
             const token = localStorage.getItem("access_token");
             fetch(`https://15.185.57.60/api/v1/users/${userId}`, {
                 method: 'GET',
@@ -3397,34 +3328,23 @@
                     return response.json();
                 })
                 .then(function (data) {
-
-
                     const userInterests = data.interests.map(interest => interest);
                     const userInterestsId = data.interests.map(interest => interest.id);
 
                     const userSubInterests = data.subInterests.map(subinterest => subinterest);
                     const userSubInterestsId = data.subInterests.map(subinterest => subinterest.id);
-
-                    // created User Interest checkbo
-
                     const notEditableContainer = document.getElementById('notEditableContainer');
-
                     notEditableContainer.innerHTML = '';
 
                     userInterests.forEach(interest => {
-
                         const checkbox = document.createElement('input');
                         checkbox.className = 'form-check-input-not-edit';
                         checkbox.checked = true;
                         checkbox.id = `P${interest.id}`;
                         checkbox.type = 'checkbox';
                         checkbox.name = 'not-edit-item-checkbox';
-                        // Make the checkbox not editable
                         checkbox.disabled = true;
-
                         checkbox.value = interest.name;
-                        // Set the checkbox as checked
-
 
                         checkbox.checked = true;
 
@@ -3433,17 +3353,13 @@
                         label.htmlFor = `P${interest}`;
                         label.textContent = interest.name;
 
-
                         const div = document.createElement('div');
                         div.className = 'form-check';
                         div.appendChild(checkbox);
                         div.appendChild(label);
-
-
                         notEditableContainer.appendChild(div);
 
                     });
-
                     // userSubInterests.forEach(subInterest=>{
 
                     //     console.log(subInterest.name)
@@ -3453,35 +3369,21 @@
 
                     let checkedInterestsCount = 0;
                     interestsCheckboxes.forEach(checkbox => {
-
                         let checkboxId = checkbox.id.slice(1);
-
-
                         checkedInterestsCount++;
                         popluateSubInterestDataForProfile({ id: checkboxId, name: checkbox.value }, userSubInterestsId);
-
-
                     });
-
-
                 })
                 .catch(function (error) {
                     console.error("Error fetching user data:", error);
                 });
-
         }
-
-
-
+       
         // Not Editable fetch sub interest for profile  
-
         function popluateSubInterestDataForProfile(interest, userSubInterests) {
-
             fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interest.id}`)
                 .then(response => response.json())
                 .then(subInterestsData => {
-
-
                     const subinterests = subInterestsData.data;
                     const subinterestContainer = document.createElement('div');
                     subinterestContainer.className = 'interest-container';
@@ -3494,15 +3396,9 @@
                     const subinterestsContainer = document.getElementById('notEditableSubContainer');
 
                     const updatedSubinterest = subinterests.filter((subinterest) => {
-
-
                         return isSubinterestChecked(subinterest.id, userSubInterests);
                     });
-
-
                     updatedSubinterest.forEach(subInterest => {
-
-
                         const subInterestCheckbox = document.createElement('input');
                         subInterestCheckbox.checked = true;
                         subInterestCheckbox.disabled = true;
@@ -3511,23 +3407,16 @@
                         subInterestCheckbox.type = 'checkbox';
                         subInterestCheckbox.name = 'not-edit-subitem-checkbox';
                         subInterestCheckbox.id = `not_Edit_sub${subInterest.id}`;
-
-
-
-
                         subInterestCheckbox.value = subInterest.id;
                         subinterestContainer.appendChild(subInterestCheckbox);
 
                         const subInterestLabel = document.createElement('label');
                         subInterestLabel.setAttribute('for', `not_Edit_sub${subInterest.id}`);
 
-
                         subInterestLabel.textContent = subInterest.name;
                         subinterestContainer.appendChild(subInterestLabel);
 
                     });
-
-
 
                     // Append the subinterest container to the main container
                     subinterestsContainer.appendChild(subinterestContainer);
@@ -3537,15 +3426,9 @@
                 });
         }
 
-
         if (userId) {
             popluateInterestDataForProfile();
-
         }
-
-
-
-
 
     </script>
 
@@ -3586,8 +3469,6 @@
         }
 	// ]]>
     </script>
-
-
  <!--Gift script-->
  <script>
     document.addEventListener('DOMContentLoaded', function () {
