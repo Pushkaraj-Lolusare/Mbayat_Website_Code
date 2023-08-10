@@ -16,10 +16,6 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/main.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-..." crossorigin="anonymous" />
@@ -1481,6 +1477,7 @@
     <!-- Main Content -->
     <!-- Main Content -->
     <main class="main-content" style="margin-top: 10px;">
+
         <!-- My Account Area -->
         <div class="tm-section tm-my-account-area bg-white tm-padding-section">
             <div class="container">
@@ -1530,7 +1527,9 @@
                             </div>
                         </div>
                     </ul>
+
                     <div class="tab-content" id="account-ontent">
+
                         <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
                             aria-labelledby="account-dashboard-tab">
                             <div style=" display: flex; justify-content: space-between; flex-direction: column;">
@@ -1642,6 +1641,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="account-orders" role="tabpanel"
                             aria-labelledby="account-orders-tab">
 
@@ -1810,7 +1810,13 @@
 
                                                     <div class="address_container" id="address_container">
                                                         <h6>Shipping Address</h6>
-                                                        <h6 id="current_shipping_address_container"></h6>
+
+                                                        <h6 id="current_shipping_address_container">
+
+
+
+                                                        </h6>
+
 
                                                     </div>
                                                 </div>
@@ -2414,6 +2420,7 @@
                                         <input type="checkbox" name="subscription-hide-details"
                                             id="subscription-hide-details">
                                         <label class="lbl-cus" for="subscription-hide-details"> Hide my details
+
                                         </label>
                                     </div>
                                     <div class="tm-form-field term-condition">
@@ -2647,8 +2654,11 @@
         });
     </script>
 
+
     <script>
         var latestShippingIdForEdit;
+
+        const shippingId = localStorage.getItem("shippingId");
 
         const ALLOWED_PATHS = ['/my-account.html'];
 
@@ -2682,7 +2692,10 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             var name = localStorage.getItem("first_name");
+
             var accountName = document.getElementById("accountname");
+            // var logoutLink = document.getElementById("logout");
+
             if (!isLoggedIn()) {
                 window.location.href = 'login.html';
                 return;
@@ -2691,15 +2704,20 @@
             var welcomeText = document.createElement("a");
             welcomeText.textContent = `Welcome, ${name}!`;
             welcomeText.style.fontWeight = "200"
+
             accountName.appendChild(welcomeText);
+            // logoutLink.addEventListener("click", handleLogout);
         });
+
 
         function fetchData() {
             fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
                 .then(response => response.json())
                 .then(data => {
                     const interests = data.results;
+
                     const container = document.getElementById('container');
+
                     container.innerHTML = '';
 
                     interests.forEach(interest => {
@@ -2725,10 +2743,23 @@
                                 fetchSubinterests(interest);
                             } else {
                                 console.log("dischecked i removed in fetch data");
+
                                 removeSubinterests(interest.id);
                             }
                         });
+        
+
                         container.appendChild(div);
+
+
+                        // Check the checkbox for interest if it is present in userInterests
+                        // const userInterests = JSON.parse(localStorage.getItem("userInterests")) || [];
+                        // // console.log("userInterests",userInterests);
+                        // if (userInterests.includes(interest.id)) {
+                        //     checkbox.checked = true;
+                        //     fetchSubinterests(interest); // Fetch subinterests for checked interest
+                        // }
+
                     });
                 })
                 .catch(error => {
@@ -2753,6 +2784,7 @@
 
                     subinterests.forEach(subInterest => {
 
+
                         const subInterestCheckbox = document.createElement('input');
                         subInterestCheckbox.checked = isSubinterestChecked(subInterest.id, userSubInterests);
 
@@ -2766,27 +2798,36 @@
                         const subInterestLabel = document.createElement('label');
                         subInterestLabel.setAttribute('for', `sub${subInterest.id}`);
 
-                        subInterestLabel.textContent = subInterest.name;
-                        subinterestContainer.appendChild(subInterestLabel);
+
+           
 
                         subInterestCheckbox.addEventListener('change', function () {
+                            // Check if the subinterest is present in userSubInterests
                             const isChecked = userSubInterests.includes(subInterest.id);
 
+                            // If the checkbox is checked and the subinterest is not in userSubInterests, add it
                             if (this.checked && !isChecked) {
                                 console.log("beforepushuserInterest", userSubInterests);
                                 userSubInterests.push(subInterest.id);
                                 console.log("afterpushuserInterest", userSubInterests);
                             }
+
                             // If the checkbox is unchecked and the subinterest is in userSubInterests, remove it
                             if (!this.checked && isChecked) {
                                 const index = userSubInterests.indexOf(subInterest.id);
                                 if (index !== -1) {
                                     userSubInterests.splice(index, 1);
                                     console.log("afteremoveInterest", userSubInterests);
+
+
+
                                 }
                             }
                         });
+
+
                     });
+
                     // Append the subinterest container to the main container
                     subinterestsContainer.appendChild(subinterestContainer);
                 })
@@ -2796,6 +2837,7 @@
         }
 
         function removeSubinterests(interestId) {
+
             const subContainer = document.getElementById('sub_container');
             const interestContainer = document.getElementById(`interest_${interestId}`);
             subContainer.removeChild(interestContainer);
@@ -2815,7 +2857,7 @@
                     return response.json();
                 })
                 .then(function (data) {
-                    document.getElementById("acdetails-firstname").value = data.first_name;
+  document.getElementById("acdetails-firstname").value = data.first_name;
                     document.getElementById("acdetails-lastname").value = data.last_name;
                     document.getElementById("acdetails-email").value = data.email;
                     document.getElementById("acdetails-password").value = data.mobile_number;
@@ -2828,6 +2870,9 @@
                     document.getElementById("editable-acdetails-email").value = data.email;
                     document.getElementById("editable-acdetails-password").value = data.mobile_number;
                     document.getElementById("editable-acdetails-displayname").value = data.date_of_birth;
+                    // localStorage.setItem("shippingId", data.shippin)
+
+
 
                     const genderSelect = document.getElementById("acdetails-gender");
                     const genderOptions = genderSelect.options;
@@ -2837,12 +2882,15 @@
                             break;
                         }
                     }
+
                     const userInterests = data.interests.map(interest => interest.id);
                     const userSubInterests = data.subInterests.map(subinterest => subinterest.id);
+
                     const interestsCheckboxes = document.querySelectorAll('#container input[name="item-checkbox"]');
                     let checkedInterestsCount = 0;
                     interestsCheckboxes.forEach(checkbox => {
                         checkbox.checked = userInterests.includes(checkbox.id);
+
                         if (checkbox.checked) {
                             checkedInterestsCount++;
                             fetchSubinterests({ id: checkbox.id, name: checkbox.value }, userSubInterests);
@@ -2858,6 +2906,7 @@
                                     checkedInterestsCount++;
                                 }
                             } else {
+
                                 console.log("dischecked");
                                 checkedInterestsCount--;
 
@@ -2876,7 +2925,9 @@
                 });
         }
 
+
         const userId = localStorage.getItem("loginId");
+
         if (userId) {
             populateAccountDetailsForm(userId);
         }
@@ -2896,6 +2947,7 @@
         }
 
         function openEditAddressModal(address) {
+
             latestShippingIdForEdit = address;
             const modal = document.getElementById('editAddressModal');
             modal.style.display = 'block';
@@ -2920,11 +2972,11 @@
                 if (!response.ok) {
                     throw new Error('Failed to fetch addresses.');
                 }
+
                 const addresses = await response.json();
                 const addresse = addresses.data;
 
-                // const subContainer = document.getElementById('address_container');
-                // editable-address-container Inside Edit ProfileModal
+
                 const editableSubContainer = document.getElementById('editable_address_container');
 
                 addresse.forEach((address, index) => {
@@ -2932,7 +2984,9 @@
                     addressDiv.classList.add('address-div');
                     addressDiv.innerHTML = `
                      <div>
-                        <input type="radio" id="address-toggle-btn${index}"  class="class-button" name="address-radio-group" check-address-id="${address.id}" value="${address.state}-${address.country}"  onclick="editAddress(event)" />
+
+                        <input type="radio" id="address-toggle-btn${index}"  class="class-button" name="address-radio-group" check-address-id="${address.id}" value="${address.state}-${address.country}"/>
+
                         <label for="address-toggle-btn${index}" >
                         ${address.country}${address.state ? ', ' + address.state : ''}${address.city ? ', ' + address.city : ''}${address.street2 ? ', ' + address.street2 : ''}${address.street1 ? ', ' + address.street1 : ''}${address.direction ? ', ' + address.direction : ''}${address.avenue ? ', ' + address.avenue : ''}${address.floor ? ', ' + address.floor : ''}${address.apartment ? ', ' + address.apartment : ''}${address.houseNo ? ', ' + address.houseNo : ''}.
                     </label>
@@ -2960,13 +3014,6 @@
 
                 //         openEditAddressModal(addressId);
 
-                //     } else if (target.classList.contains('class-button')) {
-
-                //         const addressId = target.getAttribute('check-address-id');
-
-                //     }
-                // });
-                // editable-sub-container
                 editableSubContainer.addEventListener('click', function (event) {
                     const target = event.target;
                     if (target.classList.contains('delete-button')) {
@@ -2980,7 +3027,10 @@
                     } else if (target.classList.contains('class-button')) {
 
                         const addressId = target.getAttribute('check-address-id');
-                    }
+
+
+                        editAddress(addressId);
+     }
                 });
             } catch (error) {
                 console.error('Error fetching addresses:', error);
@@ -2991,6 +3041,7 @@
 
         function deleteAddress(addressId) {
             const buttonElement = event.target;
+
             const shippingId = addressId
             console.log("shippingId", shippingId)
             const addressDiv = buttonElement.parentElement.parentElement;
@@ -3023,16 +3074,14 @@
 
         }
 
-        function editAddress(event) {
-            console.log("edit function run")
-            const target = event.target;
-            if (target.type === 'radio') {
-                const selectedValue = target.value;
-                console.log("Selected Value:", selectedValue);
-                // const [state, country] = selectedValue.split('-');
-                // const selectedAddressDiv = document.getElementById('selectedAddress');
-                // selectedAddressDiv.textContent = `${state}, ${country}`;
-            }
+
+
+
+        function editAddress(latestShippingAddressId) {
+
+            console.log("edit addrress", latestShippingAddressId);
+
+
         }
 
         function toggleGiftDropdown() {
@@ -3070,9 +3119,12 @@
         }
 
         function populateAreas(event) {
+
+
             const selectedState = event.target.value;
             const areaDropdown = document.getElementById('editAddressArea');
             areaDropdown.innerHTML = '';
+
             const selectAreaOption = document.createElement('option');
             selectAreaOption.value = '';
             selectAreaOption.textContent = 'Select Area';
@@ -3089,43 +3141,68 @@
                     areaDropdown.appendChild(option);
                     // console.log("areaDropdown", areaDropdown);
                 });
+
                 areaDropdown.style.display = 'Initial';
             }
         }
 
+    
+
         function populateAreas2(event) {
+
+
+
             const selectedState = event.target.value;
             const areaDropdown = document.getElementById('area');
             areaDropdown.innerHTML = '';
+
+
             const selectAreaOption = document.createElement('option');
             selectAreaOption.value = '';
             selectAreaOption.textContent = 'Select Area';
             areaDropdown.appendChild(selectAreaOption);
+
             const selectedStateAreas = areasByState[selectedState];
             if (selectedStateAreas) {
                 let clutter3 = ''
+
+
+            const selectedStateAreas = areasByState[selectedState];
+
+            if (selectedStateAreas) {
+                let clutter3 = ''
                 selectedStateAreas.forEach(area => {
+
                     const option = document.createElement('option');
                     option.value = area;
                     option.textContent = area;
                     areaDropdown.appendChild(option);
                     // console.log("areaDropdown", areaDropdown);
                 });
+
                 areaDropdown.style.display = 'Initial';
             }
         }
 
         function handleEditButtonClick(addressString) {
-            const address = JSON.parse(addressString);
-            openEditAddressModal(address);
+
+                areaDropdown.style.display = 'Initial';
+
+            }
+
         }
+
 
         // Add new Address function
         document.addEventListener('DOMContentLoaded', function () {
+
+
+
             const form = document.getElementById('addAddressForm');
             const submitButton = document.getElementById('addNewAddressSubmit');
             const currentUserId = localStorage.getItem("loginId");
             const token = localStorage.getItem("access_token");
+
             form.addEventListener('submit', async function (event) {
                 event.preventDefault();
                 // Handle form submission logic here
