@@ -3597,10 +3597,11 @@
                             console.log("hey", result);
                             if (result.tokens) {
                                 form.reset();
-                                alert('Profile is Updated Successful!!');
+                                console.log('Profile is Updated Successful!!');
                             } else {
-                                alert(result.message);
+                                console.log(result.message);
                             }
+                            window.location.reload();
                         })
                         .catch(error => {
                             console.error('Error submitting form:', error);
