@@ -2661,11 +2661,7 @@
     <script>
         var latestShippingIdForEdit;
 
-        const userId = localStorage.getItem("loginId");
         const shippingId = localStorage.getItem("shippingId");
-
-
-
 
         const ALLOWED_PATHS = ['/my-account.html'];
 
@@ -3224,10 +3220,6 @@
                 const floor = document.getElementById('floor').value;
                 const avenue = document.getElementById('avenue').value;
 
-                const direction = document.getElementById('direction').value;
-
-
-
                 const data = {
                     userId: currentUserId,
                     state: state,
@@ -3677,6 +3669,11 @@
             const selectedInterests = new Set();
             const subinterestContainers = {};
 
+    <!--Gift script-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectedInterests = new Set();
+            const subinterestContainers = {};
             function fetchInterests() {
                 fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
                     .then(response => response.json())
@@ -3774,6 +3771,7 @@
                             });
                         });
 
+
                         container.appendChild(subinterestContainer);
                         subinterestContainers[interestId] = subinterestContainer;
                     })
@@ -3792,6 +3790,10 @@
             }
             fetchInterests();
         });
+
+
+
+                     
 
     </script>
 
