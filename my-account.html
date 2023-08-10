@@ -3139,7 +3139,7 @@
                 const apartment = document.getElementById('apartment').value;
                 const floor = document.getElementById('floor').value;
                 const avenue = document.getElementById('avenue').value;
-    
+
                 const data = {
                     userId: currentUserId,
                     state: state,
@@ -3588,131 +3588,131 @@
     </script>
 
 
- <!--Gift script-->
- <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const selectedInterests = new Set();
-        const subinterestContainers = {};
+    <!--Gift script-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectedInterests = new Set();
+            const subinterestContainers = {};
 
-        function fetchInterests() {
-            fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
-                .then(response => response.json())
-                .then(data => {
-                    const interests = data.results;
-                    const container = document.getElementById('box-container');
+            function fetchInterests() {
+                fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
+                    .then(response => response.json())
+                    .then(data => {
+                        const interests = data.results;
+                        const container = document.getElementById('box-container');
 
-                    interests.forEach(interest => {
-                        const checkbox = document.createElement('input');
-                        checkbox.className = 'box-form-check-input';
-                        checkbox.id = `box-${interest.id}`;
-                        checkbox.type = 'checkbox';
-                        checkbox.name = 'box-item-checkbox';
-                        checkbox.value = interest.name;
+                        interests.forEach(interest => {
+                            const checkbox = document.createElement('input');
+                            checkbox.className = 'box-form-check-input';
+                            checkbox.id = `box-${interest.id}`;
+                            checkbox.type = 'checkbox';
+                            checkbox.name = 'box-item-checkbox';
+                            checkbox.value = interest.name;
 
-                        const label = document.createElement('label');
-                        label.className = 'box-form-check-label';
-                        label.htmlFor = checkbox.id;
-                        label.textContent = interest.name;
+                            const label = document.createElement('label');
+                            label.className = 'box-form-check-label';
+                            label.htmlFor = checkbox.id;
+                            label.textContent = interest.name;
 
-                        const div = document.createElement('div');
-                        div.className = 'box-form-check';
-                        div.appendChild(checkbox);
-                        div.appendChild(label);
+                            const div = document.createElement('div');
+                            div.className = 'box-form-check';
+                            div.appendChild(checkbox);
+                            div.appendChild(label);
 
-                        container.appendChild(div);
+                            container.appendChild(div);
 
-                        checkbox.addEventListener('change', function () {
-                            if (this.checked) {
-                                if (selectedInterests.size < 5) {
-                                    selectedInterests.add(interest.id);
-                                    fetchSubinterests(interest.id);
+                            checkbox.addEventListener('change', function () {
+                                if (this.checked) {
+                                    if (selectedInterests.size < 5) {
+                                        selectedInterests.add(interest.id);
+                                        fetchSubinterests(interest.id);
+                                    } else {
+                                        this.checked = false;
+                                        alert('Only 5 interests can be selected!!');
+                                    }
                                 } else {
-                                    this.checked = false;
-                                    alert('Only 5 interests can be selected!!');
+                                    selectedInterests.delete(interest.id);
+                                    removeSubinterests(interest.id);
                                 }
-                            } else {
-                                selectedInterests.delete(interest.id);
-                                removeSubinterests(interest.id);
-                            }
+                            });
                         });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching interests:', error);
                     });
-                })
-                .catch(error => {
-                    console.error('Error fetching interests:', error);
-                });
-        }
-
-        function fetchSubinterests(interestId) {
-            fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interestId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const subinterests = data.data;
-                    const container = document.getElementById('sub-box-container');
-                    container.style.display = "flex";
-                    container.style.columnGap = "20px"
-                    const selectedInterest = document.getElementById(`box-${interestId}`);
-
-                    const subinterestContainer = document.createElement('div');
-                    subinterestContainer.className = 'subinterest-container'; 
-
-                    const interestHeading = document.createElement('h6');
-                    interestHeading.textContent = selectedInterest.value;
-
-                    subinterestContainer.appendChild(interestHeading);
-
-                    subinterests.forEach(subinterest => {
-                        const checkbox = document.createElement('input');
-                        checkbox.className = 'box-form-check-input';
-                        checkbox.id = `box-sub-${subinterest.id}`;
-                        checkbox.type = 'checkbox';
-                        checkbox.name = 'box-subitem-checkbox';
-                        checkbox.value = subinterest.name;
-
-                        const label = document.createElement('label');
-                        label.className = 'box-form-check-label';
-                        label.htmlFor = checkbox.id;
-                        label.textContent = subinterest.name;
-
-                        const div = document.createElement('div');
-                        div.className = 'box-form-check';
-                        div.appendChild(checkbox);
-                        div.appendChild(label);
-
-                        subinterestContainer.appendChild(div);
-
-                        checkbox.addEventListener('change', function () {
-                            if (this.checked) {
-                                if (!selectedInterests.has(interestId)) {
-                                    selectedInterests.add(interestId);
-                                }
-                            } else {
-                                selectedInterests.delete(interestId);
-                            }
-                        });
-                    });
-
-                    container.appendChild(subinterestContainer);
-                    subinterestContainers[interestId] = subinterestContainer;
-                })
-                .catch(error => {
-                    console.error('Error fetching subinterests:', error);
-                });
-        }
-
-        function removeSubinterests(interestId) {
-            const container = document.getElementById('sub-box-container');
-            const interestContainer = subinterestContainers[interestId];
-            if (interestContainer) {
-                container.removeChild(interestContainer);
-                delete subinterestContainers[interestId];
             }
-        }
-        fetchInterests();
-    });
+
+            function fetchSubinterests(interestId) {
+                fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interestId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const subinterests = data.data;
+                        const container = document.getElementById('sub-box-container');
+                        container.style.display = "flex";
+                        container.style.columnGap = "20px"
+                        const selectedInterest = document.getElementById(`box-${interestId}`);
+
+                        const subinterestContainer = document.createElement('div');
+                        subinterestContainer.className = 'subinterest-container';
+
+                        const interestHeading = document.createElement('h6');
+                        interestHeading.textContent = selectedInterest.value;
+
+                        subinterestContainer.appendChild(interestHeading);
+
+                        subinterests.forEach(subinterest => {
+                            const checkbox = document.createElement('input');
+                            checkbox.className = 'box-form-check-input';
+                            checkbox.id = `box-sub-${subinterest.id}`;
+                            checkbox.type = 'checkbox';
+                            checkbox.name = 'box-subitem-checkbox';
+                            checkbox.value = subinterest.name;
+
+                            const label = document.createElement('label');
+                            label.className = 'box-form-check-label';
+                            label.htmlFor = checkbox.id;
+                            label.textContent = subinterest.name;
+
+                            const div = document.createElement('div');
+                            div.className = 'box-form-check';
+                            div.appendChild(checkbox);
+                            div.appendChild(label);
+
+                            subinterestContainer.appendChild(div);
+
+                            checkbox.addEventListener('change', function () {
+                                if (this.checked) {
+                                    if (!selectedInterests.has(interestId)) {
+                                        selectedInterests.add(interestId);
+                                    }
+                                } else {
+                                    selectedInterests.delete(interestId);
+                                }
+                            });
+                        });
+
+                        container.appendChild(subinterestContainer);
+                        subinterestContainers[interestId] = subinterestContainer;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching subinterests:', error);
+                    });
+            }
+
+            function removeSubinterests(interestId) {
+                const container = document.getElementById('sub-box-container');
+                const interestContainer = subinterestContainers[interestId];
+                if (interestContainer) {
+                    container.removeChild(interestContainer);
+                    delete subinterestContainers[interestId];
+                }
+            }
+            fetchInterests();
+        });
 
 
 
-</script>
+    </script>
 
 </body>
 
