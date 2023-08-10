@@ -806,6 +806,11 @@
 
                 function updateDaysLeft() {
                     const nextBoxDate = data[0].nextBoxDate;
+                    if (!nextBoxDate) {
+                        document.getElementById('daysLeft').textContent = "0 Days"; // Display empty space
+                        return;
+                    }
+
                     const currentDate = new Date();
                     const diffInTime = new Date(nextBoxDate) - currentDate;
                     const diffInDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
@@ -1527,7 +1532,8 @@
                                 <div class="subscription-div">
                                     <div class="subscription-div1">
                                         <div class="subscription-div2">
-                                            <span style="display: flex;align-items: center; gap: 10px;">
+                                            <span
+                                                style="display: flex;align-items: center; gap: 10px; flex-direction: column;">
                                                 <h5 style="margin: auto;">Months</h5>
                                                 <h5 id="totalMonths"
                                                     style="margin: auto; text-align: center; font-weight: 500;">
@@ -2579,14 +2585,7 @@
 
 
     <script>
-
-
-    
-
-
         var latestShippingIdForEdit;
-
-
         const userId = localStorage.getItem("loginId");
         const shippingId = localStorage.getItem("shippingId");
 
@@ -2767,7 +2766,7 @@
                     document.getElementById("editable-acdetails-password").value = data.mobile_number;
                     document.getElementById("editable-acdetails-displayname").value = data.date_of_birth;
 
-            // localStorage.setItem("shippingId", data.shippin)
+                    // localStorage.setItem("shippingId", data.shippin)
 
                     const genderSelect = document.getElementById("acdetails-gender");
                     const genderOptions = genderSelect.options;
@@ -2806,7 +2805,7 @@
                                 removeSubinterests(this.id);
                                 const subinterestCheckboxes = document.querySelectorAll(`#sub_container input[value="${this.id}"]`);
                                 subinterestCheckboxes.forEach(subCheckbox => {
-                                subCheckbox.checked = false;
+                                    subCheckbox.checked = false;
                                 });
                             }
                         });
@@ -2948,7 +2947,7 @@
 
         function editAddress(latestShippingAddressId) {
 
-            console.log("edit addrress",latestShippingAddressId);
+            console.log("edit addrress", latestShippingAddressId);
 
         }
 
