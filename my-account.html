@@ -1783,6 +1783,13 @@
                                                     <div class="address_container" id="address_container">
                                                         <h6>Shipping Address</h6>
                                                         <h6 id="current_shipping_address_container">
+
+
+
+
+                                                        </h6>
+
+
                                                         </h6>
                                                     </div>
                                                 </div>
@@ -2572,7 +2579,13 @@
 
 
     <script>
+
+
+    
+
+
         var latestShippingIdForEdit;
+
 
         const userId = localStorage.getItem("loginId");
         const shippingId = localStorage.getItem("shippingId");
@@ -2740,6 +2753,7 @@
                     return response.json();
                 })
                 .then(function (data) {
+
                     document.getElementById("acdetails-firstname").value = data.first_name;
                     document.getElementById("acdetails-lastname").value = data.last_name;
                     document.getElementById("acdetails-email").value = data.email;
@@ -2752,7 +2766,9 @@
                     document.getElementById("editable-acdetails-email").value = data.email;
                     document.getElementById("editable-acdetails-password").value = data.mobile_number;
                     document.getElementById("editable-acdetails-displayname").value = data.date_of_birth;
-                    // localStorage.setItem("shippingId", data.shippin)
+
+            // localStorage.setItem("shippingId", data.shippin)
+
                     const genderSelect = document.getElementById("acdetails-gender");
                     const genderOptions = genderSelect.options;
                     for (let i = 0; i < genderOptions.length; i++) {
@@ -2800,6 +2816,7 @@
                     console.error("Error fetching user data:", error);
                 });
         }
+
 
         if (userId) {
             populateAccountDetailsForm(userId);
@@ -2849,6 +2866,7 @@
                 const addresses = await response.json();
                 const addresse = addresses.data;
 
+
                 const editableSubContainer = document.getElementById('editable_address_container');
 
                 addresse.forEach((address, index) => {
@@ -2873,6 +2891,7 @@
                     editableSubContainer.appendChild(addressDiv);
                 });
 
+
                 editableSubContainer.addEventListener('click', function (event) {
                     const target = event.target;
                     if (target.classList.contains('delete-button')) {
@@ -2884,6 +2903,7 @@
                     } else if (target.classList.contains('class-button')) {
                         const addressId = target.getAttribute('check-address-id');
                         editAddress(addressId);
+
                     }
                 });
             } catch (error) {
@@ -2927,7 +2947,9 @@
         }
 
         function editAddress(latestShippingAddressId) {
-            console.log("edit addrress", latestShippingAddressId);
+
+            console.log("edit addrress",latestShippingAddressId);
+
         }
 
         function toggleGiftDropdown() {
@@ -3270,6 +3292,7 @@
                         div.appendChild(label);
                         notEditableContainer.appendChild(div);
                     });
+
                     const interestsCheckboxes = document.querySelectorAll('#notEditableContainer input[name="not-edit-item-checkbox"]');
                     let checkedInterestsCount = 0;
                     interestsCheckboxes.forEach(checkbox => {
@@ -3335,6 +3358,43 @@
             popluateInterestDataForProfile();
 
         }
+
+
+        function fetchSelectedAddress() {
+
+
+            const token = localStorage.getItem("access_token");
+
+            fetch(`https://15.185.57.60/api/v1/users/get-shipping-address-by-id/${shippingId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data)
+
+                    document.getElementById("current_shipping_address_container").textContent = `${data.country}${data.state ? ', ' + data.state : ''}${data.city ? ', ' + data.city : ''}${data.street2 ? ', ' + data.street2 : ''}${data.street1 ? ', ' + data.street1 : ''}${data.direction ? ', ' + data.direction : ''}${data.avenue ? ', ' + data.avenue : ''}${data.floor ? ', ' + data.floor : ''}${apartment ? ', ' + data.apartment : ''}${data.houseNo ? ', ' + data.houseNo : ''}.`;
+
+                }).catch(function (error) {
+                    console.error("Error fetching user data:", error);
+                });
+
+
+
+        }
+
+        if (shippingId) {
+            fetchSelectedAddress();
+
+        }
+
+    </script>
+
+
 
     </script>
 
