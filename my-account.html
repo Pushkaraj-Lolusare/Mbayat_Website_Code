@@ -2262,12 +2262,15 @@
                                                 </div>
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
                                                     <h6>Please select 5 Interests</h6>
-                                                    <div id="box-container">
+                                                    <div id="fraction-component"></div>
+                                                    <div class="check-box_flex" id="box-container">
                                                     </div>
                                                 </div>
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
                                                     <h6>Please select Sub-Interests</h6>
-                                                    <div id="sub-box-container"></div>
+                                                    <div class="check-box_flex" id="box-sub-container">
+
+                                                    </div>
                                                 </div>
                                                 <div class="tm-form-field tm-form-fieldhalf">
                                                     <button style="font-size: 15px;" type="button" class="tm-button"
@@ -2926,7 +2929,7 @@
         }
 
 
-        const userId = localStorage.getItem("loginId");
+
 
         if (userId) {
             populateAccountDetailsForm(userId);
@@ -3620,10 +3623,6 @@
 
         }
 
-
-
-
-
     </script>
 
     <script>
@@ -3664,13 +3663,17 @@
 	// ]]>
     </script>
 
-
     <!--Gift script-->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const selectedInterests = new Set();
             const subinterestContainers = {};
 
+    <!--Gift script-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectedInterests = new Set();
+            const subinterestContainers = {};
             function fetchInterests() {
                 fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
                     .then(response => response.json())
@@ -3768,6 +3771,7 @@
                             });
                         });
 
+
                         container.appendChild(subinterestContainer);
                         subinterestContainers[interestId] = subinterestContainer;
                     })
@@ -3788,6 +3792,8 @@
         });
 
 
+
+                     
 
     </script>
 
