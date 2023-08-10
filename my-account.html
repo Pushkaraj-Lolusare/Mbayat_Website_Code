@@ -1740,13 +1740,8 @@
                                                 </div>
                                                 <div class="tm-form-field tm-form-fieldhalf">
                                                     <label for="acdetails-gender">Gender</label>
-                                                    <select class="dropdown-toggle" readonly name="Gender"
-                                                        id="acdetails-gender"
-                                                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('down-arrow.png'); background-repeat: no-repeat; background-position: right center;">
-                                                        <option>Select gender</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                    </select>
+                                                    <input type="text" id="acdetails-gender" readonly>
+
                                                 </div>
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
 
@@ -1801,10 +1796,16 @@
                                                         <div class="tm-form-field tm-form-fieldhalf">
                                                             <label for="editable-acdetails-firstname">First name</label>
                                                             <input type="text" id="editable-acdetails-firstname">
+                                                            <div>
+                                                                <p id="profile-first-name-err" style="color: red;"></p>
+                                                            </div>
                                                         </div>
                                                         <div class="tm-form-field tm-form-fieldhalf">
                                                             <label for="editable-acdetails-lastname">Last name</label>
                                                             <input type="text" id="editable-acdetails-lastname">
+                                                            <div>
+                                                                <p id="profile-last-name-err" style="color: red;"></p>
+                                                            </div>
                                                         </div>
                                                         <div class="tm-form-field tm-form-fieldhalf">
                                                             <label for="editable-acdetails-email">Email address</label>
@@ -2726,7 +2727,8 @@
 
         const userId = localStorage.getItem("loginId");
         const shippingId = localStorage.getItem("shippingId");
-
+        const currentShippingId = localStorage.getItem("currentShippingAddress");
+        var latestShippingIdForEdit;
 
 
 
@@ -2812,30 +2814,8 @@
                         div.appendChild(checkbox);
                         div.appendChild(label);
 
-                        checkbox.addEventListener('change', function () {
-
-
-
-                            if (this.checked) {
-                                fetchSubinterests(interest);
-                            } else {
-
-                                console.log("dischecked i removed in fetch data");
-
-                                removeSubinterests(interest.id);
-                            }
-                        });
 
                         container.appendChild(div);
-
-
-                        // Check the checkbox for interest if it is present in userInterests
-                        // const userInterests = JSON.parse(localStorage.getItem("userInterests")) || [];
-                        // // console.log("userInterests",userInterests);
-                        // if (userInterests.includes(interest.id)) {
-                        //     checkbox.checked = true;
-                        //     fetchSubinterests(interest); // Fetch subinterests for checked interest
-                        // }
                     });
 
 
@@ -2866,16 +2846,18 @@
 
                         const subInterestCheckbox = document.createElement('input');
                         subInterestCheckbox.checked = isSubinterestChecked(subInterest.id, userSubInterests);
+                        subInterestCheckbox.className = 'subContainerCheckBox'
+                        subInterestCheckbox.setAttribute('data-interest', interest.id); // Set data-interest attribute
 
                         subInterestCheckbox.type = 'checkbox';
                         subInterestCheckbox.name = 'subitem-checkbox';
-                        subInterestCheckbox.id = `sub${subInterest.id}`
+                        subInterestCheckbox.id = `${subInterest.id}`
 
                         subInterestCheckbox.value = subInterest.id;
                         subinterestContainer.appendChild(subInterestCheckbox);
 
                         const subInterestLabel = document.createElement('label');
-                        subInterestLabel.setAttribute('for', `sub${subInterest.id}`);
+                        subInterestLabel.setAttribute('for', `${subInterest.id}`);
 
 
                         subInterestLabel.textContent = subInterest.name;
@@ -2883,31 +2865,6 @@
 
 
 
-                        subInterestCheckbox.addEventListener('change', function () {
-                            // Check if the subinterest is present in userSubInterests
-                            const isChecked = userSubInterests.includes(subInterest.id);
-
-                            // If the checkbox is checked and the subinterest is not in userSubInterests, add it
-                            if (this.checked && !isChecked) {
-                                console.log("beforepushuserInterest", userSubInterests);
-
-                                userSubInterests.push(subInterest.id);
-                                console.log("afterpushuserInterest", userSubInterests);
-                            }
-
-                            // If the checkbox is unchecked and the subinterest is in userSubInterests, remove it
-                            if (!this.checked && isChecked) {
-
-                                const index = userSubInterests.indexOf(subInterest.id);
-                                if (index !== -1) {
-
-                                    userSubInterests.splice(index, 1);
-                                    console.log("afteremoveInterest", userSubInterests);
-
-
-                                }
-                            }
-                        });
 
 
                     });
@@ -2921,6 +2878,14 @@
         }
 
         function removeSubinterests(interestId) {
+            const subinterestCheckboxes = document.querySelectorAll(`#interest_${interestId}  .subContainerCheckBox`);
+            subinterestCheckboxes.forEach(subCheckbox => {
+
+                if (subCheckbox.checked) {
+                    subCheckbox.checked = false;
+                }
+
+            });
 
             const subContainer = document.getElementById('sub_container');
             const interestContainer = document.getElementById(`interest_${interestId}`);
@@ -2947,7 +2912,9 @@
                     return response.json();
                 })
                 .then(function (data) {
-                    
+
+                    console.log(data)
+
 
 
 
@@ -2956,6 +2923,7 @@
                     document.getElementById("acdetails-email").value = data.email;
                     document.getElementById("acdetails-password").value = data.mobile_number;
                     document.getElementById("acdetails-displayname").value = data.date_of_birth;
+                    document.getElementById("acdetails-gender").value = data.gender;
 
                     // Profile Editable Modal Form
 
@@ -2964,23 +2932,21 @@
                     document.getElementById("editable-acdetails-email").value = data.email;
                     document.getElementById("editable-acdetails-password").value = data.mobile_number;
                     document.getElementById("editable-acdetails-displayname").value = data.date_of_birth;
-            // localStorage.setItem("shippingId", data.shippin)
+                    document.getElementById("editable-acdetails-gender").value = data.gender;
+                    // localStorage.setItem("shippingId", data.shippin)
+                    localStorage.setItem("shippingId", data.shipping_address_id)
 
 
 
 
-                    const genderSelect = document.getElementById("acdetails-gender");
-                    const genderOptions = genderSelect.options;
-                    for (let i = 0; i < genderOptions.length; i++) {
-                        if (genderOptions[i].value === data.gender) {
-                            genderOptions[i].selected = true;
-                            break;
-                        }
-                    }
+
 
                     const userInterests = data.interests.map(interest => interest.id);
 
                     const userSubInterests = data.subInterests.map(subinterest => subinterest.id);
+                    // store The Interest and userSubInterest array in localStrorage
+                    localStorage.setItem("userInterests", JSON.stringify(userInterests));
+                    localStorage.setItem("userSubInterests", JSON.stringify(userSubInterests));
 
                     const interestsCheckboxes = document.querySelectorAll('#container input[name="item-checkbox"]');
                     let checkedInterestsCount = 0;
@@ -3012,11 +2978,7 @@
                                 checkedInterestsCount--;
 
                                 removeSubinterests(this.id);
-                                const subinterestCheckboxes = document.querySelectorAll(`#sub_container input[value="${this.id}"]`);
-                                subinterestCheckboxes.forEach(subCheckbox => {
 
-                                    subCheckbox.checked = false;
-                                });
                             }
                         });
                     });
@@ -3152,9 +3114,7 @@
             const buttonElement = event.target;
 
             const shippingId = addressId
-            console.log("shippingId", shippingId)
             const addressDiv = buttonElement.parentElement.parentElement;
-            console.log("addressDiv", addressDiv)
             const userId = localStorage.getItem("loginId");
             const token = localStorage.getItem("access_token");
 
@@ -3184,8 +3144,17 @@
         }
 
         function editAddress(latestShippingAddressId) {
+            // Update the value of the item
+            localStorage.setItem('currentShippingAddress', latestShippingAddressId);
+            console.log('Item updated successfully.', latestShippingAddressId);
 
-            console.log("edit addrress",latestShippingAddressId);
+
+
+            const target = event.target;
+            if (target.type === 'radio') {
+                const selectedValue = target.value;
+                console.log("Selected Value:", selectedValue);
+            }
 
         }
 
@@ -3298,6 +3267,28 @@
             openEditAddressModal(address);
         }
 
+        async function validateForm() {
+            const selectedInterests = document.querySelectorAll('input[name="item-checkbox"]:checked');
+
+            if (selectedInterests.length !== 5) {
+                alert('Please select exactly 5 interests.');
+                return false;
+            }
+
+            for (let i = 0; i < selectedInterests.length; i++) {
+                const interestId = selectedInterests[i].id;
+                const selectedSubinterests = document.querySelectorAll(`input[name="subitem-checkbox"][data-interest="${interestId}"]:checked`);
+
+                if (selectedSubinterests.length === 0) {
+                    const interestName = selectedInterests[i].parentNode.textContent.trim();
+                    alert(`Please select at least one subinterest for all the interest`);
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
 
 
         // Add new Address function
@@ -3360,10 +3351,11 @@
                         console.log(result);
                         if (result.tokens) {
                             form.reset();
-                            alert('Adresss add Successful!!');
                         } else {
                             alert(result.message);
                         }
+                        location.reload();
+
                     })
                     .catch(error => {
                         console.error('Error submitting form:', error);
@@ -3441,10 +3433,13 @@
                         console.log(result);
                         if (result.tokens) {
                             form.reset();
-                            alert('Adresss is updated  Successful!!');
+                            console.log('Adresss is updated  Successful!!');
                         } else {
-                            alert(result.message);
+                            console.log(result.message);
+
                         }
+                        location.reload();
+
                     })
                     .catch(error => {
                         console.error('Error submitting form:', error);
@@ -3457,6 +3452,72 @@
 
 
         });
+
+
+
+        var profileFirstNameValidation = (event) => {
+
+            const firstNameValue = event.target.value.trim();
+            validFirstName = /^[A-Za-z]+$/;
+            let firstNameErr = document.getElementById('profile-first-name-err');
+
+
+
+            let firstCharOfFirstName = firstNameValue.charAt(0)
+
+            if (firstNameValue == "") {
+
+
+                firstNameErr.innerHTML = "First Name is required";
+
+            } else if (!validFirstName.test(firstNameValue)) {
+
+                firstNameErr.innerHTML = "First Name must be only string without white spaces";
+            }
+            else if (firstCharOfFirstName !== firstCharOfFirstName.toUpperCase()) {
+                firstNameErr.innerHTML = "First letter should be capital";
+
+            }
+            else {
+
+                firstNameErr.innerHTML = "";
+                return true;
+
+            }
+
+        }
+
+
+        var profileLastNameValidation = function (event) {
+            console.log("hey")
+
+            lastNameValue = event.target.value.trim();
+            validLastName = /^[A-Za-z]+$/;
+            let lastNameErr = document.getElementById('profile-last-name-err');
+
+            let firstCharOfLastName = lastNameValue.charAt(0)
+
+            if (lastNameValue == "") {
+
+
+                lastNameErr.innerHTML = "Last Name is required";
+
+            } else if (!validLastName.test(lastNameValue)) {
+
+                lastNameErr.innerHTML = "Last Name must be only string without white spaces";
+            }
+            else if (firstCharOfLastName !== firstCharOfLastName.toUpperCase()) {
+                lastNameErr.innerHTML = "First letter should be capital";
+
+            }
+            else {
+
+                lastNameErr.innerHTML = "";
+                return true;
+
+            }
+        }
+
 
         // Update Profile function
         document.addEventListener('DOMContentLoaded', function () {
@@ -3471,55 +3532,82 @@
                 closeEditProfileModal();
 
                 event.preventDefault();
-                // Handle form submission logic here
-                const first_name = document.getElementById("editable-acdetails-firstname").value;
-                const last_name = document.getElementById("editable-acdetails-lastname").value;
-                const email = document.getElementById("editable-acdetails-email").value;
-                const mobile_number = document.getElementById("editable-acdetails-password").value;
-                const date_of_birth = document.getElementById("editable-acdetails-displayname").value;
-                const interest = '643bacaf4d09602aa0916760,643bacaa4d09602aa0916749'
-                const subinterest = '64398733e489923d28d4750e'
-                console.log("form update submit ", currentUserId, first_name, last_name, date_of_birth);
+                if (await validateForm()) {
+                    // Handle form submission logic here
+                    const first_name = document.getElementById("editable-acdetails-firstname").value;
+                    const last_name = document.getElementById("editable-acdetails-lastname").value;
+                    const email = document.getElementById("editable-acdetails-email").value;
+                    const mobile_number = document.getElementById("editable-acdetails-password").value;
+                    const date_of_birth = document.getElementById("editable-acdetails-displayname").value;
+                    // interest and subinterest
+                    const selectedInterests = document.querySelectorAll('input[name="item-checkbox"]:checked');
+                    const interests = Array.from(selectedInterests).map(interest => interest.id).join(',');
 
 
+                    const selectedSubinterests = document.querySelectorAll('input[name="subitem-checkbox"]:checked');
+                    const subInterests = Array.from(selectedSubinterests).map(subinterest => subinterest.id).join(',');
 
-                const data = {
-                    first_name: first_name,
-                    last_name: last_name,
-                    date_of_birth: date_of_birth,
-                    email: email,
-                    mobile_number: mobile_number,
-                    date_of_birth: date_of_birth,
-                    interests: interest,
-                    subInterests: subinterest,
+                    const genderSelect = document.getElementById("editable-acdetails-gender");
+                    const shippingId = localStorage.getItem("shippingId");
+                    const currentShippingId = localStorage.getItem("currentShippingAddress");
+                    let latestshippingID;
 
-                };
+                
+                    if (currentShippingId) {
+                        latestshippingID = currentShippingId;
+
+                    } else {
+                        latestshippingID = shippingId;
 
 
+                    }
 
-                fetch(`https://15.185.57.60/api/v1/users/update-user/${currentUserId}`, {
+                
+                    const data = {
+                        first_name: first_name,
+                        last_name: last_name,
+                        date_of_birth: date_of_birth,
+                        email: email,
+                        mobile_number: mobile_number,
+                        date_of_birth: date_of_birth,
+                        gender: genderSelect.value,
 
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        shipping_address_id: latestshippingID,
+                        interests: interests,
+                        subInterests: subInterests,
 
-                    },
-                    body: JSON.stringify(data),
-                })
-                    .then(response => response.json())
-                    .then(result => {
-                        console.log("hey", result);
-                        if (result.tokens) {
-                            form.reset();
-                            alert('Profile is Updated Successful!!');
-                        } else {
-                            alert(result.message);
-                        }
+
+                    };
+
+                    console.log(data);
+
+
+                    fetch(`https://15.185.57.60/api/v1/users/update-user/${currentUserId}`, {
+
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+
+                        },
+                        body: JSON.stringify(data),
                     })
-                    .catch(error => {
-                        console.error('Error submitting form:', error);
-                    });
+                        .then(response => response.json())
+                        .then(result => {
+                            console.log("hey", result);
+                            if (result.tokens) {
+                                form.reset();
+                                alert('Profile is Updated Successful!!');
+                            } else {
+                                alert(result.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error submitting form:', error);
+                        });
+                } else {
+                    return;
+                }
 
 
 
@@ -3740,10 +3828,16 @@
                     return response.json();
                 })
                 .then(function (data) {
-                    console.log(data)
+                    data = data.data;
 
-                    document.getElementById("current_shipping_address_container").textContent = `${data.country}${data.state ? ', ' + data.state : ''}${data.city ? ', ' + data.city : ''}${data.street2 ? ', ' + data.street2 : ''}${data.street1 ? ', ' + data.street1 : ''}${data.direction ? ', ' + data.direction : ''}${data.avenue ? ', ' + data.avenue : ''}${data.floor ? ', ' + data.floor : ''}${apartment ? ', ' + data.apartment : ''}${data.houseNo ? ', ' + data.houseNo : ''}.`;
-
+                    const currentShippingAddressContainer = document.getElementById("current_shipping_address_container");
+                    currentShippingAddressContainer.innerHTML = `
+                    <div>
+                        <h6>
+                            ${data.country}${data.state ? ', ' + data.state : ''}${data.city ? ', ' + data.city : ''}${data.street2 ? ', ' + data.street2 : ''}${data.street1 ? ', ' + data.street1 : ''}${data.direction ? ', ' + data.direction : ''}${data.avenue ? ', ' + data.avenue : ''}${data.floor ? ', ' + data.floor : ''}${apartment ? ', ' + data.apartment : ''}${data.houseNo ? ', ' + data.houseNo : ''}.
+                    </h6>
+                     
+                    </div>`;
                 }).catch(function (error) {
                     console.error("Error fetching user data:", error);
                 });
