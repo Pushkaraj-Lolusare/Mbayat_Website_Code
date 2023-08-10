@@ -2268,7 +2268,7 @@
                                                 </div>
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
                                                     <h6>Please select Sub-Interests</h6>
-                                                    <div class="check-box_flex" id="box-sub-container">
+                                                    <div class="check-box_flex" id="sub-box-container">
 
                                                     </div>
                                                 </div>
@@ -3708,14 +3708,14 @@
                                 if (this.checked) {
                                     if (selectedInterests.size < 5) {
                                         selectedInterests.add(interest.id);
-                                        fetchSubinterests(interest.id);
+                                        fetchSubboxinterests(interest.id);
                                     } else {
                                         this.checked = false;
                                         alert('Only 5 interests can be selected!!');
                                     }
                                 } else {
                                     selectedInterests.delete(interest.id);
-                                    removeSubinterests(interest.id);
+                                    removeSubboxinterests(interest.id);
                                 }
                             });
                         });
@@ -3725,7 +3725,7 @@
                     });
             }
 
-            function fetchSubinterests(interestId) {
+            function fetchSubboxinterests(interestId) {
                 fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interestId}`)
                     .then(response => response.json())
                     .then(data => {
@@ -3782,7 +3782,7 @@
                     });
             }
 
-            function removeSubinterests(interestId) {
+            function removeSubboxinterests(interestId) {
                 const container = document.getElementById('sub-box-container');
                 const interestContainer = subinterestContainers[interestId];
                 if (interestContainer) {
