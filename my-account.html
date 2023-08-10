@@ -1435,7 +1435,6 @@
 
                 <div style="display: flex; ">
                     <div class="header__nav__option" id="accountname" style="text-align: center; padding-top: 36px;">
-
                     </div>
                     <div class="header__nav__option" id="accountname" style="text-align: center;">
                         <div class="dropdown">
@@ -1451,12 +1450,6 @@
                                     role="tab" aria-controls="account-orders" aria-selected="false"><i
                                         class="fas fa-shopping-bag"></i>&nbsp; &nbsp;My
                                     Orders</a>
-                                <!-- <a id="logout-link"
-                                    style="font-size: 15px; border-bottom: 1px solid gray;border-radius: 0px;"
-                                    class="nav-link" id="account-address-tab" data-toggle="tab" href="#account-address"
-                                    role="tab" aria-controls="account-address" aria-selected="false"><i
-                                        class="fas fa-address-card"></i>&nbsp;
-                                    &nbsp;Address</a> -->
                                 <a id="logout-link"
                                     style="font-size: 15px; border-bottom: 1px solid gray;border-radius: 0px;"
                                     class="nav-link" id="account-address-tab" data-toggle="tab" href="#account-wishlist"
@@ -1477,7 +1470,6 @@
     <!-- Main Content -->
     <!-- Main Content -->
     <main class="main-content" style="margin-top: 10px;">
-
         <!-- My Account Area -->
         <div class="tm-section tm-my-account-area bg-white tm-padding-section">
             <div class="container">
@@ -1527,7 +1519,6 @@
                             </div>
                         </div>
                     </ul>
-
                     <div class="tab-content" id="account-ontent">
 
                         <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
@@ -1644,16 +1635,12 @@
 
                         <div class="tab-pane fade" id="account-orders" role="tabpanel"
                             aria-labelledby="account-orders-tab">
-
-
                             <div class="tm-myaccount-orders">
-
                                 <div
                                     style="margin: auto;margin-top: -25px ;margin-bottom: 20px; background-color: rgb(110,198,183); width: 18%; padding: 10px;  border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                                     <h5 style="color: white; font-weight: 600; margin: auto; text-align: center; "> My
                                         Account</h5>
                                 </div>
-
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
                                         <thead>
@@ -1688,6 +1675,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="account-address" role="tabpanel"
                             aria-labelledby="account-address-tab">
                             <div class="tm-myaccount-address">
@@ -1722,23 +1710,20 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="account-acdetails" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="tm-myaccount-acdetails">
-
                                         <form action="#" class="tm-form tm-form-bordered">
                                             <div
                                                 style="width: 100%; display: flex;align-items: center;justify-content: flex-end;">
-
-
                                                 <button type="button" onclick="openEditProfileModal()"
                                                     style="height: 40px; font-weight: bold; background-color: rgb(177,43,82); border-radius:10px; color: white;">
                                                     <i class="fas fa-edit" style="margin-right: 10px;"></i><span>Edit
                                                         Profile</span></button>
                                             </div>
-
                                             <div class="tm-form-inner">
                                                 <div class="tm-form-field tm-form-fieldhalf">
                                                     <label for="acdetails-firstname">First name</label>
@@ -1752,8 +1737,6 @@
                                                     <label for="acdetails-email">Email address</label>
                                                     <input type="email" id="acdetails-email" readonly>
                                                 </div>
-
-
                                                 <div class="tm-form-field col-lg-6 col-md-6 col-12">
                                                     <label for="acdetails-password">Mobile Number</label>
                                                     <div style="display: flex">
@@ -1766,15 +1749,11 @@
                                                         <input type="number" id="acdetails-password" required="required"
                                                             maxlength="8" readonly>
                                                     </div>
-
                                                 </div>
-
-
                                                 <div class="tm-form-field tm-form-fieldhalf">
                                                     <label for="acdetails-displayname">Date of Birth</label>
                                                     <input type="date" id="acdetails-displayname"
                                                         onchange="acdetailsDisplayDob(event)" readonly>
-
                                                     <div>
                                                         <p id="acdetailsDisplayDobErr" style="color: red;"></p>
                                                     </div>
@@ -1790,56 +1769,34 @@
                                                     </select>
                                                 </div>
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
-
                                                     <h6>Please select 5 Interests</h6>
                                                     <div id="fraction-component"></div>
-
                                                     <div class="check-box_flex" id="notEditableContainer">
                                                     </div>
                                                 </div>
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
                                                     <h6>Please select Sub-Interests</h6>
                                                     <div class="check-box_flex" id="notEditableSubContainer">
-
                                                     </div>
                                                 </div>
-
-
-
                                                 <div class="tm-form-field col-lg-12 col-md-12 col-12">
-
                                                     <div class="address_container" id="address_container">
                                                         <h6>Shipping Address</h6>
-
                                                         <h6 id="current_shipping_address_container">
-
-
-
                                                         </h6>
-
-
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                         </form>
-
-
 
                                         <!-- here the profile editable modal -->
                                         <div id="editProfileModal" class="modal"
                                             style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
-
                                             <div class="modal-content" style="padding: 20px;">
-
                                                 <div style="display: flex; justify-content: space-between;">
                                                     <h2>Edit Profile</h2>
                                                 </div>
-
                                                 <form action="#" id="editProfileForm" class="tm-form tm-form-bordered">
-
-
                                                     <div class="tm-form-inner">
                                                         <div class="tm-form-field tm-form-fieldhalf">
                                                             <label for="editable-acdetails-firstname">First name</label>
@@ -1853,8 +1810,6 @@
                                                             <label for="editable-acdetails-email">Email address</label>
                                                             <input type="email" id="editable-acdetails-email" readonly>
                                                         </div>
-
-
                                                         <div class="tm-form-field col-lg-6 col-md-6 col-12">
                                                             <label for="editable-acdetails-password">Mobile
                                                                 Number</label>
@@ -1868,16 +1823,12 @@
                                                                 <input type="number" id="editable-acdetails-password"
                                                                     required="required" maxlength="8" readonly>
                                                             </div>
-
                                                         </div>
-
-
                                                         <div class="tm-form-field tm-form-fieldhalf">
                                                             <label for="editable-acdetails-displayname">Date of
                                                                 Birth</label>
                                                             <input type="date" id="editable-acdetails-displayname"
                                                                 onchange="acdetailsDisplayDob(event)">
-
                                                             <div>
                                                                 <p id="acdetailsDisplayDobErr" style="color: red;"></p>
                                                             </div>
@@ -1900,17 +1851,11 @@
                                                             <div class="check-box_flex" id="container">
                                                             </div>
                                                         </div>
-
-
                                                         <div class="tm-form-field col-lg-12 col-md-12 col-12">
                                                             <h6>Please select Sub-Interests</h6>
                                                             <div class="check-box_flex" id="sub_container">
-
                                                             </div>
                                                         </div>
-
-
-
                                                         <div class="tm-form-field tm-form-fieldhalf">
                                                             <button type="button" onclick="openAddAddressModal()"
                                                                 style="height: 40px; font-weight: bold; background-color: rgb(177,43,82); border-radius:10px; color: white;">
@@ -1921,39 +1866,24 @@
                                                         <div class="tm-form-field col-lg-12 col-md-12 col-12">
                                                             <div class="editable_address_container"
                                                                 id="editable_address_container">
-
                                                             </div>
                                                         </div>
-
                                                         <div class="tm-form-field" style="margin-top: 80px;">
-
-
-
-
                                                             <button id="editProfileSubmit" type="submit"
                                                                 onclick="closeAddAddressModal()"
                                                                 style=" margin-left: 10px; border: none; padding:0px 30px; height: 40px; font-weight: bold; background-color: rgb(177,43,82);  font-size: 15px; border-radius:10px; color: white;">
                                                                 <span style="text-align: center; ">Save Changes</span>
                                                             </button>
-
-
                                                             <button type="button" class="tm-button"
                                                                 onclick="closeEditProfileModal()"
                                                                 style=" margin-left: 10px; border: none; padding:0px 30px; height: 40px; font-weight: bold; background-color: rgb(177,43,82);  font-size: 15px; border-radius:10px; color: white;">
                                                                 <span style="text-align: center; ">Cancel</span>
                                                             </button>
-
-
                                                         </div>
-
-
                                                     </div>
                                                 </form>
-
                                             </div>
-
                                         </div>
-
 
                                         <div id="addAddressModal" class="modal"
                                             style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
@@ -1975,7 +1905,6 @@
                                                                     style="color:red">*</span></label><br />
                                                             <input type="text" id="country" value="Kuwait" disabled />
                                                         </div>
-
                                                     </div>
                                                     <div
                                                         style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
@@ -1999,10 +1928,6 @@
                                                                     style="color:red">*</span></label>
                                                             <select id="area" required>
                                                                 <option value="">Select Area</option>
-
-
-
-
                                                             </select>
                                                         </div>
                                                     </div>
@@ -2046,31 +1971,21 @@
                                                         <label for="direction">Direction</label><br />
                                                         <input type="text" id="direction" value="" />
                                                     </div>
-
                                                     <div class="tm-form-field" style="margin-top: 80px;">
-
-
-
-
                                                         <button id="addNewAddressSubmit" type="submit" class="tm-button"
                                                             style=" border: none; padding:0px 20px; height: 40px; font-weight: bold; background-color: rgb(177,43,82);  font-size: 15px; border-radius:10px; color: white;">
                                                             <i class="fas fa-plus" style="margin-right: 7px;"></i> <span
                                                                 style="text-align: center; ">Add Address</span>
                                                         </button>
-
-
                                                         <button type="button" class="tm-button"
                                                             onclick="closeAddAddressModal()"
                                                             style=" margin-left: 10px; border: none; padding:0px 30px; height: 40px; font-weight: bold; background-color: rgb(177,43,82);  font-size: 15px; border-radius:10px; color: white;">
                                                             <span style="text-align: center; ">Cancel</span>
                                                         </button>
-
-
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
-
 
                                         <div id="editAddressModal" class="modal"
                                             style="width: 80%; margin: auto; top: 3%; height: 600px;overflow: auto;">
@@ -2081,7 +1996,6 @@
                                                 </div>
                                                 <form id="editAddressForm">
                                                     <!-- Add address form fields -->
-
                                                     <div class="tm-form-field" style="width: 45%;">
                                                         <label for="editAddressName">Address Name <span
                                                                 style="color:red">*</span></label><br />
@@ -2098,7 +2012,6 @@
                                                         <div class="tm-form-field" style="width: 45%;">
                                                             <label for="editAddressState">State <span
                                                                     style="color:red">*</span></label>
-
                                                             <select id="editAddressState"
                                                                 onchange="populateAreas(event)" required>
                                                                 <option value="">Select State</option>
@@ -2117,11 +2030,8 @@
                                                             <select id="editAddressArea" required>
                                                                 <option value="">Select Area</option>
                                                             </select>
-
                                                         </div>
                                                     </div>
-
-
                                                     <div
                                                         style="display: flex; justify-content: space-between; width: 45%; column-gap: 40px;">
                                                         <div class="tm-form-field">
@@ -2178,14 +2088,17 @@
                                                 </form>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="gift-acdetails" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
                             <h1>Gift</h1>
                         </div>
+
                         <div class="tab-pane fade" id="account-wishlist" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
                             <div
@@ -2194,6 +2107,7 @@
                                 </h4>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="account-box" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
                             <div
@@ -2327,6 +2241,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="gift-History" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
                             <div
@@ -2367,6 +2282,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="account-Subscription" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
                             <div
@@ -2450,6 +2366,7 @@
                                 </div>
                             </form>
                         </div>
+
                         <div class="tab-pane fade" id="account-Subscription-History" role="tabpanel"
                             aria-labelledby="account-acdetails-tab">
                             <div
@@ -2491,15 +2408,15 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
         <!--// My Account Area -->
-
     </main>
     <!--// Main Content -->
-    <!--// Main Content -->
+
     <!-- Footer Section Begin -->
     <footer class="footer">
         <div class="container">
@@ -2527,7 +2444,6 @@
                             </form>
                         </div>
                         <div class="hero__social">
-                            <!-- <a href="#"><i class="fa fa-facebook"></i></a> -->
                             <a href="https://twitter.com/trymbayat"><i class="fa fa-twitter"></i></a>
                             <a href="https://www.instagram.com/trymbayat/"><i class="fa fa-instagram"></i></a>
                         </div>
@@ -2556,14 +2472,12 @@
             <div class="row footer__copyright__text">
                 <div class="col-lg-6 text-left">
                     <div class="">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         <p>Copyright ©
                             <script>
                                 document.write(new Date().getFullYear());
                             </script>
                             <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="#" target="_blank"> MBAYAT</a>
                         </p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -2583,7 +2497,6 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -2664,9 +2577,6 @@
         const userId = localStorage.getItem("loginId");
         const shippingId = localStorage.getItem("shippingId");
 
-
-
-
         const ALLOWED_PATHS = ['/my-account.html'];
 
         function isAllowedPath(path) {
@@ -2699,30 +2609,23 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             var name = localStorage.getItem("first_name");
-
             var accountName = document.getElementById("accountname");
-            // var logoutLink = document.getElementById("logout");
 
             if (!isLoggedIn()) {
                 window.location.href = 'login.html';
                 return;
             }
-
             var welcomeText = document.createElement("a");
             welcomeText.textContent = `Welcome, ${name}!`;
             welcomeText.style.fontWeight = "200"
-
             accountName.appendChild(welcomeText);
-            // logoutLink.addEventListener("click", handleLogout);
         });
-
 
         function fetchData() {
             fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all')
                 .then(response => response.json())
                 .then(data => {
                     const interests = data.results;
-
                     const container = document.getElementById('container');
 
                     container.innerHTML = '';
@@ -2750,23 +2653,11 @@
                                 fetchSubinterests(interest);
                             } else {
                                 console.log("dischecked i removed in fetch data");
-
                                 removeSubinterests(interest.id);
                             }
                         });
-        
 
                         container.appendChild(div);
-
-
-                        // Check the checkbox for interest if it is present in userInterests
-                        // const userInterests = JSON.parse(localStorage.getItem("userInterests")) || [];
-                        // // console.log("userInterests",userInterests);
-                        // if (userInterests.includes(interest.id)) {
-                        //     checkbox.checked = true;
-                        //     fetchSubinterests(interest); // Fetch subinterests for checked interest
-                        // }
-
                     });
                 })
                 .catch(error => {
@@ -2791,7 +2682,6 @@
 
                     subinterests.forEach(subInterest => {
 
-
                         const subInterestCheckbox = document.createElement('input');
                         subInterestCheckbox.checked = isSubinterestChecked(subInterest.id, userSubInterests);
 
@@ -2805,37 +2695,24 @@
                         const subInterestLabel = document.createElement('label');
                         subInterestLabel.setAttribute('for', `sub${subInterest.id}`);
 
-
-           
-
                         subInterestCheckbox.addEventListener('change', function () {
-                            // Check if the subinterest is present in userSubInterests
                             const isChecked = userSubInterests.includes(subInterest.id);
 
-                            // If the checkbox is checked and the subinterest is not in userSubInterests, add it
                             if (this.checked && !isChecked) {
                                 console.log("beforepushuserInterest", userSubInterests);
                                 userSubInterests.push(subInterest.id);
                                 console.log("afterpushuserInterest", userSubInterests);
                             }
 
-                            // If the checkbox is unchecked and the subinterest is in userSubInterests, remove it
                             if (!this.checked && isChecked) {
                                 const index = userSubInterests.indexOf(subInterest.id);
                                 if (index !== -1) {
                                     userSubInterests.splice(index, 1);
                                     console.log("afteremoveInterest", userSubInterests);
-
-
-
                                 }
                             }
                         });
-
-
                     });
-
-                    // Append the subinterest container to the main container
                     subinterestsContainer.appendChild(subinterestContainer);
                 })
                 .catch(error => {
@@ -2844,7 +2721,6 @@
         }
 
         function removeSubinterests(interestId) {
-
             const subContainer = document.getElementById('sub_container');
             const interestContainer = document.getElementById(`interest_${interestId}`);
             subContainer.removeChild(interestContainer);
@@ -2864,23 +2740,19 @@
                     return response.json();
                 })
                 .then(function (data) {
-  document.getElementById("acdetails-firstname").value = data.first_name;
+                    document.getElementById("acdetails-firstname").value = data.first_name;
                     document.getElementById("acdetails-lastname").value = data.last_name;
                     document.getElementById("acdetails-email").value = data.email;
                     document.getElementById("acdetails-password").value = data.mobile_number;
                     document.getElementById("acdetails-displayname").value = data.date_of_birth;
 
                     // Profile Editable Modal Form
-
                     document.getElementById("editable-acdetails-firstname").value = data.first_name;
                     document.getElementById("editable-acdetails-lastname").value = data.last_name;
                     document.getElementById("editable-acdetails-email").value = data.email;
                     document.getElementById("editable-acdetails-password").value = data.mobile_number;
                     document.getElementById("editable-acdetails-displayname").value = data.date_of_birth;
                     // localStorage.setItem("shippingId", data.shippin)
-
-
-
                     const genderSelect = document.getElementById("acdetails-gender");
                     const genderOptions = genderSelect.options;
                     for (let i = 0; i < genderOptions.length; i++) {
@@ -2913,15 +2785,12 @@
                                     checkedInterestsCount++;
                                 }
                             } else {
-
                                 console.log("dischecked");
                                 checkedInterestsCount--;
-
                                 removeSubinterests(this.id);
                                 const subinterestCheckboxes = document.querySelectorAll(`#sub_container input[value="${this.id}"]`);
                                 subinterestCheckboxes.forEach(subCheckbox => {
-
-                                    subCheckbox.checked = false;
+                                subCheckbox.checked = false;
                                 });
                             }
                         });
@@ -2931,9 +2800,6 @@
                     console.error("Error fetching user data:", error);
                 });
         }
-
-
-
 
         if (userId) {
             populateAccountDetailsForm(userId);
@@ -2983,7 +2849,6 @@
                 const addresses = await response.json();
                 const addresse = addresses.data;
 
-
                 const editableSubContainer = document.getElementById('editable_address_container');
 
                 addresse.forEach((address, index) => {
@@ -2991,13 +2856,11 @@
                     addressDiv.classList.add('address-div');
                     addressDiv.innerHTML = `
                      <div>
-
                         <input type="radio" id="address-toggle-btn${index}"  class="class-button" name="address-radio-group" check-address-id="${address.id}" value="${address.state}-${address.country}"/>
 
                         <label for="address-toggle-btn${index}" >
                         ${address.country}${address.state ? ', ' + address.state : ''}${address.city ? ', ' + address.city : ''}${address.street2 ? ', ' + address.street2 : ''}${address.street1 ? ', ' + address.street1 : ''}${address.direction ? ', ' + address.direction : ''}${address.avenue ? ', ' + address.avenue : ''}${address.floor ? ', ' + address.floor : ''}${address.apartment ? ', ' + address.apartment : ''}${address.houseNo ? ', ' + address.houseNo : ''}.
-                    </label>
-                     
+                    </label>                    
                     </div>
                     <div class="button-container">
                         <button edit-address-id="${address.id}" type="button" class="edit-button" style="background-color: rgb(73,197,182);border-radius: 10px; display:flex; height: 40px; padding: 15px; align-items:center">
@@ -3007,19 +2870,8 @@
                             <i class="fas fa-trash-alt" style="margin-right:10px"></i>Delete
                         </button>
                     </div>`;
-                    // subContainer.appendChild(addressDiv);
                     editableSubContainer.appendChild(addressDiv);
                 });
-
-                // subContainer.addEventListener('click', function (event) {
-                //     const target = event.target;
-                //     if (target.classList.contains('delete-button')) {
-                //         const addressId = target.getAttribute('data-address-id');
-                //         deleteAddress(addressId);
-                //     } else if (target.classList.contains('edit-button')) {
-                //         const addressId = target.getAttribute('edit-address-id');
-
-                //         openEditAddressModal(addressId);
 
                 editableSubContainer.addEventListener('click', function (event) {
                     const target = event.target;
@@ -3028,16 +2880,11 @@
                         deleteAddress(addressId);
                     } else if (target.classList.contains('edit-button')) {
                         const addressId = target.getAttribute('edit-address-id');
-
                         openEditAddressModal(addressId);
-
                     } else if (target.classList.contains('class-button')) {
-
                         const addressId = target.getAttribute('check-address-id');
-
-
                         editAddress(addressId);
-     }
+                    }
                 });
             } catch (error) {
                 console.error('Error fetching addresses:', error);
@@ -3048,7 +2895,6 @@
 
         function deleteAddress(addressId) {
             const buttonElement = event.target;
-
             const shippingId = addressId
             console.log("shippingId", shippingId)
             const addressDiv = buttonElement.parentElement.parentElement;
@@ -3073,7 +2919,6 @@
                 .then((data) => {
                     console.log('Address deleted:', data);
                     addressDiv.remove();
-                    // fetchAddresses();
                 })
                 .catch((error) => {
                     console.error('Error deleting address:', error);
@@ -3081,20 +2926,13 @@
 
         }
 
-
-
-
         function editAddress(latestShippingAddressId) {
-
             console.log("edit addrress", latestShippingAddressId);
-
-
         }
 
         function toggleGiftDropdown() {
             var dropdown = document.querySelector(".dropdown-content");
             var dropbtn = document.querySelector(".dropbtn");
-
             dropbtn.classList.toggle("active");
 
             if (dropdown.style.display === "block") {
@@ -3109,7 +2947,6 @@
         document.addEventListener("click", function (event) {
             var dropdown = document.querySelector(".dropdown-content");
             var dropbtn = document.querySelector(".dropbtn");
-
             if (!event.target.matches(".dropbtn") && dropdown.style.display === "block") {
                 dropdown.style.display = "none";
                 dropbtn.classList.remove("active");
@@ -3126,12 +2963,9 @@
         }
 
         function populateAreas(event) {
-
-
             const selectedState = event.target.value;
             const areaDropdown = document.getElementById('editAddressArea');
             areaDropdown.innerHTML = '';
-
             const selectAreaOption = document.createElement('option');
             selectAreaOption.value = '';
             selectAreaOption.textContent = 'Select Area';
@@ -3148,22 +2982,15 @@
                     areaDropdown.appendChild(option);
                     // console.log("areaDropdown", areaDropdown);
                 });
-
                 areaDropdown.style.display = 'Initial';
             }
         }
 
-    
-
         function populateAreas2(event) {
-
-
-
             const selectedState = event.target.value;
             const areaDropdown = document.getElementById('area');
             areaDropdown.innerHTML = '';
 
-
             const selectAreaOption = document.createElement('option');
             selectAreaOption.value = '';
             selectAreaOption.textContent = 'Select Area';
@@ -3172,39 +2999,26 @@
             const selectedStateAreas = areasByState[selectedState];
             if (selectedStateAreas) {
                 let clutter3 = ''
+                const selectedStateAreas = areasByState[selectedState];
+                if (selectedStateAreas) {
+                    let clutter3 = ''
+                    selectedStateAreas.forEach(area => {
+                        const option = document.createElement('option');
+                        option.value = area;
+                        option.textContent = area;
+                        areaDropdown.appendChild(option);
+                    });
+                    areaDropdown.style.display = 'Initial';
+                }
+            }
 
-
-            const selectedStateAreas = areasByState[selectedState];
-
-            if (selectedStateAreas) {
-                let clutter3 = ''
-                selectedStateAreas.forEach(area => {
-
-                    const option = document.createElement('option');
-                    option.value = area;
-                    option.textContent = area;
-                    areaDropdown.appendChild(option);
-                    // console.log("areaDropdown", areaDropdown);
-                });
-
+            function handleEditButtonClick(addressString) {
                 areaDropdown.style.display = 'Initial';
             }
         }
-
-        function handleEditButtonClick(addressString) {
-
-                areaDropdown.style.display = 'Initial';
-
-            }
-
-        }
-
 
         // Add new Address function
         document.addEventListener('DOMContentLoaded', function () {
-
-
-
             const form = document.getElementById('addAddressForm');
             const submitButton = document.getElementById('addNewAddressSubmit');
             const currentUserId = localStorage.getItem("loginId");
@@ -3212,7 +3026,6 @@
 
             form.addEventListener('submit', async function (event) {
                 event.preventDefault();
-                // Handle form submission logic here
                 const addressName = document.getElementById('addressName').value;
                 const country = document.getElementById('country').value;
                 const state = document.getElementById('state').value;
@@ -3223,10 +3036,7 @@
                 const apartment = document.getElementById('apartment').value;
                 const floor = document.getElementById('floor').value;
                 const avenue = document.getElementById('avenue').value;
-
                 const direction = document.getElementById('direction').value;
-
-
 
                 const data = {
                     userId: currentUserId,
@@ -3244,14 +3054,11 @@
                     country_code: '+91',
                 };
 
-
-
                 fetch('https://15.185.57.60/api/v1/users/create-user-shipping-address', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
-
                     },
                     body: JSON.stringify(data),
                 })
@@ -3268,28 +3075,18 @@
                     .catch(error => {
                         console.error('Error submitting form:', error);
                     });
-
-
-
             });
-
-
         });
-
 
         // updateAddress  function 
         document.addEventListener('DOMContentLoaded', function () {
-
             const form = document.getElementById('editAddressForm');
             const submitButton = document.getElementById('editNewAddressSubmit');
             const currentUserId = localStorage.getItem("loginId");
             const token = localStorage.getItem("access_token");
 
-
             form.addEventListener('submit', async function (event) {
-
                 event.preventDefault();
-                // Handle form submission logic here
                 const shippingId = latestShippingIdForEdit;
                 const addressName = document.getElementById('editAddressName').value;
                 const country = document.getElementById('editAddressCountry').value;
@@ -3303,14 +3100,9 @@
                 const avenue = document.getElementById('editAddressAvenue').value;
                 const direction = document.getElementById('editAddressDirection').value;
 
-
-
-
-
                 const data = {
                     userId: currentUserId,
                     state: state,
-
                     shippingId: shippingId,
                     street1: street,
                     city: area,
@@ -3324,8 +3116,6 @@
                     addressName: addressName,
                     country_code: '+91',
                 };
-
-
 
                 fetch('https://15.185.57.60/api/v1/users/update-shipping-address', {
                     method: 'PUT',
@@ -3349,13 +3139,7 @@
                     .catch(error => {
                         console.error('Error submitting form:', error);
                     });
-
-
-
             });
-
-
-
         });
 
         // Update Profile function
@@ -3366,12 +3150,10 @@
             const currentUserId = localStorage.getItem("loginId");
             const token = localStorage.getItem("access_token");
 
-
             form.addEventListener('submit', async function (event) {
                 closeEditProfileModal();
-
                 event.preventDefault();
-                // Handle form submission logic here
+
                 const first_name = document.getElementById("editable-acdetails-firstname").value;
                 const last_name = document.getElementById("editable-acdetails-lastname").value;
                 const email = document.getElementById("editable-acdetails-email").value;
@@ -3380,8 +3162,6 @@
                 const interest = '643bacaf4d09602aa0916760,643bacaa4d09602aa0916749'
                 const subinterest = '64398733e489923d28d4750e'
                 console.log("form update submit ", currentUserId, first_name, last_name, date_of_birth);
-
-
 
                 const data = {
                     first_name: first_name,
@@ -3395,10 +3175,7 @@
 
                 };
 
-
-
                 fetch(`https://15.185.57.60/api/v1/users/update-user/${currentUserId}`, {
-
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -3420,28 +3197,15 @@
                     .catch(error => {
                         console.error('Error submitting form:', error);
                     });
-
-
-
             });
-
-
-
         });
 
-
-
-
-
-        // open profile edit modal
         function openEditProfileModal() {
             disableScroll();
             const modal = document.getElementById('editProfileModal');
             modal.style.display = 'block';
 
         }
-        // Close profile edit modal
-
 
         function closeEditProfileModal() {
             enableScroll();
@@ -3449,17 +3213,9 @@
             modal.style.display = 'none';
         }
 
-
-
-
-        // Enable or Disable scrolling at opening modal
-
         function disableScroll() {
-            // Get the current page scroll position
             scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-
-                // if any scroll is attempted, set this to the previous value
                 window.onscroll = function () {
                     window.scrollTo(scrollLeft, scrollTop);
                 };
@@ -3469,11 +3225,8 @@
             window.onscroll = function () { };
         }
 
-
         // Not Editable fetch interest for profile  
         function popluateInterestDataForProfile() {
-
-            // firstly fetch data of user
             const token = localStorage.getItem("access_token");
             fetch(`https://15.185.57.60/api/v1/users/${userId}`, {
                 method: 'GET',
@@ -3485,22 +3238,16 @@
                     return response.json();
                 })
                 .then(function (data) {
-
-
                     const userInterests = data.interests.map(interest => interest);
                     const userInterestsId = data.interests.map(interest => interest.id);
-
                     const userSubInterests = data.subInterests.map(subinterest => subinterest);
                     const userSubInterestsId = data.subInterests.map(subinterest => subinterest.id);
 
                     // created User Interest checkbo
-
                     const notEditableContainer = document.getElementById('notEditableContainer');
-
                     notEditableContainer.innerHTML = '';
 
                     userInterests.forEach(interest => {
-
                         const checkbox = document.createElement('input');
                         checkbox.className = 'form-check-input-not-edit';
                         checkbox.checked = true;
@@ -3512,64 +3259,35 @@
 
                         checkbox.value = interest.name;
                         // Set the checkbox as checked
-
-
                         checkbox.checked = true;
-
                         const label = document.createElement('label');
                         label.className = 'form-check-label';
                         label.htmlFor = `P${interest}`;
                         label.textContent = interest.name;
-
-
                         const div = document.createElement('div');
                         div.className = 'form-check';
                         div.appendChild(checkbox);
                         div.appendChild(label);
-
-
                         notEditableContainer.appendChild(div);
-
                     });
-
-                    // userSubInterests.forEach(subInterest=>{
-
-                    //     console.log(subInterest.name)
-                    // })
-
                     const interestsCheckboxes = document.querySelectorAll('#notEditableContainer input[name="not-edit-item-checkbox"]');
-
                     let checkedInterestsCount = 0;
                     interestsCheckboxes.forEach(checkbox => {
-
                         let checkboxId = checkbox.id.slice(1);
-
-
                         checkedInterestsCount++;
                         popluateSubInterestDataForProfile({ id: checkboxId, name: checkbox.value }, userSubInterestsId);
-
-
                     });
-
-
                 })
                 .catch(function (error) {
                     console.error("Error fetching user data:", error);
                 });
-
         }
 
-
-
         // Not Editable fetch sub interest for profile  
-
         function popluateSubInterestDataForProfile(interest, userSubInterests) {
-
             fetch(`https://15.185.57.60/api/v1/interest/sub-interest-by-id/${interest.id}`)
                 .then(response => response.json())
                 .then(subInterestsData => {
-
-
                     const subinterests = subInterestsData.data;
                     const subinterestContainer = document.createElement('div');
                     subinterestContainer.className = 'interest-container';
@@ -3578,19 +3296,13 @@
                     const interestHeading = document.createElement('h6');
                     interestHeading.textContent = `${interest.name}`;
                     subinterestContainer.appendChild(interestHeading);
-
                     const subinterestsContainer = document.getElementById('notEditableSubContainer');
 
                     const updatedSubinterest = subinterests.filter((subinterest) => {
-
-
                         return isSubinterestChecked(subinterest.id, userSubInterests);
                     });
 
-
                     updatedSubinterest.forEach(subInterest => {
-
-
                         const subInterestCheckbox = document.createElement('input');
                         subInterestCheckbox.checked = true;
                         subInterestCheckbox.disabled = true;
@@ -3599,9 +3311,6 @@
                         subInterestCheckbox.type = 'checkbox';
                         subInterestCheckbox.name = 'not-edit-subitem-checkbox';
                         subInterestCheckbox.id = `not_Edit_sub${subInterest.id}`;
-
-
-
 
                         subInterestCheckbox.value = subInterest.id;
                         subinterestContainer.appendChild(subInterestCheckbox);
@@ -3614,9 +3323,6 @@
                         subinterestContainer.appendChild(subInterestLabel);
 
                     });
-
-
-
                     // Append the subinterest container to the main container
                     subinterestsContainer.appendChild(subinterestContainer);
                 })
@@ -3624,7 +3330,6 @@
                     console.error('Error fetching subinterests:', error);
                 });
         }
-
 
         if (userId) {
             popluateInterestDataForProfile();
